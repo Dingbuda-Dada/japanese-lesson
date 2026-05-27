@@ -374,7 +374,7 @@ section.active{display:block}
     <div class="search-box">
       <div class="search-row">
         <input class="search-input" id="searchInput" type="text" placeholder="搜尋主題… 例如：滑雪、婚禮、醫院">
-        <button class="btn-api-key" onclick="showApiModal()" title="設定 Claude AI 金鑰">⚙️</button>
+        <button class="btn-api-key" onclick="showApiModal()" title="設定 Gemini AI 金鑰">⚙️</button>
         <button class="btn-search" id="btnSearch" onclick="doSearch()">🔍 搜尋</button>
       </div>
       <div class="count-row">
@@ -1584,14 +1584,14 @@ function renderPhrases() {
   const grid = document.getElementById('phraseGrid');
   const list = searchResults ? searchResults : (phrases[currentCategory]?.items || []);
   if (searchResults !== null && list.length === 0) {
-    const hasKey = localStorage.getItem('claude_api_key');
+    const hasKey = localStorage.getItem('gemini_api_key');
     grid.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--ink-3)">
         <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
         <div style="font-size:1rem;color:var(--ink-2);margin-bottom:.6rem">找不到「${document.getElementById('searchInput').value}」的相關語句</div>
         ${hasKey
           ? `<div style="font-size:.85rem">AI 生成失敗，請確認 API 金鑰是否正確。<button onclick="showApiModal()" style="margin-left:.4rem;color:var(--shu);background:none;border:none;cursor:pointer;font-size:.85rem;text-decoration:underline">重新設定</button></div>`
-          : `<div style="font-size:.85rem;margin-bottom:1rem">設定 Claude AI 金鑰，即可針對任意情境即時生成語句</div>
+          : `<div style="font-size:.85rem;margin-bottom:1rem">設定 Gemini AI 金鑰，即可針對任意情境即時生成語句</div>
              <button onclick="showApiModal()" style="padding:.55rem 1.2rem;background:var(--shu);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.88rem;font-family:inherit">⚙️ 設定 AI 金鑰</button>`
         }
       </div>`;
@@ -1630,39 +1630,51 @@ async function doSearch() {
   if (!q) return;
   const btn = document.getElementById('btnSearch');
   btn.disabled = true;
-  const apiKey = localStorage.getItem('claude_api_key');
+  const apiKey = localStorage.getItem('gemini_api_key');
   let usedAI = false;
 
   if (apiKey) {
     btn.innerHTML = '⏳ AI 生成中…';
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-haiku-4-5-20251001',
-          max_tokens: 2048,
-          messages: [{
-            role: 'user',
-            content: `你是日語教學助手。請為「${q}」情境生成 ${searchCount} 個實用日文語句（丁寧體・禮貌形）。\n要求：\n1. 貼近「${q}」真實使用場景\n2. 包含各種句型（問句/回答/請求/感謝）\n3. 只回傳 JSON 陣列，每項格式：{"j":"日文","r":"羅馬字（Hepburn）","c":"繁體中文"}\n不要任何說明文字，只輸出陣列。`
-          }]
-        })
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const prompt = `你是日語教學助手。請為「${q}」情境生成 ${searchCount} 個實用日文語句（丁寧體・禮貌形）。\n要求：\n1. 貼近「${q}」真實使用場景\n2. 包含各種句型（問句/回答/請求/感謝）\n3. 只回傳 JSON 陣列，每項格式：{"j":"日文","r":"羅馬字（Hepburn）","c":"繁體中文"}\n不要任何說明文字，只輸出 JSON 陣列。`;
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        }
+      );
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error?.message || 'HTTP ' + res.status);
+      }
       const data = await res.json();
-      const raw = data.content[0].text.trim();
+      const raw = data.candidates[0].content.parts[0].text.trim();
       const match = raw.match(/\[[\s\S]*\]/);
       if (!match) throw new Error('no JSON');
       searchResults = JSON.parse(match[0]).slice(0, searchCount);
       usedAI = true;
     } catch(err) {
       console.warn('AI search failed:', err);
-      fallbackSearch(q);
+      // Show error message in empty state
+      searchResults = [];
+      btn.disabled = false;
+      btn.innerHTML = '🔍 搜尋';
+      document.getElementById('catRow').style.display = 'none';
+      document.getElementById('resultsBar').style.display = 'flex';
+      document.getElementById('resultsTitle').innerHTML = '「'+q+'」的相關語句';
+      document.getElementById('resultsCount').textContent = '共 0 個結果';
+      const errMsg = err.message.includes('quota') || err.message.includes('429')
+        ? '免費額度已達上限，請稍後再試（通常每分鐘重置）'
+        : '金鑰錯誤，請重新設定';
+      document.getElementById('phraseGrid').innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--ink-3)">
+          <div style="font-size:2rem;margin-bottom:.8rem">⚠️</div>
+          <div style="font-size:.95rem;color:var(--ink-2);margin-bottom:.8rem">${errMsg}</div>
+          <button onclick="showApiModal()" style="padding:.5rem 1.1rem;background:var(--shu);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.85rem;font-family:inherit">⚙️ 設定金鑰</button>
+        </div>`;
+      return;
     }
   } else {
     btn.innerHTML = '⏳ 搜尋中…';
@@ -1688,14 +1700,14 @@ function fallbackSearch(q) {
 }
 
 function showApiModal() {
-  document.getElementById('apiKeyInput').value = localStorage.getItem('claude_api_key') || '';
+  document.getElementById('apiKeyInput').value = localStorage.getItem('gemini_api_key') || '';
   document.getElementById('apiModal').style.display = 'flex';
 }
 function closeApiModal() { document.getElementById('apiModal').style.display = 'none'; }
 function saveApiKey() {
   const k = document.getElementById('apiKeyInput').value.trim();
-  if (k) localStorage.setItem('claude_api_key', k);
-  else localStorage.removeItem('claude_api_key');
+  if (k) localStorage.setItem('gemini_api_key', k);
+  else localStorage.removeItem('gemini_api_key');
   closeApiModal();
   const btn = document.getElementById('btnSearch');
   btn.innerHTML = '✓ 已儲存';
@@ -2363,11 +2375,11 @@ renderPhrases();
 <!-- API Key Modal -->
 <div id="apiModal" class="api-modal-overlay" style="display:none" onclick="if(event.target===this)closeApiModal()">
   <div class="api-modal">
-    <h3>⚙️ Claude AI 語句生成</h3>
-    <p>輸入 Claude API 金鑰，即可針對<strong>任意情境</strong>（如：滑雪、婚禮、求職面試…）用 AI 即時生成道地日文語句與發音練習。</p>
-    <p style="color:var(--shu)">🔑 取得免費金鑰：<a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color:var(--shu);text-decoration:underline">console.anthropic.com</a></p>
+    <h3>⚙️ Gemini AI 語句生成</h3>
+    <p>輸入 Google Gemini API 金鑰，即可針對<strong>任意情境</strong>（如：滑雪、婚禮、求職面試…）用 AI 即時生成道地日文語句。</p>
+    <p style="color:var(--shu)">🔑 取得免費金鑰：<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--shu);text-decoration:underline">aistudio.google.com/apikey</a></p>
     <p style="color:var(--ink-3)">金鑰僅儲存於本機瀏覽器（localStorage），不會傳至任何第三方伺服器。</p>
-    <input class="api-key-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-...">
+    <input class="api-key-input" id="apiKeyInput" type="password" placeholder="AQ.Ab8...">
     <div class="api-modal-btns">
       <button class="btn-api-cancel" onclick="closeApiModal()">取消</button>
       <button class="btn-api-save" onclick="saveApiKey()">儲存金鑰</button>

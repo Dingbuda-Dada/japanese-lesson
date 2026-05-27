@@ -1583,6 +1583,20 @@ function buildCatRow() {
 function renderPhrases() {
   const grid = document.getElementById('phraseGrid');
   const list = searchResults ? searchResults : (phrases[currentCategory]?.items || []);
+  if (searchResults !== null && list.length === 0) {
+    const hasKey = localStorage.getItem('claude_api_key');
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--ink-3)">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
+        <div style="font-size:1rem;color:var(--ink-2);margin-bottom:.6rem">找不到「${document.getElementById('searchInput').value}」的相關語句</div>
+        ${hasKey
+          ? `<div style="font-size:.85rem">AI 生成失敗，請確認 API 金鑰是否正確。<button onclick="showApiModal()" style="margin-left:.4rem;color:var(--shu);background:none;border:none;cursor:pointer;font-size:.85rem;text-decoration:underline">重新設定</button></div>`
+          : `<div style="font-size:.85rem;margin-bottom:1rem">設定 Claude AI 金鑰，即可針對任意情境即時生成語句</div>
+             <button onclick="showApiModal()" style="padding:.55rem 1.2rem;background:var(--shu);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.88rem;font-family:inherit">⚙️ 設定 AI 金鑰</button>`
+        }
+      </div>`;
+    return;
+  }
   grid.innerHTML = list.map((p,i) => `
     <div class="phrase-card" style="animation-delay:${i*30}ms">
       <div class="card-top">
@@ -1670,7 +1684,7 @@ function fallbackSearch(q) {
   searchResults = all.filter(p =>
     p.j.includes(q) || p.r.toLowerCase().includes(q.toLowerCase()) || p.c.includes(q)
   ).slice(0, searchCount);
-  if (!searchResults.length) searchResults = shuffle([...all]).slice(0, Math.min(searchCount, all.length));
+  // No random fallback — empty results trigger the "set up AI key" prompt
 }
 
 function showApiModal() {

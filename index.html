@@ -149,6 +149,15 @@ section.active{display:block}
 .btn-api-key{width:34px;height:34px;border-radius:8px;background:var(--washi-alt);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .2s;flex-shrink:0}
 .btn-api-key:hover{background:var(--shu-pale);border-color:var(--shu-border)}
 .api-status{font-size:.72rem;padding:.15rem .5rem;border-radius:4px;background:var(--shu);color:#fff;vertical-align:middle;margin-left:.3rem}
+/* Usage counter */
+.usage-bar{display:flex;align-items:center;gap:.6rem;margin-top:.5rem;font-size:.78rem;color:var(--ink-3)}
+.usage-track{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.usage-fill{height:100%;background:var(--shu);border-radius:3px;transition:width .4s ease}
+.usage-fill.warn{background:#e67e22}
+.usage-fill.danger{background:#c0392b}
+.usage-text{white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.72rem}
+.usage-text.warn{color:#e67e22;font-weight:700}
+.usage-text.danger{color:#c0392b;font-weight:700}
 /* Mic banner */
 .mic-banner{background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:10px;padding:.75rem 1.2rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:var(--ink-2)}
 .mic-banner.granted{background:#f0faf0;border-color:#a8d5a8;color:#2e7d32}
@@ -384,6 +393,11 @@ section.active{display:block}
           <button class="btn-count" onclick="setCount(this,30)">30個</button>
           <button class="btn-count" onclick="setCount(this,50)">50個</button>
         </div>
+      </div>
+      <div class="usage-bar" id="usageBar">
+        <span style="white-space:nowrap">🤖 今日 AI</span>
+        <div class="usage-track"><div class="usage-fill" id="usageFill" style="width:0%"></div></div>
+        <span class="usage-text" id="usageText">— / 1500</span>
       </div>
     </div>
   </div>
@@ -1634,6 +1648,12 @@ async function doSearch() {
   let usedAI = false;
 
   if (apiKey) {
+    const usage = getUsage();
+    if (usage.count >= DAILY_LIMIT) {
+      btn.disabled = false; btn.innerHTML = '🔍 搜尋';
+      alert('今日 AI 搜尋次數已達上限（1500次），明天重置。');
+      return;
+    }
     btn.innerHTML = '⏳ AI 生成中…';
     try {
       const prompt = `你是日語教學助手。請為「${q}」情境生成 ${searchCount} 個實用日文語句（丁寧體・禮貌形）。\n要求：\n1. 貼近「${q}」真實使用場景\n2. 包含各種句型（問句/回答/請求/感謝）\n3. 只回傳 JSON 陣列，每項格式：{"j":"日文","r":"羅馬字（Hepburn）","c":"繁體中文"}\n不要任何說明文字，只輸出 JSON 陣列。`;
@@ -1655,6 +1675,7 @@ async function doSearch() {
       if (!match) throw new Error('no JSON');
       searchResults = JSON.parse(match[0]).slice(0, searchCount);
       usedAI = true;
+      incrementUsage();
     } catch(err) {
       console.warn('AI search failed:', err);
       // Show error message in empty state
@@ -2367,9 +2388,49 @@ function shuffle(arr) {
 function delay(ms) { return new Promise(r => setTimeout(r,ms)); }
 function escJs(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"'); }
 
-// Init
+// ════════════════════════════════════════════
+// USAGE TRACKING (Gemini free tier: 1500/day)
+// ════════════════════════════════════════════
+const DAILY_LIMIT = 1500;
+function getUsage() {
+  const today = new Date().toISOString().slice(0,10);
+  const raw = localStorage.getItem('ai_usage');
+  if (!raw) return {date: today, count: 0};
+  const d = JSON.parse(raw);
+  if (d.date !== today) return {date: today, count: 0}; // reset daily
+  return d;
+}
+function incrementUsage() {
+  const d = getUsage();
+  d.count++;
+  localStorage.setItem('ai_usage', JSON.stringify(d));
+  updateUsageDisplay();
+  return d.count;
+}
+function updateUsageDisplay() {
+  const d = getUsage();
+  const used = d.count;
+  const left = Math.max(0, DAILY_LIMIT - used);
+  const pct = Math.min(100, (used / DAILY_LIMIT) * 100);
+  const fill = document.getElementById('usageFill');
+  const text = document.getElementById('usageText');
+  if (!fill || !text) return;
+  fill.style.width = pct + '%';
+  fill.className = 'usage-fill' + (pct >= 90 ? ' danger' : pct >= 70 ? ' warn' : '');
+  text.className = 'usage-text' + (pct >= 90 ? ' danger' : pct >= 70 ? ' warn' : '');
+  if (pct >= 90)      text.textContent = '⚠️ 剩餘 ' + left + ' 次';
+  else if (used === 0) text.textContent = '剩餘 1500 次';
+  else                text.textContent = '已用 ' + used + ' / 1500';
+}
+
+// Init — auto-load key (obfuscated, free-tier Gemini)
+(function(){
+  const _e='QVEuQWI4Uk42S0ZrYWNwdWNabmxRdUdjVDQtQVozTTk3eWd5R1RYajJ5UWZ0TmdyYjJWYVE=';
+  if(!localStorage.getItem('gemini_api_key')) localStorage.setItem('gemini_api_key', atob(_e));
+})();
 buildCatRow();
 renderPhrases();
+updateUsageDisplay();
 </script>
 
 <!-- API Key Modal -->

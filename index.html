@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日文語句教學 v2 — Japanese Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --washi:       #FDFAF5;
+  --washi-alt:   #F5F0E8;
+  --surface:     #FFFFFF;
+  --ink:         #1C1C1E;
+  --ink-2:       #48484A;
+  --ink-3:       #8A8A8E;
+  --shu:         #C0392B;
+  --shu-h:       #A93226;
+  --shu-pale:    #FDF0EF;
+  --shu-border:  #F5CCC8;
+  --gold:        #8B6914;
+  --gold-bg:     #FEF9E7;
+  --gold-border: #F0D080;
+  --pine:        #1B4332;
+  --ocean:       #1A5276;
+  --border:      #E8E2D9;
+  --border-s:    #D4CCC0;
+  --sh-sm: 0 1px 3px rgba(28,28,30,.06),0 1px 2px rgba(28,28,30,.04);
+  --sh-md: 0 4px 12px rgba(28,28,30,.08),0 2px 4px rgba(28,28,30,.05);
+  --sh-lg: 0 8px 24px rgba(28,28,30,.10),0 3px 8px rgba(28,28,30,.06);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--washi);color:var(--ink);font-family:'Noto Sans TC','Noto Sans JP',sans-serif;min-height:100vh}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(253,250,245,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;padding:0 1.5rem;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-logo{font-family:'Zen Old Mincho',serif;font-size:1.2rem;font-weight:900;color:var(--ink);padding:1rem 1.5rem 1rem 0;border-right:1px solid var(--border);margin-right:.25rem;white-space:nowrap;letter-spacing:.05em;flex-shrink:0}
+.nav-tab{display:flex;align-items:center;gap:.4rem;padding:1rem 1.1rem;font-size:.8rem;font-weight:500;color:var(--ink-3);cursor:pointer;border:none;background:none;transition:color .2s;white-space:nowrap;border-bottom:2px solid transparent;position:relative;top:1px;font-family:inherit}
+.nav-tab:hover{color:var(--ink)}
+.nav-tab.active{color:var(--shu);border-bottom-color:var(--shu)}
+
+/* ── Sections ── */
+section{display:none}
+section.active{display:block}
+
+/* ── Inner tabs ── */
+.inner-tabs{display:flex;gap:.5rem;margin-bottom:2rem;background:var(--washi-alt);border-radius:12px;padding:.4rem;width:fit-content}
+.inner-tab{padding:.45rem 1.2rem;border-radius:8px;border:none;background:transparent;font-family:inherit;font-size:.82rem;font-weight:500;color:var(--ink-3);cursor:pointer;transition:all .2s}
+.inner-tab.active{background:var(--surface);color:var(--ink);box-shadow:var(--sh-sm);font-weight:600}
+.inner-pane{display:none}
+.inner-pane.active{display:block}
+
+/* ── Hero ── */
+.hero{padding:5rem 1.5rem 4rem;text-align:center;max-width:800px;margin:0 auto}
+.hero-kana{font-family:'Zen Old Mincho',serif;font-size:clamp(4rem,12vw,8rem);font-weight:900;line-height:1;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.02em}
+.hero-kana span{color:var(--shu)}
+.hero-sub{font-size:.8rem;color:var(--ink-3);letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero-rule{width:48px;height:2px;background:var(--shu);margin:0 auto 1.2rem;border-radius:1px}
+.hero-title{font-family:'Zen Old Mincho',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;margin-bottom:.8rem;color:var(--ink)}
+.hero-desc{color:var(--ink-3);font-size:.92rem;line-height:1.8}
+
+/* ── Search ── */
+.search-wrap{max-width:720px;margin:2.5rem auto 0;padding:0 1.5rem}
+.search-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:var(--sh-sm)}
+.search-row{display:flex;gap:.75rem;margin-bottom:1rem}
+.search-input{flex:1;padding:.85rem 1.2rem;background:var(--washi);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-family:inherit;font-size:.95rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.search-input::placeholder{color:var(--ink-3)}
+.search-input:focus{border-color:var(--shu);box-shadow:0 0 0 3px rgba(192,57,43,.08)}
+.btn-search{padding:.85rem 1.5rem;background:var(--shu);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;font-family:inherit;display:flex;align-items:center;gap:.5rem}
+.btn-search:hover{background:var(--shu-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(192,57,43,.25)}
+.btn-search:disabled{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+.count-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.count-label{font-size:.8rem;color:var(--ink-3)}
+.count-btns{display:flex;gap:.5rem}
+.btn-count{padding:.35rem .9rem;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--ink-3);font-size:.82rem;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-count.active,.btn-count:hover{border-color:var(--shu);color:var(--shu);background:var(--shu-pale)}
+.cat-row{display:flex;gap:.75rem;flex-wrap:wrap;max-width:1200px;margin:1.5rem auto 0;padding:0 1.5rem}
+.btn-cat{padding:.45rem 1.2rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);font-family:inherit;font-size:.82rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
+.btn-cat.active{background:var(--shu);border-color:var(--shu);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(192,57,43,.2)}
+.btn-cat:hover:not(.active){border-color:var(--border-s);color:var(--ink)}
+
+/* ── Phrase Grid ── */
+.phrase-grid{max-width:1200px;margin:1.5rem auto;padding:0 1.5rem 4rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.phrase-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem;transition:all .25s;animation:fadeUp .4s ease both;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.phrase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--shu),#E07060);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.phrase-card:hover{box-shadow:var(--sh-lg);border-color:var(--border-s);transform:translateY(-3px)}
+.phrase-card:hover::before{transform:scaleX(1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card-top{display:flex;justify-content:flex-end;margin-bottom:1rem}
+.btn-audio{width:36px;height:36px;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:50%;color:var(--shu);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.btn-audio:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
+.btn-audio.playing{background:var(--shu);color:#fff;animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.card-jp{font-family:'Zen Old Mincho',serif;font-size:1.6rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;line-height:1.4}
+.card-romaji{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-3);background:var(--washi-alt);padding:.25rem .7rem;border-radius:4px;display:inline-block;margin-bottom:.8rem;letter-spacing:.03em}
+.card-cn{font-size:1rem;color:var(--ink-2);border-top:1px solid var(--border);padding-top:.75rem;font-weight:500}
+
+/* ── Section Header ── */
+.section-header{text-align:center;margin-bottom:2.5rem;padding-top:3rem}
+.section-kana-title{font-family:'Zen Old Mincho',serif;font-size:2.2rem;font-weight:900;color:var(--ink);margin-bottom:.5rem}
+.section-title-rule{width:40px;height:2px;background:var(--shu);margin:.6rem auto .7rem;border-radius:1px}
+.section-desc{color:var(--ink-3);font-size:.9rem}
+
+/* ── Kana ── */
+.kana-wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem}
+.kana-toggle{display:flex;gap:.5rem;justify-content:center;margin-bottom:2rem}
+.btn-kana-type{padding:.5rem 2rem;border-radius:100px;font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);box-shadow:var(--sh-sm)}
+.btn-kana-type.active{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:var(--sh-md)}
+.kana-row-block{margin-bottom:1.5rem}
+.kana-row-name{font-size:.78rem;color:var(--shu);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;padding-left:.75rem;border-left:3px solid var(--shu)}
+.kana-row-chars{display:flex;gap:.75rem;flex-wrap:wrap}
+.kana-char-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;min-width:90px;text-align:center;cursor:pointer;transition:all .2s;flex:0 0 auto;box-shadow:var(--sh-sm)}
+.kana-char-card:hover{background:var(--shu-pale);border-color:var(--shu-border);transform:scale(1.05);box-shadow:var(--sh-md)}
+.kana-main{font-family:'Zen Old Mincho',serif;font-size:2rem;font-weight:700;color:var(--ink);display:block;line-height:1.2}
+.kana-romaji{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);margin-top:.25rem;display:block}
+.kana-detail{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--shu);border-radius:16px;padding:1.5rem;margin-bottom:2rem;display:none;animation:fadeUp .3s ease;box-shadow:var(--sh-md)}
+.kana-detail.show{display:block}
+.kd-top{display:flex;gap:2rem;align-items:center;margin-bottom:1.2rem}
+.kd-chars{display:flex;gap:1.5rem;align-items:baseline}
+.kd-hira{font-family:'Zen Old Mincho',serif;font-size:4rem;font-weight:900;color:var(--shu);transition:all .2s}
+.kd-kata{font-family:'Zen Old Mincho',serif;font-size:3rem;font-weight:700;color:var(--ink-3);transition:all .2s}
+.kana-detail.kata-mode .kd-hira{font-size:3rem;font-weight:700;color:var(--ink-3)}
+.kana-detail.kata-mode .kd-kata{font-size:4rem;font-weight:900;color:var(--shu)}
+.kd-info{flex:1}
+.kd-romaji{font-family:'JetBrains Mono',monospace;font-size:1.2rem;color:var(--gold);margin-bottom:.5rem;font-weight:700}
+.kd-pron{font-size:.88rem;color:var(--ink-2);line-height:1.6}
+.kd-vocab-list{display:flex;flex-direction:column;gap:.6rem;margin-top:.5rem}
+.kd-vocab-item{background:var(--washi-alt);border:1px solid var(--border);border-radius:8px;padding:.7rem 1rem}
+.kd-vocab-word{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.kd-vocab-jp{font-family:'Zen Old Mincho',serif;font-size:1.1rem;color:var(--ink)}
+.kd-vocab-r{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--ink-3)}
+.kd-vocab-cn{font-size:.82rem;color:var(--shu);font-weight:600}
+.kd-vocab-ex{font-size:.82rem;color:var(--ink-2);margin-top:.2rem;line-height:1.5;flex:1}
+.kd-vocab-ex-row{display:flex;align-items:flex-start;gap:.4rem;margin-top:.2rem}
+.kd-vocab-exr{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3)}
+/* API key modal */
+.api-modal-overlay{position:fixed;inset:0;background:rgba(28,28,30,.45);z-index:2000;display:flex;align-items:center;justify-content:center}
+.api-modal{background:var(--surface);border-radius:16px;padding:2rem;max-width:420px;width:92%;box-shadow:0 24px 64px rgba(0,0,0,.18)}
+.api-modal h3{font-family:'Zen Old Mincho',serif;font-size:1.2rem;margin:0 0 .6rem;color:var(--ink)}
+.api-modal p{font-size:.83rem;color:var(--ink-2);margin:0 0 .8rem;line-height:1.65}
+.api-key-input{width:100%;padding:.7rem 1rem;border:1px solid var(--border);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:.82rem;box-sizing:border-box;margin-bottom:1rem;background:var(--washi-alt);color:var(--ink);outline:none}
+.api-key-input:focus{border-color:var(--shu-border);box-shadow:0 0 0 3px var(--shu-pale)}
+.api-modal-btns{display:flex;gap:.5rem;justify-content:flex-end}
+.btn-api-save{padding:.55rem 1.2rem;background:var(--shu);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.88rem;font-family:inherit}
+.btn-api-cancel{padding:.55rem 1.2rem;background:transparent;color:var(--ink-2);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.88rem;font-family:inherit}
+.btn-api-key{width:34px;height:34px;border-radius:8px;background:var(--washi-alt);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .2s;flex-shrink:0}
+.btn-api-key:hover{background:var(--shu-pale);border-color:var(--shu-border)}
+.api-status{font-size:.72rem;padding:.15rem .5rem;border-radius:4px;background:var(--shu);color:#fff;vertical-align:middle;margin-left:.3rem}
+/* Mic banner */
+.mic-banner{background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:10px;padding:.75rem 1.2rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem;font-size:.85rem;color:var(--ink-2)}
+.mic-banner.granted{background:#f0faf0;border-color:#a8d5a8;color:#2e7d32}
+.mic-banner.hidden{display:none}
+.btn-mic-req{padding:.35rem .85rem;background:var(--shu);color:#fff;border:none;border-radius:6px;font-size:.8rem;cursor:pointer;font-weight:600;white-space:nowrap;font-family:inherit}
+/* Conversation speech */
+.btn-conv-speech{padding:.28rem .6rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:6px;font-size:.74rem;color:var(--shu);cursor:pointer;transition:all .2s;font-family:inherit;flex-shrink:0}
+.btn-conv-speech:hover{background:var(--shu);color:#fff}
+.btn-conv-speech.recording{background:var(--shu);color:#fff;animation:pulse 1s infinite}
+.conv-speech-result{font-size:.74rem;padding:.18rem .45rem;border-radius:4px;margin-left:.3rem}
+.conv-speech-result.correct{background:#e8f5e9;color:#2e7d32}
+.conv-speech-result.partial{background:#fff8e1;color:#f57f17}
+.conv-speech-result.wrong{background:#fce4ec;color:#c62828}
+
+/* ── Grammar ── */
+.grammar-wrap{max-width:900px;margin:0 auto;padding:0 1.5rem 4rem}
+.level-filter{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.btn-level{padding:.4rem 1.2rem;border-radius:100px;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);box-shadow:var(--sh-sm)}
+.btn-level:hover{border-color:var(--border-s);color:var(--ink)}
+.btn-level.active                   {background:var(--ink);border-color:var(--ink);color:#fff}
+.btn-level[data-level="N5"].active  {background:#1B4332;border-color:#1B4332}
+.btn-level[data-level="N4"].active  {background:#1A5276;border-color:#1A5276}
+.btn-level[data-level="N3"].active  {background:#7D6608;border-color:#7D6608}
+.btn-level[data-level="N2"].active  {background:#5B2C6F;border-color:#5B2C6F}
+.btn-level[data-level="N1"].active  {background:var(--shu);border-color:var(--shu)}
+.grammar-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1rem;transition:all .2s;box-shadow:var(--sh-sm);border-left-width:4px}
+.grammar-card:hover{box-shadow:var(--sh-md);border-color:var(--border-s)}
+.grammar-card[data-level="N5"]{border-left-color:#27AE60}
+.grammar-card[data-level="N4"]{border-left-color:#2980B9}
+.grammar-card[data-level="N3"]{border-left-color:#D4AC0D}
+.grammar-card[data-level="N2"]{border-left-color:#8E44AD}
+.grammar-card[data-level="N1"]{border-left-color:var(--shu)}
+.grammar-header{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;cursor:pointer;user-select:none;transition:background .15s}
+.grammar-header:hover{background:var(--washi)}
+.level-badge{padding:.2rem .7rem;border-radius:100px;font-size:.72rem;font-weight:700;font-family:'JetBrains Mono',monospace;white-space:nowrap;border:1px solid}
+.level-badge[data-level="N5"]{background:#EAFAF1;color:#1B4332;border-color:#ABEBC6}
+.level-badge[data-level="N4"]{background:#EBF5FB;color:#1A5276;border-color:#AED6F1}
+.level-badge[data-level="N3"]{background:#FEF9E7;color:#7D6608;border-color:#F9E79F}
+.level-badge[data-level="N2"]{background:#F5EEF8;color:#5B2C6F;border-color:#D7BDE2}
+.level-badge[data-level="N1"]{background:var(--shu-pale);color:#7B241C;border-color:var(--shu-border)}
+.grammar-title{flex:1;font-size:1rem;font-weight:600;color:var(--ink)}
+.grammar-chevron{color:var(--ink-3);transition:transform .3s;font-size:.8rem}
+.grammar-card.open .grammar-chevron{transform:rotate(180deg)}
+.grammar-body{display:none;padding:0 1.5rem 1.5rem;border-top:1px solid var(--border)}
+.grammar-card.open .grammar-body{display:block}
+.grammar-pattern{background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;padding:.75rem 1rem;margin:.8rem 0;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--gold);line-height:1.6;font-weight:600}
+.grammar-desc{font-size:.9rem;color:var(--ink-2);line-height:1.7;padding-top:.8rem;margin-bottom:.25rem}
+.grammar-note{font-size:.82rem;color:var(--ink-3);background:var(--washi-alt);border-radius:6px;padding:.6rem .9rem;margin-bottom:.75rem;line-height:1.6}
+.example-controls{display:flex;gap:.5rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+.ex-label{font-size:.8rem;color:var(--ink-3)}
+.btn-rnd{padding:.35rem .9rem;border-radius:6px;background:var(--surface);border:1px solid var(--border);color:var(--ink-3);font-family:inherit;font-size:.8rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
+.btn-rnd:hover,.btn-rnd.active{background:var(--gold-bg);border-color:var(--gold-border);color:var(--gold)}
+.btn-dice{padding:.35rem .9rem;border-radius:6px;background:var(--shu-pale);border:1px solid var(--shu-border);color:var(--shu);font-family:inherit;font-size:.8rem;cursor:pointer;transition:all .2s}
+.btn-dice:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
+.example-item{background:var(--washi);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:.6rem;transition:all .2s}
+.example-item.highlight{background:var(--shu-pale);border-color:var(--shu-border)}
+.ex-jp{font-family:'Zen Old Mincho',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.3rem;display:flex;align-items:center;gap:.7rem}
+.ex-romaji{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-3);margin-bottom:.25rem}
+.ex-cn{font-size:.9rem;color:var(--ink-2)}
+.btn-ex-audio{width:26px;height:26px;border-radius:50%;background:var(--shu-pale);border:1px solid var(--shu-border);color:var(--shu);font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.btn-ex-audio:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
+
+/* ── Verb Conjugation ── */
+.verb-group{margin-bottom:2.5rem}
+.verb-group-title{font-family:'Zen Old Mincho',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.verb-group-desc{font-size:.85rem;color:var(--ink-3);margin-bottom:1.2rem;line-height:1.6}
+.verb-table-scroll{overflow-x:auto;border-radius:12px;box-shadow:var(--sh-sm)}
+.verb-table{width:100%;border-collapse:collapse;background:var(--surface);font-size:.85rem;min-width:700px}
+.verb-table th{background:var(--washi-alt);color:var(--ink-2);font-weight:600;padding:.7rem .9rem;text-align:center;border:1px solid var(--border);font-size:.78rem;white-space:nowrap}
+.verb-table th:first-child{text-align:left}
+.verb-table td{padding:.65rem .9rem;border:1px solid var(--border);text-align:center;color:var(--ink);font-family:'Zen Old Mincho',serif}
+.verb-table td:first-child{font-weight:600;text-align:left;background:var(--washi-alt);color:var(--ink);font-family:'Noto Sans TC',sans-serif;font-size:.82rem}
+.verb-table tr:hover td{background:var(--shu-pale)}
+.verb-table tr:hover td:first-child{background:var(--shu-pale)}
+.v-form-header{font-size:.72rem;color:var(--ink-3);display:block}
+
+/* ── Conversation ── */
+.conv-wrap{max-width:900px;margin:0 auto;padding:0 1.5rem 4rem}
+.conv-controls{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.btn-random-scene{padding:.5rem 1.2rem;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;color:var(--gold);font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-random-scene:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.75rem;margin-bottom:2rem}
+.scenario-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm);text-align:center}
+.scenario-card:hover{border-color:var(--shu-border);background:var(--shu-pale);box-shadow:var(--sh-md)}
+.scenario-card.active{border-color:var(--shu);background:var(--shu-pale);box-shadow:0 2px 8px rgba(192,57,43,.15)}
+.sc-icon{font-size:1.6rem;margin-bottom:.4rem;line-height:1}
+.sc-title{font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.2rem}
+.sc-desc{font-size:.74rem;color:var(--ink-3);line-height:1.5}
+.dialogue-panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--sh-md)}
+.dialogue-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;background:var(--washi-alt)}
+.dialogue-title{font-family:'Zen Old Mincho',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
+.btn-play-all{margin-left:auto;padding:.4rem 1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:6px;color:var(--shu);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-play-all:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
+.dialogue-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem}
+.bubble-row{display:flex;gap:.75rem;align-items:flex-start}
+.bubble-row.side-right{flex-direction:row-reverse}
+.speaker-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0;font-family:'Zen Old Mincho',serif;border:1px solid}
+.avatar-left{background:#EBF5FB;color:#1A5276;border-color:#AED6F1}
+.avatar-right{background:var(--shu-pale);color:var(--shu);border-color:var(--shu-border)}
+.bubble-content{max-width:78%}
+.bubble{border-radius:16px;padding:.9rem 1.1rem;border:1px solid}
+.bubble-left{background:var(--washi);border-color:var(--border);border-top-left-radius:4px}
+.bubble-right{background:var(--shu-pale);border-color:var(--shu-border);border-top-right-radius:4px}
+.bubble-jp{font-family:'Zen Old Mincho',serif;font-size:1.05rem;color:var(--ink);margin-bottom:.3rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.bubble-romaji{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--ink-3);margin-bottom:.2rem}
+.bubble-cn{font-size:.88rem;color:var(--ink-2)}
+.bubble-grammar{margin-top:.5rem;font-size:.74rem;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:4px;padding:.2rem .6rem;display:inline-block;color:var(--gold)}
+.bubble-row.side-right .bubble-content{align-items:flex-end;display:flex;flex-direction:column}
+.dl-highlight .bubble{box-shadow:0 0 0 2px var(--shu)}
+
+/* ── Pronunciation ── */
+.pron-wrap{max-width:900px;margin:0 auto;padding:0 1.5rem 4rem}
+.pron-intro{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem;box-shadow:var(--sh-sm);display:flex;gap:1.5rem;align-items:flex-start}
+.pron-intro-icon{font-size:2.5rem;flex-shrink:0}
+.pron-intro-text h3{font-family:'Zen Old Mincho',serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
+.pron-intro-text p{font-size:.88rem;color:var(--ink-2);line-height:1.7}
+.pron-no-support{background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;padding:.75rem 1rem;font-size:.85rem;color:var(--gold);margin-bottom:1rem;display:none}
+.pron-cat-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.btn-pron-cat{padding:.45rem 1.2rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);font-family:inherit;font-size:.82rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
+.btn-pron-cat.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.pron-grid{display:flex;flex-direction:column;gap:.75rem}
+.pron-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.5rem;box-shadow:var(--sh-sm);transition:all .2s}
+.pron-card:hover{box-shadow:var(--sh-md);border-color:var(--border-s)}
+.pron-card-top{display:flex;align-items:flex-start;gap:1rem}
+.pron-jp{font-family:'Zen Old Mincho',serif;font-size:1.3rem;font-weight:700;color:var(--ink);flex:1}
+.pron-meta{margin-top:.2rem}
+.pron-romaji{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-3);margin-bottom:.15rem}
+.pron-cn{font-size:.88rem;color:var(--ink-2)}
+.pron-actions{display:flex;gap:.6rem;margin-top:.9rem;flex-wrap:wrap;align-items:center}
+.btn-listen{padding:.45rem 1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:8px;color:var(--shu);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-listen:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
+.btn-speak{padding:.45rem 1rem;background:var(--washi-alt);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-speak.recording{background:var(--shu);color:#fff;border-color:var(--shu);animation:pulse .8s infinite}
+.btn-speak:hover:not(.recording){background:var(--washi);border-color:var(--border-s)}
+.pron-result{font-size:.85rem;padding:.4rem .8rem;border-radius:6px;margin-left:.5rem;display:inline-block}
+.pron-result.correct{background:#EAFAF1;color:#1B4332;border:1px solid #ABEBC6}
+.pron-result.partial{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border)}
+.pron-result.wrong{background:var(--shu-pale);color:var(--shu);border:1px solid var(--shu-border)}
+
+/* ── Quiz ── */
+.quiz-wrap{max-width:700px;margin:0 auto;padding:0 1.5rem 4rem}
+.quiz-start{text-align:center;padding:3rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:var(--sh-md)}
+.quiz-emoji{font-size:4rem;margin-bottom:1rem}
+.quiz-start-title{font-family:'Zen Old Mincho',serif;font-size:1.8rem;font-weight:900;color:var(--ink);margin-bottom:.5rem}
+.quiz-type-row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0}
+.btn-quiz-type{padding:.6rem 1.4rem;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);font-family:inherit;font-size:.85rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
+.btn-quiz-type.active{background:var(--washi-alt);border-color:var(--border-s);color:var(--ink);font-weight:600}
+.btn-start{padding:.9rem 3rem;background:var(--shu);border:none;border-radius:12px;color:#fff;font-family:inherit;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:1rem;box-shadow:0 4px 16px rgba(192,57,43,.25)}
+.btn-start:hover{background:var(--shu-h);transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,57,43,.35)}
+.quiz-question{animation:fadeUp .3s ease}
+.quiz-progress{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.progress-bar{flex:1;height:4px;background:var(--border);border-radius:2px}
+.progress-fill{height:100%;background:var(--shu);border-radius:2px;transition:width .4s ease}
+.progress-text{font-size:.8rem;color:var(--ink-3);white-space:nowrap}
+.score-badge{padding:.25rem .75rem;background:#EAFAF1;border-radius:100px;font-size:.82rem;color:#1B4332;font-weight:600;white-space:nowrap;border:1px solid #ABEBC6}
+.question-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center;margin-bottom:1.5rem;box-shadow:var(--sh-md)}
+.q-label{font-size:.8rem;color:var(--ink-3);letter-spacing:.1em;margin-bottom:1rem}
+.q-main{font-family:'Zen Old Mincho',serif;font-size:4rem;font-weight:900;color:var(--ink);line-height:1;margin-bottom:.5rem}
+.q-main.romaji-q{font-family:'JetBrains Mono',monospace;font-size:2.5rem}
+.q-sentence{font-family:'Zen Old Mincho',serif;font-size:1.4rem;color:var(--ink);line-height:1.6;margin-bottom:.5rem}
+.q-blank{color:var(--shu);font-weight:900;border-bottom:2px solid var(--shu);padding:0 .3rem}
+.btn-q-audio{width:42px;height:42px;border-radius:50%;background:var(--shu-pale);border:1px solid var(--shu-border);color:var(--shu);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:0 auto;transition:all .2s}
+.btn-q-audio:hover{background:var(--shu);color:#fff}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.btn-option{padding:1rem;border-radius:12px;background:var(--surface);border:1px solid var(--border);color:var(--ink);font-family:inherit;cursor:pointer;transition:all .2s;font-size:.95rem;box-shadow:var(--sh-sm);text-align:left}
+.btn-option.full{grid-column:span 2;font-size:.9rem}
+.btn-option:hover:not(:disabled){background:var(--washi);border-color:var(--border-s);transform:scale(1.01);box-shadow:var(--sh-md)}
+.btn-option.correct{background:#EAFAF1;border-color:#27AE60;color:#1B4332;font-weight:700}
+.btn-option.wrong{background:var(--shu-pale);border-color:var(--shu);color:var(--shu-h)}
+.btn-option .opt-kana{font-family:'Zen Old Mincho',serif;font-size:1.5rem;display:block;margin-bottom:.2rem}
+.btn-option .opt-romaji{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3)}
+.q-explanation{background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:10px;padding:.9rem 1.1rem;margin-top:1rem;font-size:.88rem;color:var(--gold);line-height:1.6;text-align:left;animation:fadeUp .3s ease}
+.quiz-result{text-align:center;padding:3rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:20px;animation:fadeUp .4s ease;box-shadow:var(--sh-md)}
+.result-score{font-family:'Zen Old Mincho',serif;font-size:5rem;font-weight:900;color:var(--shu);line-height:1;margin-bottom:.5rem}
+.result-msg{font-size:1.1rem;color:var(--ink-2);margin-bottom:2rem}
+.btn-retry{padding:.8rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
+.btn-retry:hover{background:var(--washi);border-color:var(--border-s);box-shadow:var(--sh-md)}
+.results-bar{max-width:1200px;margin:1.5rem auto 0;padding:0 1.5rem;display:flex;align-items:center;gap:1rem}
+.results-title{font-family:'Zen Old Mincho',serif;font-size:1.1rem;color:var(--ink)}
+.results-count{font-size:.82rem;color:var(--ink-3)}
+.btn-clear{margin-left:auto;padding:.35rem .9rem;background:var(--surface);border:1px solid var(--border);color:var(--ink-3);border-radius:6px;font-family:inherit;font-size:.8rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
+.btn-clear:hover{color:var(--ink);border-color:var(--border-s)}
+.loading-state{text-align:center;padding:4rem 1.5rem;color:var(--ink-3)}
+.spin{display:inline-block;width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--shu);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){
+  .hero-kana{font-size:5rem}
+  .phrase-grid{grid-template-columns:1fr}
+  .options-grid{grid-template-columns:1fr}
+  .btn-option.full{grid-column:span 1}
+  .scenario-grid{grid-template-columns:repeat(2,1fr)}
+  .bubble-content{max-width:88%}
+  .kd-top{flex-direction:column;gap:1rem}
+  .verb-table{font-size:.75rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">日本語</div>
+    <button class="nav-tab active" onclick="showSection('home')" data-tab="home"><span>🔍</span> 語句搜尋</button>
+    <button class="nav-tab" onclick="showSection('kana')" data-tab="kana"><span>あ</span> 50音教學</button>
+    <button class="nav-tab" onclick="showSection('grammar')" data-tab="grammar"><span>📖</span> 文法教學</button>
+    <button class="nav-tab" onclick="showSection('conversation')" data-tab="conversation"><span>💬</span> 對話練習</button>
+    <button class="nav-tab" onclick="showSection('pronunciation')" data-tab="pronunciation"><span>🎤</span> 發音練習</button>
+    <button class="nav-tab" onclick="showSection('quiz')" data-tab="quiz"><span>✍️</span> 測驗</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section id="sec-home" class="active">
+  <div class="hero">
+    <div class="hero-kana">日本<span>語</span></div>
+    <p class="hero-sub">Japanese Learning Platform</p>
+    <div class="hero-rule"></div>
+    <h1 class="hero-title">日文語句教學</h1>
+    <p class="hero-desc">學習丁寧體（禮貌形）的日文語句<br>包含各種情境用語及 AI 語句生成</p>
+  </div>
+  <div class="search-wrap">
+    <div class="search-box">
+      <div class="search-row">
+        <input class="search-input" id="searchInput" type="text" placeholder="搜尋主題… 例如：滑雪、婚禮、醫院">
+        <button class="btn-api-key" onclick="showApiModal()" title="設定 Claude AI 金鑰">⚙️</button>
+        <button class="btn-search" id="btnSearch" onclick="doSearch()">🔍 搜尋</button>
+      </div>
+      <div class="count-row">
+        <span class="count-label">語句數量：</span>
+        <div class="count-btns">
+          <button class="btn-count active" onclick="setCount(this,20)">20個</button>
+          <button class="btn-count" onclick="setCount(this,30)">30個</button>
+          <button class="btn-count" onclick="setCount(this,50)">50個</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cat-row" id="catRow"></div>
+  <div id="resultsBar" class="results-bar" style="display:none">
+    <span class="results-title" id="resultsTitle"></span>
+    <span class="results-count" id="resultsCount"></span>
+    <button class="btn-clear" onclick="clearSearch()">✕ 清除</button>
+  </div>
+  <div class="phrase-grid" id="phraseGrid"></div>
+</section>
+
+<!-- KANA -->
+<section id="sec-kana">
+  <div class="kana-wrap">
+    <div class="section-header">
+      <div class="section-kana-title">五十音</div>
+      <div class="section-title-rule"></div>
+      <p class="section-desc">點擊任意假名，查看發音、單詞與例句</p>
+    </div>
+    <div class="kana-toggle">
+      <button class="btn-kana-type active" onclick="setKanaType(this,'hiragana')">平假名 ひらがな</button>
+      <button class="btn-kana-type" onclick="setKanaType(this,'katakana')">片假名 カタカナ</button>
+    </div>
+    <div id="kanaDetail" class="kana-detail"></div>
+    <div id="kanaGrid"></div>
+  </div>
+</section>
+
+<!-- GRAMMAR -->
+<section id="sec-grammar">
+  <div class="grammar-wrap">
+    <div class="section-header">
+      <div class="section-kana-title">文法教學</div>
+      <div class="section-title-rule"></div>
+      <p class="section-desc">N5 ～ N1 分級文法課程 ＋ 動詞完整變化表</p>
+    </div>
+    <div class="inner-tabs">
+      <button class="inner-tab active" onclick="showGrammarPane('list',this)">📋 文法列表</button>
+      <button class="inner-tab" onclick="showGrammarPane('verb',this)">🔄 動詞變化</button>
+    </div>
+    <div id="gp-list" class="inner-pane active">
+      <div class="level-filter" id="levelFilter">
+        <button class="btn-level active" data-level="all" onclick="filterGrammar(this,'all')">全部</button>
+        <button class="btn-level" data-level="N5" onclick="filterGrammar(this,'N5')">N5</button>
+        <button class="btn-level" data-level="N4" onclick="filterGrammar(this,'N4')">N4</button>
+        <button class="btn-level" data-level="N3" onclick="filterGrammar(this,'N3')">N3</button>
+        <button class="btn-level" data-level="N2" onclick="filterGrammar(this,'N2')">N2</button>
+        <button class="btn-level" data-level="N1" onclick="filterGrammar(this,'N1')">N1</button>
+      </div>
+      <div id="grammarList"></div>
+    </div>
+    <div id="gp-verb" class="inner-pane">
+      <div id="verbConjContainer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVERSATION -->
+<section id="sec-conversation">
+  <div class="conv-wrap">
+    <div class="section-header">
+      <div class="section-kana-title">對話練習</div>
+      <div class="section-title-rule"></div>
+      <p class="section-desc">選擇情景，學習日常日文對話</p>
+    </div>
+    <div class="conv-controls">
+      <button class="btn-random-scene" onclick="pickRandomScenario()">🎲 隨機情境</button>
+    </div>
+    <div class="mic-banner hidden" id="convMicBanner">🎤 需要麥克風權限才能使用跟讀練習 <button class="btn-mic-req" onclick="requestMicPermission('convMicBanner')">授權麥克風</button></div>
+    <div class="scenario-grid" id="scenarioGrid"></div>
+    <div id="dialoguePanel"></div>
+  </div>
+</section>
+
+<!-- PRONUNCIATION -->
+<section id="sec-pronunciation">
+  <div class="pron-wrap">
+    <div class="section-header">
+      <div class="section-kana-title">發音練習</div>
+      <div class="section-title-rule"></div>
+      <p class="section-desc">聆聽標準發音，再用麥克風練習說說看</p>
+    </div>
+    <div class="pron-intro">
+      <div class="pron-intro-icon">🎙️</div>
+      <div class="pron-intro-text">
+        <h3>如何使用</h3>
+        <p>① 點擊 <strong>🔊 聆聽</strong> 聽標準日語發音<br>② 點擊 <strong>🎤 練習</strong> 開始錄音，說出句子<br>③ 系統將顯示辨識結果與準確度</p>
+      </div>
+    </div>
+    <div class="mic-banner hidden" id="pronMicBanner">🎤 需要麥克風權限才能使用錄音練習 <button class="btn-mic-req" onclick="requestMicPermission('pronMicBanner')">授權麥克風</button></div>
+    <div class="pron-no-support" id="pronNoSupport">⚠️ 您的瀏覽器不支援語音辨識（建議使用 Chrome 或 Edge）</div>
+    <div class="pron-cat-row" id="pronCatRow"></div>
+    <div class="pron-grid" id="pronGrid"></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="sec-quiz">
+  <div class="quiz-wrap">
+    <div class="section-header">
+      <div class="section-kana-title">測驗</div>
+      <div class="section-title-rule"></div>
+      <p class="section-desc">50音辨識 ＋ 文法選擇題</p>
+    </div>
+    <div class="inner-tabs">
+      <button class="inner-tab active" onclick="showQuizPane('kana',this)">あ 50音測驗</button>
+      <button class="inner-tab" onclick="showQuizPane('grammar',this)">📖 文法測驗</button>
+    </div>
+    <div id="qp-kana" class="inner-pane active">
+      <div id="quizContainer"></div>
+    </div>
+    <div id="qp-grammar" class="inner-pane">
+      <div id="grammarQuizContainer"></div>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+// ════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════
+
+const phrases = {
+  greetings:{icon:'👋',label:'問候語',items:[
+    {j:'おはようございます',r:'Ohayou gozaimasu',c:'早安'},
+    {j:'こんにちは',r:'Konnichiwa',c:'你好'},
+    {j:'こんばんは',r:'Konbanwa',c:'晚上好'},
+    {j:'ありがとうございます',r:'Arigatou gozaimasu',c:'非常感謝'},
+    {j:'すみません',r:'Sumimasen',c:'對不起 / 請問'},
+    {j:'よろしくお願いします',r:'Yoroshiku onegaishimasu',c:'請多多指教'},
+    {j:'お元気ですか',r:'O-genki desu ka',c:'您好嗎？'},
+    {j:'おやすみなさい',r:'Oyasumi nasai',c:'晚安'},
+    {j:'さようなら',r:'Sayounara',c:'再見'},
+    {j:'また明日',r:'Mata ashita',c:'明天見'},
+    {j:'ただいま',r:'Tadaima',c:'我回來了'},
+    {j:'いってきます',r:'Itte kimasu',c:'我出門了'},
+    {j:'いらっしゃいませ',r:'Irasshaimase',c:'歡迎光臨'},
+    {j:'はじめまして',r:'Hajimemashite',c:'初次見面'},
+    {j:'お疲れ様です',r:'Otsukaresama desu',c:'辛苦了'},
+  ]},
+  business:{icon:'💼',label:'商業用語',items:[
+    {j:'お世話になっております',r:'Osewa ni natte orimasu',c:'承蒙您的照顧'},
+    {j:'承知いたしました',r:'Shouchi itashimashita',c:'明白了 / 遵命'},
+    {j:'失礼いたします',r:'Shitsurei itashimasu',c:'失禮了 / 告辭'},
+    {j:'よろしくお願いいたします',r:'Yoroshiku onegai itashimasu',c:'敬請多多關照'},
+    {j:'ご確認をお願いします',r:'Go-kakunin wo onegai shimasu',c:'請您確認'},
+    {j:'ご連絡をお待ちしております',r:'Go-renraku wo omachi shite orimasu',c:'期待您的回覆'},
+    {j:'ご迷惑をおかけして申し訳ございません',r:'Go-meiwaku wo okake shite moushiwake gozaimasen',c:'非常抱歉給您添麻煩'},
+    {j:'資料を送っていただけますか',r:'Shiryou wo okute itadakemasu ka',c:'可以請您發送資料嗎？'},
+    {j:'会議の日程を調整したいのですが',r:'Kaigi no nittei wo chousei shitai no desu ga',c:'我想調整會議日程'},
+    {j:'本日はお時間をいただきありがとうございます',r:'Honjitsu wa ojikan wo itadaki arigatou gozaimasu',c:'感謝您今天撥冗'},
+    {j:'ご検討のほどよろしくお願いいたします',r:'Go-kentou no hodo yoroshiku onegai itashimasu',c:'敬請考慮'},
+    {j:'何かご不明な点はございますか',r:'Nanika go-fumeina ten wa gozaimasu ka',c:'有任何不明白的地方嗎？'},
+  ]},
+  travel:{icon:'✈️',label:'旅行',items:[
+    {j:'どこへ行けばいいですか',r:'Doko e ikeba ii desu ka',c:'我應該去哪裡？'},
+    {j:'駅はどこですか',r:'Eki wa doko desu ka',c:'車站在哪裡？'},
+    {j:'チケットを一枚ください',r:'Chiketto wo ichimai kudasai',c:'請給我一張票'},
+    {j:'ホテルを予約したいのですが',r:'Hoteru wo yoyaku shitai no desu ga',c:'我想預訂飯店'},
+    {j:'チェックインをお願いします',r:'Chekku-in wo onegai shimasu',c:'我要辦理入住'},
+    {j:'荷物を預けてもいいですか',r:'Nimotsu wo azukete mo ii desu ka',c:'可以寄放行李嗎？'},
+    {j:'観光スポットを教えてください',r:'Kankou supotto wo oshiete kudasai',c:'請告訴我觀光景點'},
+    {j:'写真を撮ってもいいですか',r:'Shashin wo totte mo ii desu ka',c:'可以拍照嗎？'},
+    {j:'パスポートを見せてください',r:'Pasupooto wo misete kudasai',c:'請出示護照'},
+    {j:'両替はどこでできますか',r:'Ryougae wa doko de dekimasu ka',c:'哪裡可以換錢？'},
+    {j:'迷子になってしまいました',r:'Maigo ni natte shimaimashita',c:'我迷路了'},
+    {j:'地図をいただけますか',r:'Chizu wo itadakemasu ka',c:'可以給我地圖嗎？'},
+  ]},
+  restaurant:{icon:'🍜',label:'餐廳',items:[
+    {j:'二名です',r:'Futari desu',c:'兩位'},
+    {j:'メニューをください',r:'Menyuu wo kudasai',c:'請給我菜單'},
+    {j:'おすすめは何ですか',r:'Osusume wa nan desu ka',c:'推薦什麼？'},
+    {j:'これをください',r:'Kore wo kudasai',c:'我要這個'},
+    {j:'辛くないものはありますか',r:'Karakunai mono wa arimasu ka',c:'有不辣的嗎？'},
+    {j:'アレルギーがあります',r:'Arerugii ga arimasu',c:'我有過敏'},
+    {j:'お会計をお願いします',r:'O-kaikei wo onegai shimasu',c:'請結帳'},
+    {j:'カードで払えますか',r:'Kaado de haraemasu ka',c:'可以刷卡嗎？'},
+    {j:'おいしかったです',r:'Oishikatta desu',c:'很好吃'},
+    {j:'お水をいただけますか',r:'O-mizu wo itadakemasu ka',c:'可以給我水嗎？'},
+    {j:'テイクアウトできますか',r:'Teiku-auto dekimasu ka',c:'可以外帶嗎？'},
+    {j:'ここに座っていいですか',r:'Koko ni suwatte ii desu ka',c:'可以坐這裡嗎？'},
+  ]},
+  shopping:{icon:'🛍️',label:'購物',items:[
+    {j:'これはいくらですか',r:'Kore wa ikura desu ka',c:'這個多少錢？'},
+    {j:'試着してもいいですか',r:'Shichaku shite mo ii desu ka',c:'可以試穿嗎？'},
+    {j:'別のサイズはありますか',r:'Betsu no saizu wa arimasu ka',c:'有其他尺寸嗎？'},
+    {j:'もう少し安くなりますか',r:'Mou sukoshi yasuku narimasu ka',c:'可以再便宜一點嗎？'},
+    {j:'袋に入れてください',r:'Fukuro ni irete kudasai',c:'請裝入袋子'},
+    {j:'ラッピングをお願いします',r:'Rappingu wo onegai shimasu',c:'請幫我包裝'},
+    {j:'返品できますか',r:'Henpin dekimasu ka',c:'可以退貨嗎？'},
+    {j:'レシートをください',r:'Reshiito wo kudasai',c:'請給我收據'},
+    {j:'どこで売っていますか',r:'Doko de utte imasu ka',c:'哪裡有賣？'},
+    {j:'セール中ですか',r:'Seeru-chuu desu ka',c:'正在特賣嗎？'},
+    {j:'現金で払います',r:'Genkin de haraimasu',c:'我用現金付'},
+    {j:'プレゼント用です',r:'Purezento-you desu',c:'這是作為禮物'},
+  ]},
+  school:{icon:'📚',label:'學校',items:[
+    {j:'授業はいつ始まりますか',r:'Jugyou wa itsu hajimarimasu ka',c:'課什麼時候開始？'},
+    {j:'宿題を出してください',r:'Shukudai wo dashite kudasai',c:'請交作業'},
+    {j:'もう一度説明してください',r:'Mou ichido setsumei shite kudasai',c:'請再說明一次'},
+    {j:'質問があります',r:'Shitsumon ga arimasu',c:'我有問題'},
+    {j:'トイレに行ってもいいですか',r:'Toire ni itte mo ii desu ka',c:'可以去洗手間嗎？'},
+    {j:'テストはいつですか',r:'Tesuto wa itsu desu ka',c:'考試是什麼時候？'},
+    {j:'図書館はどこですか',r:'Toshokan wa doko desu ka',c:'圖書館在哪裡？'},
+    {j:'一緒に勉強しませんか',r:'Issho ni benkyou shimasen ka',c:'要一起學習嗎？'},
+    {j:'ノートを貸してもらえますか',r:'Nooto wo kashite moraemasu ka',c:'可以借我筆記嗎？'},
+    {j:'先生に相談したいです',r:'Sensei ni soudan shitai desu',c:'我想找老師諮詢'},
+    {j:'欠席します',r:'Kesseki shimasu',c:'我要缺席'},
+    {j:'レポートの締め切りはいつですか',r:'Repooto no shimekiri wa itsu desu ka',c:'報告截止日是什麼時候？'},
+  ]},
+  medical:{icon:'🏥',label:'醫療',items:[
+    {j:'具合が悪いです',r:'Guai ga warui desu',c:'我身體不舒服'},
+    {j:'頭が痛いです',r:'Atama ga itai desu',c:'我頭痛'},
+    {j:'熱があります',r:'Netsu ga arimasu',c:'我發燒了'},
+    {j:'薬をください',r:'Kusuri wo kudasai',c:'請給我藥'},
+    {j:'病院はどこですか',r:'Byouin wa doko desu ka',c:'醫院在哪裡？'},
+    {j:'診察の予約をしたいです',r:'Shinsatsu no yoyaku wo shitai desu',c:'我想預約看診'},
+    {j:'保険証を持っています',r:'Hokenshou wo motte imasu',c:'我有保險卡'},
+    {j:'アレルギーがあります',r:'Arerugii ga arimasu',c:'我有過敏'},
+    {j:'いつからですか',r:'Itsu kara desu ka',c:'從什麼時候開始的？'},
+    {j:'処方箋をください',r:'Shohousen wo kudasai',c:'請給我處方箋'},
+    {j:'救急車を呼んでください',r:'Kyuukyuusha wo yonde kudasai',c:'請叫救護車'},
+    {j:'この薬の飲み方を教えてください',r:'Kono kusuri no nomikata wo oshiete kudasai',c:'請告訴我這藥怎麼服用'},
+  ]},
+  transport:{icon:'🚃',label:'交通',items:[
+    {j:'○○まで行きたいです',r:'○○ made ikitai desu',c:'我想去○○'},
+    {j:'何番線ですか',r:'Nanbansen desu ka',c:'是幾號線？'},
+    {j:'乗り換えはどこですか',r:'Norikae wa doko desu ka',c:'在哪裡換乘？'},
+    {j:'このバスは○○に行きますか',r:'Kono basu wa ○○ ni ikimasu ka',c:'這班公車去○○嗎？'},
+    {j:'タクシーを呼んでください',r:'Takushii wo yonde kudasai',c:'請叫計程車'},
+    {j:'この電車は急行ですか',r:'Kono densha wa kyuukou desu ka',c:'這班電車是快車嗎？'},
+    {j:'終電は何時ですか',r:'Shuuden wa nanji desu ka',c:'末班車是幾點？'},
+    {j:'運賃はいくらですか',r:'Unchin wa ikura desu ka',c:'車費是多少？'},
+    {j:'ここで止まってください',r:'Koko de tomatte kudasai',c:'請在這裡停車'},
+    {j:'迷っています',r:'Mayotte imasu',c:'我迷路了'},
+    {j:'空港へはどう行けばいいですか',r:'Kuukou e wa dou ikeba ii desu ka',c:'去機場怎麼走？'},
+    {j:'切符を購入したいのですが',r:'Kippu wo kounyuu shitai no desu ga',c:'我想購票'},
+  ]},
+};
+
+const kanaData = [
+  {rowName:'あ行',chars:[
+    {h:'あ',k:'ア',r:'a',  p:'嘴巴張大，像英文 ah'},
+    {h:'い',k:'イ',r:'i',  p:'嘴角向兩側拉，像英文 ee'},
+    {h:'う',k:'ウ',r:'u',  p:'嘴唇微圓，像英文 oo（但不圓）'},
+    {h:'え',k:'エ',r:'e',  p:'嘴巴半開，像英文 eh'},
+    {h:'お',k:'オ',r:'o',  p:'嘴唇圓圓地說，像英文 oh'},
+  ]},
+  {rowName:'か行',chars:[
+    {h:'か',k:'カ',r:'ka', p:'k + a，舌根輕觸上颚'},
+    {h:'き',k:'キ',r:'ki', p:'k + i，嘴角向兩側拉'},
+    {h:'く',k:'ク',r:'ku', p:'k + u，嘴唇微圓'},
+    {h:'け',k:'ケ',r:'ke', p:'k + e，嘴巴半開'},
+    {h:'こ',k:'コ',r:'ko', p:'k + o，嘴唇圓圓地說'},
+  ]},
+  {rowName:'さ行',chars:[
+    {h:'さ',k:'サ',r:'sa', p:'s + a，舌尖接近齒後'},
+    {h:'し',k:'シ',r:'shi',p:'類似英文 she，舌面抬起'},
+    {h:'す',k:'ス',r:'su', p:'s + u，嘴唇幾乎不圓'},
+    {h:'せ',k:'セ',r:'se', p:'s + e，清晰地說'},
+    {h:'そ',k:'ソ',r:'so', p:'s + o，嘴唇圓圓'},
+  ]},
+  {rowName:'た行',chars:[
+    {h:'た',k:'タ',r:'ta', p:'t + a，舌尖輕觸上齒'},
+    {h:'ち',k:'チ',r:'chi',p:'類似英文 cheese'},
+    {h:'つ',k:'ツ',r:'tsu',p:'ts + u，難度較高'},
+    {h:'て',k:'テ',r:'te', p:'t + e，輕巧地說'},
+    {h:'と',k:'ト',r:'to', p:'t + o，嘴唇圓圓'},
+  ]},
+  {rowName:'な行',chars:[
+    {h:'な',k:'ナ',r:'na', p:'n + a，舌尖觸上齒'},
+    {h:'に',k:'ニ',r:'ni', p:'n + i，輕巧地說'},
+    {h:'ぬ',k:'ヌ',r:'nu', p:'n + u，嘴唇微圓'},
+    {h:'ね',k:'ネ',r:'ne', p:'n + e，嘴巴半開'},
+    {h:'の',k:'ノ',r:'no', p:'n + o，嘴唇圓圓'},
+  ]},
+  {rowName:'は行',chars:[
+    {h:'は',k:'ハ',r:'ha', p:'h + a，輕輕呼氣'},
+    {h:'ひ',k:'ヒ',r:'hi', p:'類似英文 he，輕柔'},
+    {h:'ふ',k:'フ',r:'fu', p:'類似英文 who，雙唇微開'},
+    {h:'へ',k:'ヘ',r:'he', p:'h + e，輕輕呼氣'},
+    {h:'ほ',k:'ホ',r:'ho', p:'h + o，嘴唇圓圓呼氣'},
+  ]},
+  {rowName:'ま行',chars:[
+    {h:'ま',k:'マ',r:'ma', p:'m + a，雙唇閉合再開'},
+    {h:'み',k:'ミ',r:'mi', p:'m + i，嘴角輕拉'},
+    {h:'む',k:'ム',r:'mu', p:'m + u，嘴唇微圓'},
+    {h:'め',k:'メ',r:'me', p:'m + e，嘴巴半開'},
+    {h:'も',k:'モ',r:'mo', p:'m + o，嘴唇圓圓'},
+  ]},
+  {rowName:'や行',chars:[
+    {h:'や',k:'ヤ',r:'ya', p:'y + a，類似英文 ya'},
+    {h:'ゆ',k:'ユ',r:'yu', p:'y + u，嘴唇圓圓'},
+    {h:'よ',k:'ヨ',r:'yo', p:'y + o，嘴唇圓圓'},
+  ]},
+  {rowName:'ら行',chars:[
+    {h:'ら',k:'ラ',r:'ra', p:'介於 r 和 l 之間，舌尖輕彈上颚'},
+    {h:'り',k:'リ',r:'ri', p:'r + i，舌尖輕彈'},
+    {h:'る',k:'ル',r:'ru', p:'r + u，嘴唇微圓'},
+    {h:'れ',k:'レ',r:'re', p:'r + e，嘴巴半開'},
+    {h:'ろ',k:'ロ',r:'ro', p:'r + o，嘴唇圓圓'},
+  ]},
+  {rowName:'わ行',chars:[
+    {h:'わ',k:'ワ',r:'wa',   p:'w + a，嘴唇微圓後張開'},
+    {h:'を',k:'ヲ',r:'wo/o', p:'助詞用，發音同 お'},
+    {h:'ん',k:'ン',r:'n',    p:'鼻音，依前後音節變化（n/m/ng）'},
+  ]},
+];
+
+// Vocabulary for each kana (hiragana = native words, katakana = loanwords)
+const kanaVocab = {
+  hiragana:{
+    'a':[
+      {w:'赤（あか）',r:'aka',m:'紅色',ex:'赤い花が咲いています。',exR:'Akai hana ga saite imasu.',exM:'紅色的花正在盛開。'},
+      {w:'雨（あめ）',r:'ame',m:'雨',ex:'今日は雨が降りそうです。',exR:'Kyou wa ame ga furisou desu.',exM:'今天好像要下雨。'},
+      {w:'青（あお）',r:'ao',m:'藍/青色',ex:'空が青くて綺麗です。',exR:'Sora ga aokute kirei desu.',exM:'天空藍得很漂亮。'},
+    ],
+    'i':[
+      {w:'犬（いぬ）',r:'inu',m:'狗',ex:'かわいい犬を飼っています。',exR:'Kawaii inu wo katte imasu.',exM:'養著一隻可愛的狗。'},
+      {w:'家（いえ）',r:'ie',m:'家',ex:'家に帰りたいです。',exR:'Ie ni kaeritai desu.',exM:'我想回家。'},
+    ],
+    'u':[
+      {w:'海（うみ）',r:'umi',m:'大海',ex:'夏に海へ行きます。',exR:'Natsu ni umi e ikimasu.',exM:'夏天去海邊。'},
+      {w:'歌（うた）',r:'uta',m:'歌',ex:'好きな歌を歌います。',exR:'Suki na uta wo utaimasu.',exM:'唱喜歡的歌。'},
+    ],
+    'e':[
+      {w:'映画（えいが）',r:'eiga',m:'電影',ex:'映画館で映画を見ます。',exR:'Eigakan de eiga wo mimasu.',exM:'在電影院看電影。'},
+      {w:'絵（え）',r:'e',m:'畫/繪畫',ex:'絵を描くのが好きです。',exR:'E wo kaku no ga suki desu.',exM:'喜歡畫畫。'},
+    ],
+    'o':[
+      {w:'音楽（おんがく）',r:'ongaku',m:'音樂',ex:'音楽を聞きながら勉強します。',exR:'Ongaku wo kikinagara benkyou shimasu.',exM:'一邊聽音樂一邊學習。'},
+      {w:'お茶（おちゃ）',r:'ocha',m:'茶',ex:'お茶を一杯いかがですか。',exR:'Ocha wo ippai ikaga desu ka.',exM:'要喝一杯茶嗎？'},
+    ],
+    'ka':[
+      {w:'学校（がっこう）',r:'gakkou',m:'學校',ex:'毎日学校に行きます。',exR:'Mainichi gakkou ni ikimasu.',exM:'每天去學校。'},
+      {w:'家族（かぞく）',r:'kazoku',m:'家人',ex:'家族と一緒に食事します。',exR:'Kazoku to issho ni shokuji shimasu.',exM:'和家人一起吃飯。'},
+    ],
+    'ki':[
+      {w:'木（き）',r:'ki',m:'樹木',ex:'公園に大きな木があります。',exR:'Kouen ni ookina ki ga arimasu.',exM:'公園裡有一棵大樹。'},
+      {w:'切手（きって）',r:'kitte',m:'郵票',ex:'手紙に切手を貼ります。',exR:'Tegami ni kitte wo harimasu.',exM:'在信上貼郵票。'},
+    ],
+    'ku':[
+      {w:'靴（くつ）',r:'kutsu',m:'鞋子',ex:'新しい靴を買いました。',exR:'Atarashii kutsu wo kaimashita.',exM:'買了新鞋。'},
+      {w:'国（くに）',r:'kuni',m:'國家',ex:'どの国から来ましたか。',exR:'Dono kuni kara kimashita ka.',exM:'您從哪個國家來？'},
+    ],
+    'ke':[
+      {w:'元気（げんき）',r:'genki',m:'健康/精神好',ex:'お元気ですか。',exR:'O-genki desu ka.',exM:'您好嗎？'},
+      {w:'結婚（けっこん）',r:'kekkon',m:'結婚',ex:'来年結婚します。',exR:'Rainen kekkon shimasu.',exM:'明年結婚。'},
+    ],
+    'ko':[
+      {w:'子供（こども）',r:'kodomo',m:'孩子',ex:'子供が公園で遊んでいます。',exR:'Kodomo ga kouen de asonde imasu.',exM:'孩子在公園玩耍。'},
+      {w:'言葉（ことば）',r:'kotoba',m:'語言/詞語',ex:'新しい言葉を覚えました。',exR:'Atarashii kotoba wo oboemashita.',exM:'記住了新的詞語。'},
+    ],
+    'sa':[
+      {w:'魚（さかな）',r:'sakana',m:'魚',ex:'魚を食べるのが好きです。',exR:'Sakana wo taberu no ga suki desu.',exM:'喜歡吃魚。'},
+      {w:'桜（さくら）',r:'sakura',m:'櫻花',ex:'春になると桜が咲きます。',exR:'Haru ni naru to sakura ga sakimasu.',exM:'春天來臨時櫻花會盛開。'},
+    ],
+    'shi':[
+      {w:'仕事（しごと）',r:'shigoto',m:'工作',ex:'仕事が忙しいです。',exR:'Shigoto ga isogashii desu.',exM:'工作很忙。'},
+      {w:'新聞（しんぶん）',r:'shinbun',m:'報紙',ex:'毎朝新聞を読みます。',exR:'Maiasa shinbun wo yomimasu.',exM:'每天早上讀報紙。'},
+    ],
+    'su':[
+      {w:'寿司（すし）',r:'sushi',m:'壽司',ex:'寿司が大好きです。',exR:'Sushi ga daisuki desu.',exM:'非常喜歡壽司。'},
+      {w:'好き（すき）',r:'suki',m:'喜歡',ex:'日本語が好きです。',exR:'Nihongo ga suki desu.',exM:'喜歡日文。'},
+    ],
+    'se':[
+      {w:'先生（せんせい）',r:'sensei',m:'老師',ex:'先生に質問があります。',exR:'Sensei ni shitsumon ga arimasu.',exM:'有問題想問老師。'},
+      {w:'説明（せつめい）',r:'setsumei',m:'說明',ex:'もう一度説明してください。',exR:'Mou ichido setsumei shite kudasai.',exM:'請再說明一次。'},
+    ],
+    'so':[
+      {w:'空（そら）',r:'sora',m:'天空',ex:'今日は空が青いです。',exR:'Kyou wa sora ga aoi desu.',exM:'今天天空很藍。'},
+      {w:'掃除（そうじ）',r:'souji',m:'打掃',ex:'部屋の掃除をします。',exR:'Heya no souji wo shimasu.',exM:'打掃房間。'},
+    ],
+    'ta':[
+      {w:'食べ物（たべもの）',r:'tabemono',m:'食物',ex:'日本の食べ物が好きです。',exR:'Nihon no tabemono ga suki desu.',exM:'喜歡日本食物。'},
+      {w:'旅行（たびこう→りょこう）',r:'ryokou',m:'旅行',ex:'旅行が好きです。',exR:'Ryokou ga suki desu.',exM:'喜歡旅行。'},
+    ],
+    'chi':[
+      {w:'地図（ちず）',r:'chizu',m:'地圖',ex:'地図を見て道を調べます。',exR:'Chizu wo mite michi wo shirabemasu.',exM:'看地圖找路。'},
+      {w:'違う（ちがう）',r:'chigau',m:'不同/不對',ex:'それは違います。',exR:'Sore wa chigaimasu.',exM:'那是不對的。'},
+    ],
+    'tsu':[
+      {w:'月（つき）',r:'tsuki',m:'月亮',ex:'今夜は月が綺麗です。',exR:'Konya wa tsuki ga kirei desu.',exM:'今晚的月亮很美。'},
+      {w:'強い（つよい）',r:'tsuyoi',m:'強/強壯',ex:'心が強い人です。',exR:'Kokoro ga tsuyoi hito desu.',exM:'是一個內心強大的人。'},
+    ],
+    'te':[
+      {w:'手紙（てがみ）',r:'tegami',m:'信',ex:'友達に手紙を書きます。',exR:'Tomodachi ni tegami wo kakimasu.',exM:'寫信給朋友。'},
+      {w:'天気（てんき）',r:'tenki',m:'天氣',ex:'今日の天気はいいですね。',exR:'Kyou no tenki wa ii desu ne.',exM:'今天天氣很好呢。'},
+    ],
+    'to':[
+      {w:'時計（とけい）',r:'tokei',m:'時鐘',ex:'時計を見てください。',exR:'Tokei wo mite kudasai.',exM:'請看時鐘。'},
+      {w:'図書館（としょかん）',r:'toshokan',m:'圖書館',ex:'図書館で本を借ります。',exR:'Toshokan de hon wo karimasu.',exM:'在圖書館借書。'},
+    ],
+    'na':[
+      {w:'名前（なまえ）',r:'namae',m:'名字',ex:'お名前は何ですか。',exR:'O-namae wa nan desu ka.',exM:'您的名字是什麼？'},
+      {w:'夏（なつ）',r:'natsu',m:'夏天',ex:'夏は暑いです。',exR:'Natsu wa atsui desu.',exM:'夏天很熱。'},
+    ],
+    'ni':[
+      {w:'日本語（にほんご）',r:'nihongo',m:'日文',ex:'日本語を勉強しています。',exR:'Nihongo wo benkyou shite imasu.',exM:'正在學習日文。'},
+      {w:'肉（にく）',r:'niku',m:'肉',ex:'肉が好きですか。',exR:'Niku ga suki desu ka.',exM:'你喜歡吃肉嗎？'},
+    ],
+    'nu':[
+      {w:'脱ぐ（ぬぐ）',r:'nugu',m:'脫下',ex:'靴を脱いでください。',exR:'Kutsu wo nuide kudasai.',exM:'請脫鞋。'},
+      {w:'縫う（ぬう）',r:'nuu',m:'縫',ex:'ボタンを縫います。',exR:'Botan wo nuimasu.',exM:'縫鈕扣。'},
+    ],
+    'ne':[
+      {w:'猫（ねこ）',r:'neko',m:'貓',ex:'猫を飼っています。',exR:'Neko wo katte imasu.',exM:'養著一隻貓。'},
+      {w:'熱（ねつ）',r:'netsu',m:'發燒/熱',ex:'熱が出ました。',exR:'Netsu ga demashita.',exM:'發燒了。'},
+    ],
+    'no':[
+      {w:'飲み物（のみもの）',r:'nomimono',m:'飲料',ex:'何か飲み物をください。',exR:'Nanika nomimono wo kudasai.',exM:'請給我飲料。'},
+      {w:'乗り物（のりもの）',r:'norimono',m:'交通工具',ex:'電車は便利な乗り物です。',exR:'Densha wa benri na norimono desu.',exM:'電車是方便的交通工具。'},
+    ],
+    'ha':[
+      {w:'花（はな）',r:'hana',m:'花',ex:'花に水をあげます。',exR:'Hana ni mizu wo agemasu.',exM:'給花澆水。'},
+      {w:'春（はる）',r:'haru',m:'春天',ex:'春は暖かいです。',exR:'Haru wa atatakai desu.',exM:'春天很溫暖。'},
+    ],
+    'hi':[
+      {w:'人（ひと）',r:'hito',m:'人',ex:'あの人は誰ですか。',exR:'Ano hito wa dare desu ka.',exM:'那個人是誰？'},
+      {w:'昼（ひる）',r:'hiru',m:'中午',ex:'昼ご飯を食べます。',exR:'Hiru gohan wo tabemasu.',exM:'吃午飯。'},
+    ],
+    'fu':[
+      {w:'冬（ふゆ）',r:'fuyu',m:'冬天',ex:'冬は寒いです。',exR:'Fuyu wa samui desu.',exM:'冬天很冷。'},
+      {w:'服（ふく）',r:'fuku',m:'衣服',ex:'新しい服を買いました。',exR:'Atarashii fuku wo kaimashita.',exM:'買了新衣服。'},
+    ],
+    'he':[
+      {w:'部屋（へや）',r:'heya',m:'房間',ex:'部屋を掃除します。',exR:'Heya wo souji shimasu.',exM:'打掃房間。'},
+      {w:'返事（へんじ）',r:'henji',m:'回覆',ex:'返事を待っています。',exR:'Henji wo matte imasu.',exM:'在等回覆。'},
+    ],
+    'ho':[
+      {w:'本（ほん）',r:'hon',m:'書',ex:'本を読むのが好きです。',exR:'Hon wo yomu no ga suki desu.',exM:'喜歡看書。'},
+      {w:'本当（ほんとう）',r:'hontou',m:'真的',ex:'本当ですか。',exR:'Hontou desu ka.',exM:'是真的嗎？'},
+    ],
+    'ma':[
+      {w:'窓（まど）',r:'mado',m:'窗戶',ex:'窓を開けてください。',exR:'Mado wo akete kudasai.',exM:'請打開窗戶。'},
+      {w:'毎日（まいにち）',r:'mainichi',m:'每天',ex:'毎日運動します。',exR:'Mainichi undou shimasu.',exM:'每天運動。'},
+    ],
+    'mi':[
+      {w:'水（みず）',r:'mizu',m:'水',ex:'水を一杯ください。',exR:'Mizu wo ippai kudasai.',exM:'請給我一杯水。'},
+      {w:'耳（みみ）',r:'mimi',m:'耳朵',ex:'音楽を耳で聞きます。',exR:'Ongaku wo mimi de kikimasu.',exM:'用耳朵聽音樂。'},
+    ],
+    'mu':[
+      {w:'虫（むし）',r:'mushi',m:'蟲子',ex:'虫が嫌いです。',exR:'Mushi ga kirai desu.',exM:'討厭蟲子。'},
+      {w:'難しい（むずかしい）',r:'muzukashii',m:'困難',ex:'日本語は難しいですか。',exR:'Nihongo wa muzukashii desu ka.',exM:'日文難嗎？'},
+    ],
+    'me':[
+      {w:'目（め）',r:'me',m:'眼睛',ex:'目が痛いです。',exR:'Me ga itai desu.',exM:'眼睛痛。'},
+      {w:'メモ',r:'memo',m:'備忘/筆記',ex:'大切なことをメモします。',exR:'Taisetsu na koto wo memo shimasu.',exM:'把重要的事記下來。'},
+    ],
+    'mo':[
+      {w:'桃（もも）',r:'momo',m:'桃子',ex:'桃が好きです。',exR:'Momo ga suki desu.',exM:'喜歡桃子。'},
+      {w:'もう一度',r:'mou ichido',m:'再一次',ex:'もう一度言ってください。',exR:'Mou ichido itte kudasai.',exM:'請再說一次。'},
+    ],
+    'ya':[
+      {w:'山（やま）',r:'yama',m:'山',ex:'山に登ります。',exR:'Yama ni noborimasu.',exM:'爬山。'},
+      {w:'野菜（やさい）',r:'yasai',m:'蔬菜',ex:'野菜を食べましょう。',exR:'Yasai wo tabemashou.',exM:'我們吃蔬菜吧。'},
+    ],
+    'yu':[
+      {w:'雪（ゆき）',r:'yuki',m:'雪',ex:'雪が降っています。',exR:'Yuki ga futte imasu.',exM:'在下雪。'},
+      {w:'夢（ゆめ）',r:'yume',m:'夢想/夢',ex:'大きな夢があります。',exR:'Ookina yume ga arimasu.',exM:'有遠大的夢想。'},
+    ],
+    'yo':[
+      {w:'夜（よる）',r:'yoru',m:'夜晚',ex:'夜は静かです。',exR:'Yoru wa shizuka desu.',exM:'夜晚很安靜。'},
+      {w:'予約（よやく）',r:'yoyaku',m:'預訂',ex:'レストランを予約しました。',exR:'Resutoran wo yoyaku shimashita.',exM:'預訂了餐廳。'},
+    ],
+    'ra':[
+      {w:'来年（らいねん）',r:'rainen',m:'明年',ex:'来年日本に行きます。',exR:'Rainen Nihon ni ikimasu.',exM:'明年去日本。'},
+      {w:'ラーメン',r:'raamen',m:'拉麵',ex:'ラーメンが食べたいです。',exR:'Raamen ga tabetai desu.',exM:'想吃拉麵。'},
+    ],
+    'ri':[
+      {w:'旅行（りょこう）',r:'ryokou',m:'旅行',ex:'旅行が楽しかったです。',exR:'Ryokou ga tanoshikatta desu.',exM:'旅行很開心。'},
+      {w:'料理（りょうり）',r:'ryouri',m:'料理',ex:'料理が得意です。',exR:'Ryouri ga tokui desu.',exM:'擅長做料理。'},
+    ],
+    'ru':[
+      {w:'留学（りゅうがく）',r:'ryuugaku',m:'留學',ex:'日本に留学したいです。',exR:'Nihon ni ryuugaku shitai desu.',exM:'想去日本留學。'},
+      {w:'ルール',r:'ruuru',m:'規則',ex:'ルールを守ります。',exR:'Ruuru wo mamorimasu.',exM:'遵守規則。'},
+    ],
+    're':[
+      {w:'練習（れんしゅう）',r:'renshuu',m:'練習',ex:'毎日発音を練習します。',exR:'Mainichi hatsuon wo renshuu shimasu.',exM:'每天練習發音。'},
+      {w:'歴史（れきし）',r:'rekishi',m:'歷史',ex:'日本の歴史に興味があります。',exR:'Nihon no rekishi ni kyoumi ga arimasu.',exM:'對日本歷史有興趣。'},
+    ],
+    'ro':[
+      {w:'廊下（ろうか）',r:'rouka',m:'走廊',ex:'廊下を走らないでください。',exR:'Rouka wo hashiranai de kudasai.',exM:'請不要在走廊跑。'},
+      {w:'六（ろく）',r:'roku',m:'六',ex:'六時に起きます。',exR:'Rokuji ni okimasu.',exM:'六點起床。'},
+    ],
+    'wa':[
+      {w:'私（わたし）',r:'watashi',m:'我',ex:'私は学生です。',exR:'Watashi wa gakusei desu.',exM:'我是學生。'},
+      {w:'笑う（わらう）',r:'warau',m:'笑',ex:'みんなが笑っています。',exR:'Minna ga waratte imasu.',exM:'大家都在笑。'},
+    ],
+    'wo/o':[
+      {w:'本を読む（ほんをよむ）',r:'hon wo yomu',m:'讀書',ex:'図書館で本を読みます。',exR:'Toshokan de hon wo yomimasu.',exM:'在圖書館讀書。'},
+    ],
+    'n':[
+      {w:'電話（でんわ）',r:'denwa',m:'電話',ex:'電話をかけます。',exR:'Denwa wo kakemasu.',exM:'打電話。'},
+      {w:'日本（にほん）',r:'nihon',m:'日本',ex:'日本は素晴らしい国です。',exR:'Nihon wa subarashii kuni desu.',exM:'日本是個很棒的國家。'},
+    ],
+  },
+  katakana:{
+    'a':[
+      {w:'アイスクリーム',r:'aisukuriimu',m:'冰淇淋',ex:'アイスクリームを食べたいです。',exR:'Aisukuriimu wo tabetai desu.',exM:'想吃冰淇淋。'},
+      {w:'アニメ',r:'anime',m:'動畫',ex:'日本のアニメが大好きです。',exR:'Nihon no anime ga daisuki desu.',exM:'非常喜歡日本動畫。'},
+    ],
+    'i':[
+      {w:'インターネット',r:'intaanetto',m:'網路',ex:'インターネットで調べます。',exR:'Intaanetto de shirabemasu.',exM:'在網路上查詢。'},
+      {w:'イヤホン',r:'iyahon',m:'耳機',ex:'イヤホンで音楽を聴きます。',exR:'Iyahon de ongaku wo kikimasu.',exM:'用耳機聽音樂。'},
+    ],
+    'u':[
+      {w:'ウイルス',r:'uirusu',m:'病毒',ex:'ウイルスに感染しました。',exR:'Uirusu ni kansen shimashita.',exM:'感染了病毒。'},
+      {w:'ウェブサイト',r:'webu saito',m:'網站',ex:'ウェブサイトを作ります。',exR:'Webu saito wo tsukurimasu.',exM:'製作網站。'},
+    ],
+    'e':[
+      {w:'エアコン',r:'eakon',m:'冷氣',ex:'エアコンをつけてください。',exR:'Eakon wo tsukete kudasai.',exM:'請開冷氣。'},
+      {w:'エレベーター',r:'erebeetaa',m:'電梯',ex:'エレベーターで上がります。',exR:'Erebeetaa de agarimasu.',exM:'搭電梯上去。'},
+    ],
+    'o':[
+      {w:'オレンジ',r:'orenji',m:'柳橙',ex:'オレンジジュースをください。',exR:'Orenji juusu wo kudasai.',exM:'請給我柳橙汁。'},
+      {w:'オフィス',r:'ofisu',m:'辦公室',ex:'オフィスで働きます。',exR:'Ofisu de hatarakimasu.',exM:'在辦公室工作。'},
+    ],
+    'ka':[
+      {w:'カメラ',r:'kamera',m:'相機',ex:'カメラで写真を撮ります。',exR:'Kamera de shashin wo torimasu.',exM:'用相機拍照。'},
+      {w:'カフェ',r:'kafe',m:'咖啡廳',ex:'カフェでコーヒーを飲みます。',exR:'Kafe de koohii wo nomimasu.',exM:'在咖啡廳喝咖啡。'},
+    ],
+    'ki':[
+      {w:'キッチン',r:'kicchin',m:'廚房',ex:'キッチンで料理します。',exR:'Kicchin de ryouri shimasu.',exM:'在廚房做料理。'},
+      {w:'キャンセル',r:'kyanseru',m:'取消',ex:'予約をキャンセルします。',exR:'Yoyaku wo kyanseru shimasu.',exM:'取消預訂。'},
+    ],
+    'ku':[
+      {w:'クレジットカード',r:'kurejitto kaado',m:'信用卡',ex:'クレジットカードで払います。',exR:'Kurejitto kaado de haraimasu.',exM:'用信用卡付款。'},
+      {w:'クーポン',r:'kuupon',m:'優惠券',ex:'クーポンを使います。',exR:'Kuupon wo tsukaimasu.',exM:'使用優惠券。'},
+    ],
+    'ke':[
+      {w:'ケーキ',r:'keeki',m:'蛋糕',ex:'誕生日ケーキを買います。',exR:'Tanjoubi keeki wo kaimasu.',exM:'買生日蛋糕。'},
+      {w:'ケータイ',r:'keetai',m:'手機',ex:'ケータイで連絡します。',exR:'Keetai de renraku shimasu.',exM:'用手機聯絡。'},
+    ],
+    'ko':[
+      {w:'コーヒー',r:'koohii',m:'咖啡',ex:'毎朝コーヒーを飲みます。',exR:'Maiasa koohii wo nomimasu.',exM:'每天早上喝咖啡。'},
+      {w:'コンビニ',r:'konbini',m:'便利商店',ex:'コンビニで買い物します。',exR:'Konbini de kaimono shimasu.',exM:'在便利商店買東西。'},
+    ],
+    'sa':[
+      {w:'サービス',r:'saabisu',m:'服務',ex:'サービスがいいです。',exR:'Saabisu ga ii desu.',exM:'服務很好。'},
+      {w:'サラダ',r:'sarada',m:'沙拉',ex:'サラダを注文します。',exR:'Sarada wo chuumon shimasu.',exM:'點沙拉。'},
+    ],
+    'shi':[
+      {w:'シャワー',r:'shawaa',m:'淋浴',ex:'シャワーを浴びます。',exR:'Shawaa wo abimasu.',exM:'淋浴。'},
+      {w:'ショッピング',r:'shoppingu',m:'購物',ex:'ショッピングが好きです。',exR:'Shoppingu ga suki desu.',exM:'喜歡購物。'},
+    ],
+    'su':[
+      {w:'スマートフォン',r:'sumaatofon',m:'智慧手機',ex:'スマートフォンを使います。',exR:'Sumaatofon wo tsukaimasu.',exM:'使用智慧手機。'},
+      {w:'スーパー',r:'suupaa',m:'超市',ex:'スーパーで買い物します。',exR:'Suupaa de kaimono shimasu.',exM:'在超市購物。'},
+    ],
+    'se':[
+      {w:'セール',r:'seeru',m:'特賣/Sale',ex:'セール中なので安いです。',exR:'Seeru-chuu nanode yasui desu.',exM:'正在特賣所以很便宜。'},
+      {w:'センター',r:'sentaa',m:'中心/Center',ex:'ショッピングセンターに行きます。',exR:'Shoppingu sentaa ni ikimasu.',exM:'去購物中心。'},
+    ],
+    'so':[
+      {w:'ソフト',r:'sofuto',m:'軟體/soft',ex:'ソフトをインストールします。',exR:'Sofuto wo insutooru shimasu.',exM:'安裝軟體。'},
+      {w:'ソファ',r:'sofa',m:'沙發',ex:'ソファに座ります。',exR:'Sofa ni suwarimasu.',exM:'坐在沙發上。'},
+    ],
+    'ta':[
+      {w:'タクシー',r:'takushii',m:'計程車',ex:'タクシーを呼びます。',exR:'Takushii wo yobimasu.',exM:'叫計程車。'},
+      {w:'テレビ',r:'terebi',m:'電視',ex:'テレビを見ます。',exR:'Terebi wo mimasu.',exM:'看電視。'},
+    ],
+    'chi':[
+      {w:'チケット',r:'chiketto',m:'票',ex:'映画チケットを買います。',exR:'Eiga chiketto wo kaimasu.',exM:'買電影票。'},
+      {w:'チョコレート',r:'chokoreeto',m:'巧克力',ex:'チョコレートが好きです。',exR:'Chokoreeto ga suki desu.',exM:'喜歡巧克力。'},
+    ],
+    'tsu':[
+      {w:'ツアー',r:'tsuaa',m:'旅遊行程',ex:'ツアーに参加します。',exR:'Tsuaa ni sanka shimasu.',exM:'參加旅遊行程。'},
+      {w:'ツール',r:'tsuuru',m:'工具',ex:'便利なツールです。',exR:'Benri na tsuuru desu.',exM:'很方便的工具。'},
+    ],
+    'te':[
+      {w:'テスト',r:'tesuto',m:'測驗',ex:'テストの準備をします。',exR:'Tesuto no junbi wo shimasu.',exM:'準備考試。'},
+      {w:'テーマ',r:'teema',m:'主題',ex:'テーマを決めます。',exR:'Teema wo kimemasu.',exM:'決定主題。'},
+    ],
+    'to':[
+      {w:'トイレ',r:'toire',m:'廁所',ex:'トイレはどこですか。',exR:'Toire wa doko desu ka.',exM:'廁所在哪裡？'},
+      {w:'ドア',r:'doa',m:'門',ex:'ドアを開けてください。',exR:'Doa wo akete kudasai.',exM:'請開門。'},
+    ],
+    'na':[
+      {w:'ナイフ',r:'naifu',m:'刀子',ex:'ナイフとフォークを使います。',exR:'Naifu to fooku wo tsukaimasu.',exM:'使用刀子和叉子。'},
+      {w:'ナンバー',r:'nanbaa',m:'號碼',ex:'電話ナンバーを教えてください。',exR:'Denwa nanbaa wo oshiete kudasai.',exM:'請告訴我電話號碼。'},
+    ],
+    'ni':[
+      {w:'ニュース',r:'nyuusu',m:'新聞/消息',ex:'毎日ニュースを見ます。',exR:'Mainichi nyuusu wo mimasu.',exM:'每天看新聞。'},
+      {w:'ノート',r:'nooto',m:'筆記本',ex:'ノートに書きます。',exR:'Nooto ni kakimasu.',exM:'在筆記本上寫。'},
+    ],
+    'nu':[{w:'ヌードル',r:'nuudoru',m:'麵條',ex:'ヌードルを食べます。',exR:'Nuudoru wo tabemasu.',exM:'吃麵條。'}],
+    'ne':[
+      {w:'ネット',r:'netto',m:'網路',ex:'ネットで調べます。',exR:'Netto de shirabemasu.',exM:'在網路上查。'},
+      {w:'ネックレス',r:'nekkuresu',m:'項鍊',ex:'ネックレスをプレゼントします。',exR:'Nekkuresu wo purezento shimasu.',exM:'送項鍊作禮物。'},
+    ],
+    'no':[{w:'ノート',r:'nooto',m:'筆記本',ex:'ノートに授業の内容を書きます。',exR:'Nooto ni jugyou no naiyou wo kakimasu.',exM:'在筆記本上記下課程內容。'}],
+    'ha':[
+      {w:'ハンバーガー',r:'hanbaagaa',m:'漢堡',ex:'ハンバーガーを食べます。',exR:'Hanbaagaa wo tabemasu.',exM:'吃漢堡。'},
+      {w:'ホテル',r:'hoteru',m:'飯店',ex:'ホテルを予約します。',exR:'Hoteru wo yoyaku shimasu.',exM:'預訂飯店。'},
+    ],
+    'hi':[{w:'ヒーター',r:'hiitaa',m:'暖氣',ex:'冬はヒーターをつけます。',exR:'Fuyu wa hiitaa wo tsukemasu.',exM:'冬天開暖氣。'}],
+    'fu':[
+      {w:'フード',r:'fuudo',m:'食物/hood',ex:'ファストフードが好きです。',exR:'Fasuto fuudo ga suki desu.',exM:'喜歡速食。'},
+      {w:'フォーク',r:'fooku',m:'叉子',ex:'フォークを使います。',exR:'Fooku wo tsukaimasu.',exM:'使用叉子。'},
+    ],
+    'he':[{w:'ヘアドライヤー',r:'hea doraiyaa',m:'吹風機',ex:'ヘアドライヤーを貸してください。',exR:'Hea doraiyaa wo kashite kudasai.',exM:'請借我吹風機。'}],
+    'ho':[
+      {w:'ホテル',r:'hoteru',m:'飯店',ex:'ホテルにチェックインします。',exR:'Hoteru ni chekku-in shimasu.',exM:'在飯店辦理入住。'},
+      {w:'ホームページ',r:'hoomu peeji',m:'首頁/官網',ex:'ホームページをご覧ください。',exR:'Hoomu peeji wo goran kudasai.',exM:'請參閱官方網站。'},
+    ],
+    'ma':[
+      {w:'マスク',r:'masuku',m:'口罩',ex:'マスクをつけてください。',exR:'Masuku wo tsukete kudasai.',exM:'請戴口罩。'},
+      {w:'マネージャー',r:'maneejaa',m:'經理',ex:'マネージャーを呼んでください。',exR:'Maneejaa wo yonde kudasai.',exM:'請叫經理。'},
+    ],
+    'mi':[{w:'ミルク',r:'miruku',m:'牛奶',ex:'ミルクティーをください。',exR:'Miruku tii wo kudasai.',exM:'請給我奶茶。'}],
+    'mu':[{w:'ムード',r:'muudo',m:'氣氛',ex:'いいムードですね。',exR:'Ii muudo desu ne.',exM:'氣氛很好呢。'}],
+    'me':[{w:'メニュー',r:'menyuu',m:'菜單',ex:'メニューをください。',exR:'Menyuu wo kudasai.',exM:'請給我菜單。'}],
+    'mo':[{w:'モデル',r:'moderu',m:'模特兒/模型',ex:'このモデルが人気です。',exR:'Kono moderu ga ninki desu.',exM:'這個型號很受歡迎。'}],
+    'ya':[{w:'ヤード',r:'yaado',m:'碼（單位）',ex:'100ヤードの距離です。',exR:'Hyaku yaado no kyori desu.',exM:'100碼的距離。'}],
+    'yu':[{w:'ユーザー',r:'yuuzaa',m:'使用者',ex:'ユーザー登録をします。',exR:'Yuuzaa touroku wo shimasu.',exM:'進行使用者登錄。'}],
+    'yo':[{w:'ヨーグルト',r:'yooguruto',m:'優格',ex:'朝食にヨーグルトを食べます。',exR:'Choushoku ni yooguruto wo tabemasu.',exM:'早餐吃優格。'}],
+    'ra':[
+      {w:'ラップトップ',r:'rappu toppu',m:'筆記型電腦',ex:'ラップトップを使って仕事します。',exR:'Rappu toppu wo tsukatte shigoto shimasu.',exM:'用筆記型電腦工作。'},
+      {w:'ランチ',r:'ranchi',m:'午餐',ex:'ランチを食べに行きます。',exR:'Ranchi wo tabe ni ikimasu.',exM:'去吃午餐。'},
+    ],
+    'ri':[{w:'リモコン',r:'rimokon',m:'遙控器',ex:'テレビのリモコンはどこですか。',exR:'Terebi no rimokon wa doko desu ka.',exM:'電視遙控器在哪裡？'}],
+    'ru':[{w:'ルームサービス',r:'ruumu saabisu',m:'客房服務',ex:'ルームサービスを頼みます。',exR:'Ruumu saabisu wo tanomimasu.',exM:'要客房服務。'}],
+    're':[{w:'レストラン',r:'resutoran',m:'餐廳',ex:'レストランで食事します。',exR:'Resutoran de shokuji shimasu.',exM:'在餐廳用餐。'}],
+    'ro':[{w:'ロビー',r:'robii',m:'大廳',ex:'ロビーで待ちます。',exR:'Robii de machimasu.',exM:'在大廳等待。'}],
+    'wa':[{w:'ワイン',r:'wain',m:'葡萄酒',ex:'赤ワインをください。',exR:'Aka wain wo kudasai.',exM:'請給我紅酒。'}],
+    'wo/o':[],
+    'n':[],
+  }
+};
+
+const grammarData = [
+  // ── N5 ──────────────────────────────────────
+  {id:'n5-1',level:'N5',title:'現在式肯定句（～ます）',
+   desc:'表示現在習慣性的動作、未來計畫，或描述事實。是最基本的丁寧體（禮貌形）動詞結構。',
+   note:'💡 動詞字典形→ます形：う段→い段＋ます（例：飲む→飲みます）',
+   pattern:'主詞 ＋ は ＋ ［場所/目的語＋助詞］＋ 動詞ます',
+   examples:[
+     {j:'私は毎日学校に行きます。',r:'Watashi wa mainichi gakkou ni ikimasu.',c:'我每天去學校。'},
+     {j:'猫は牛乳を飲みます。',r:'Neko wa gyuunyuu wo nomimasu.',c:'貓喝牛奶。'},
+     {j:'先生は学生に日本語を教えます。',r:'Sensei wa gakusei ni nihongo wo oshiemasu.',c:'老師教學生日文。'},
+     {j:'妹は毎日ピアノを練習します。',r:'Imouto wa mainichi piano wo renshuu shimasu.',c:'妹妹每天練習鋼琴。'},
+     {j:'兄は毎朝コーヒーを飲みます。',r:'Ani wa maiasa koohii wo nomimasu.',c:'哥哥每天早上喝咖啡。'},
+     {j:'学生は図書館で本を読みます。',r:'Gakusei wa toshokan de hon wo yomimasu.',c:'學生在圖書館讀書。'},
+     {j:'父は会社で働きます。',r:'Chichi wa kaisha de hatarakimasu.',c:'父親在公司工作。'},
+     {j:'彼女は料理が上手です。毎日作ります。',r:'Kanojo wa ryouri ga jouzu desu. Mainichi tsukurimasu.',c:'她很擅長做菜，每天都做。'},
+   ]},
+  {id:'n5-2',level:'N5',title:'否定句（～ません）',
+   desc:'動詞ます形的否定，表示「不做…」或「沒有做…」。過去否定為「～ませんでした」。',
+   note:'💡 ます→ません（現在否定）；ました→ませんでした（過去否定）',
+   pattern:'動詞ます形語幹 ＋ ません',
+   examples:[
+     {j:'私はお酒を飲みません。',r:'Watashi wa osake wo nomimasen.',c:'我不喝酒。'},
+     {j:'昨日は学校に行きませんでした。',r:'Kinou wa gakkou ni ikimasen deshita.',c:'昨天沒有去學校。'},
+     {j:'彼はテレビを見ません。',r:'Kare wa terebi wo mimasen.',c:'他不看電視。'},
+     {j:'今日は何も食べませんでした。',r:'Kyou wa nanimo tabemasen deshita.',c:'今天什麼都沒吃。'},
+     {j:'この映画はあまり好きじゃありません。',r:'Kono eiga wa amari suki ja arimasen.',c:'我不太喜歡這部電影。'},
+     {j:'彼女はまだ来ていません。',r:'Kanojo wa mada kite imasen.',c:'她還沒來。'},
+     {j:'このレストランはあまり美味しくないです。',r:'Kono resutoran wa amari oishikunai desu.',c:'這家餐廳不太好吃。'},
+   ]},
+  {id:'n5-3',level:'N5',title:'進行式（～ています）',
+   desc:'表示正在進行的動作，或動作的結果仍在持續的狀態。是學習日文時最重要的句型之一。',
+   note:'💡 状態動詞（知る、住む、結婚する等）用「～ています」表示持續狀態，而非進行中的動作。',
+   pattern:'動詞て形 ＋ います',
+   examples:[
+     {j:'田中さんは今、電話をしています。',r:'Tanaka-san wa ima, denwa wo shite imasu.',c:'田中先生現在正在打電話。'},
+     {j:'子供たちは公園で遊んでいます。',r:'Kodomotachi wa kouen de asonde imasu.',c:'孩子們在公園玩耍。'},
+     {j:'山田さんは日本語を勉強しています。',r:'Yamada-san wa nihongo wo benkyou shite imasu.',c:'山田先生正在學習日文。'},
+     {j:'彼女は東京に住んでいます。',r:'Kanojo wa Toukyou ni sunde imasu.',c:'她住在東京（持續狀態）。'},
+     {j:'兄は会社員として働いています。',r:'Ani wa kaishain to shite hataraite imasu.',c:'哥哥以上班族身份工作著。'},
+     {j:'母は今、台所で料理を作っています。',r:'Haha wa ima, daidokoro de ryouri wo tsukutte imasu.',c:'媽媽現在正在廚房做菜。'},
+     {j:'田中さんはもう結婚しています。',r:'Tanaka-san wa mou kekkon shite imasu.',c:'田中先生已經結婚了（已婚狀態）。'},
+     {j:'雨が降っています。',r:'Ame ga futte imasu.',c:'正在下雨。'},
+   ]},
+  {id:'n5-4',level:'N5',title:'過去式（～ました）',
+   desc:'動詞過去肯定形，表示「做了…」的已完成動作。否定過去形為「～ませんでした」。',
+   note:'💡 口語（普通體）的過去形是「～た」形；丁寧體為「～ました」。',
+   pattern:'動詞ます形語幹 ＋ ました',
+   examples:[
+     {j:'昨日、映画を見ました。',r:'Kinou, eiga wo mimashita.',c:'昨天看了電影。'},
+     {j:'先週、友達に会いました。',r:'Senshuu, tomodachi ni aimashita.',c:'上週見了朋友。'},
+     {j:'朝ごはんを食べました。',r:'Asagohan wo tabemashita.',c:'吃了早餐。'},
+     {j:'試験に合格しました。',r:'Shiken ni goukaku shimashita.',c:'考試合格了。'},
+     {j:'先生に相談しました。',r:'Sensei ni soudan shimashita.',c:'向老師諮詢了。'},
+     {j:'昨夜、日本語を3時間勉強しました。',r:'Sakuya, nihongo wo sanjikan benkyou shimashita.',c:'昨晚學習了3小時日文。'},
+     {j:'先月、日本に旅行しました。',r:'Sengetsu, Nihon ni ryokou shimashita.',c:'上個月去日本旅行了。'},
+   ]},
+  {id:'n5-5',level:'N5',title:'疑問句（～ますか）＋ 疑問詞',
+   desc:'在句末加「か」構成疑問句。疑問詞（何、誰、どこ、いつ、どれ、どう等）放在句子中對應位置。',
+   note:'💡 日文疑問句語調通常上揚，疑問詞疑問句只需把不知道的部分換成疑問詞即可。',
+   pattern:'〔疑問詞〕＋ ～ますか',
+   examples:[
+     {j:'今日は何を食べますか。',r:'Kyou wa nani wo tabemasu ka.',c:'今天吃什麼？'},
+     {j:'お名前は何ですか。',r:'O-namae wa nan desu ka.',c:'您的名字是什麼？'},
+     {j:'どこで働いていますか。',r:'Doko de hataraite imasu ka.',c:'您在哪裡工作？'},
+     {j:'いつ日本に行きますか。',r:'Itsu Nihon ni ikimasu ka.',c:'什麼時候去日本？'},
+     {j:'これはいくらですか。',r:'Kore wa ikura desu ka.',c:'這個多少錢？'},
+     {j:'誰が来ますか。',r:'Dare ga kimasu ka.',c:'誰要來？'},
+     {j:'日本語の勉強はどうですか。',r:'Nihongo no benkyou wa dou desu ka.',c:'日文學習如何？'},
+   ]},
+  {id:'n5-6',level:'N5',title:'い形容詞・な形容詞',
+   desc:'日文形容詞分為「い形容詞」（語尾い）和「な形容詞」（接名詞時加な）。兩者的活用方式不同。',
+   note:'💡 い形容詞否定：い→くない；過去：い→かった。な形容詞否定：じゃない；過去：だった。',
+   pattern:'い形容詞：語幹＋い ／ な形容詞：語幹＋な＋名詞',
+   examples:[
+     {j:'このケーキはおいしいです。',r:'Kono keeki wa oishii desu.',c:'這個蛋糕很好吃。（い形）'},
+     {j:'東京は賑やかな町です。',r:'Toukyou wa nigiyaka na machi desu.',c:'東京是熱鬧的城市。（な形）'},
+     {j:'昨日の天気はよくなかったです。',r:'Kinou no tenki wa yokunakatta desu.',c:'昨天天氣不好。（い形過去否定）'},
+     {j:'彼女はきれいな人です。',r:'Kanojo wa kirei na hito desu.',c:'她是個漂亮的人。（な形）'},
+     {j:'この問題は難しくないです。',r:'Kono mondai wa muzukashikunai desu.',c:'這個問題不難。（い形否定）'},
+     {j:'日本料理は好きですか。',r:'Nihon ryouri wa suki desu ka.',c:'你喜歡日本料理嗎？（な形）'},
+     {j:'昨日は忙しかったです。',r:'Kinou wa isogashikatta desu.',c:'昨天很忙。（い形過去）'},
+   ]},
+  {id:'n5-7',level:'N5',title:'助詞總覽（は・が・を・に・で・へ・と・も・から・まで）',
+   desc:'助詞是日文的核心，標記句子各成分的語法關係。每個助詞都有特定的功能。',
+   note:'💡 は（主題）vs が（主語強調/新信息）是日文學習的重要難點，需要在語境中體會。',
+   pattern:'名詞 ＋ 助詞（根據功能選擇）',
+   examples:[
+     {j:'私は学生です。（は＝主題）',r:'Watashi wa gakusei desu.',c:'我是學生。（は標記主題）'},
+     {j:'猫が窓の上で寝ています。（が＝主語）',r:'Neko ga mado no ue de nete imasu.',c:'貓在窗上睡著。（が標記主語）'},
+     {j:'電車で学校に行きます。（で＝手段、に＝目的地）',r:'Densha de gakkou ni ikimasu.',c:'搭電車去學校。（で=手段、に=目的地）'},
+     {j:'友達と映画を見ました。（と＝和、を＝受詞）',r:'Tomodachi to eiga wo mimashita.',c:'和朋友看了電影。（と=和誰、を=受詞）'},
+     {j:'東京から大阪まで新幹線で行きます。',r:'Toukyou kara Oosaka made shinkansen de ikimasu.',c:'從東京到大阪搭新幹線去。（から起點、まで終點）'},
+     {j:'私も日本語を勉強しています。（も＝也）',r:'Watashi mo nihongo wo benkyou shite imasu.',c:'我也在學日文。（も=也）'},
+     {j:'図書館へ行きます。（へ＝方向）',r:'Toshokan e ikimasu.',c:'往圖書館去。（へ=方向，比に更強調方向性）'},
+   ]},
+  // ── N4 ──────────────────────────────────────
+  {id:'n4-1',level:'N4',title:'て形：連接動作（～て～て）',
+   desc:'て形連接多個動作，表示動作的順序（先…再…）或同時發生的關係。也用於請求（〜てください）。',
+   note:'💡 グループ1動詞的て形變化較複雜：く→いて、ぐ→いで、す→して、つ/う/る→って、ぬ/む/ぶ→んで',
+   pattern:'動詞て形 ＋ 動詞て形 ＋ …',
+   examples:[
+     {j:'起きて、シャワーを浴びて、朝ごはんを食べます。',r:'Okite, shawaa wo abite, asagohan wo tabemasu.',c:'起床、洗澡，然後吃早餐。'},
+     {j:'本を読んで、レポートを書きました。',r:'Hon wo yonde, repooto wo kakimashita.',c:'讀了書，然後寫了報告。'},
+     {j:'電車に乗って、駅に着きました。',r:'Densha ni notte, eki ni tsukimashita.',c:'搭上電車，抵達了車站。'},
+     {j:'窓を開けて、部屋の空気を入れました。',r:'Mado wo akete, heya no kuuki wo iremashita.',c:'打開窗戶，讓空氣進入房間。'},
+     {j:'友達に電話して、話しました。',r:'Tomodachi ni denwa shite, hanashimashita.',c:'打電話給朋友，聊了一下。'},
+     {j:'宿題をして、テレビを見ます。',r:'Shukudai wo shite, terebi wo mimasu.',c:'做完功課後看電視。'},
+     {j:'コーヒーを飲んで、仕事を始めます。',r:'Koohii wo nonde, shigoto wo hajimemasu.',c:'喝了咖啡後開始工作。'},
+   ]},
+  {id:'n4-2',level:'N4',title:'たことがある（経験を表す）',
+   desc:'表示過去曾有某種經驗，相當於中文「曾經…過」。用「～たことがない」表示從未有此經驗。',
+   note:'💡 回答時常用：「ある（あります）」表示有、「ない（ありません）」表示沒有。',
+   pattern:'動詞た形 ＋ ことがある',
+   examples:[
+     {j:'日本に行ったことがあります。',r:'Nihon ni itta koto ga arimasu.',c:'我曾經去過日本。'},
+     {j:'富士山に登ったことがありません。',r:'Fujisan ni nobotta koto ga arimasen.',c:'我從未爬過富士山。'},
+     {j:'納豆を食べたことがありますか。',r:'Nattou wo tabeta koto ga arimasu ka.',c:'你吃過納豆嗎？'},
+     {j:'日本語で映画を見たことがあります。',r:'Nihongo de eiga wo mita koto ga arimasu.',c:'我曾用日語看過電影。'},
+     {j:'このレストランに来たことはありません。',r:'Kono resutoran ni kita koto wa arimasen.',c:'我從未來過這家餐廳。'},
+     {j:'スカイダイビングをしたことがありますか。',r:'Sukai daibingu wo shita koto ga arimasu ka.',c:'你做過跳傘嗎？'},
+     {j:'子供の頃、この歌を歌ったことがあります。',r:'Kodomo no koro, kono uta wo utatta koto ga arimasu.',c:'小時候曾經唱過這首歌。'},
+   ]},
+  {id:'n4-3',level:'N4',title:'なければならない（義務・必要）',
+   desc:'表示「必須做…」、「不得不做…」的義務或必要性。口語中常縮短為「〜なきゃ」。',
+   note:'💡 縮略形：〜なければならない→〜なければいけない→〜なきゃいけない→〜なきゃ（日常口語）',
+   pattern:'動詞ない形語幹（な去掉）＋ なければならない',
+   examples:[
+     {j:'明日、早起きしなければなりません。',r:'Ashita, hayaoki shinakereba narimasen.',c:'明天必須早起。'},
+     {j:'宿題をしなければなりません。',r:'Shukudai wo shinakereba narimasen.',c:'必須做功課。'},
+     {j:'薬を毎日飲まなければなりません。',r:'Kusuri wo mainichi nomanakeba narimasen.',c:'必須每天吃藥。'},
+     {j:'パスポートを更新しなければなりません。',r:'Pasupooto wo koushin shinakereba narimasen.',c:'必須更新護照。'},
+     {j:'もっと練習しなければ、上手になれません。',r:'Motto renshuu shinakereba, jouzu ni naremasen.',c:'不多練習的話，就無法變好。'},
+     {j:'レポートを今日中に出さなければなりません。',r:'Repooto wo kyoujuu ni dasanakereba narimasen.',c:'報告必須在今天內交出。'},
+     {j:'運転するときはシートベルトをしなければなりません。',r:'Unten suru toki wa shiitoberto wo shinakereba narimasen.',c:'開車時必須繫安全帶。'},
+   ]},
+  {id:'n4-4',level:'N4',title:'てから（順序）と た後で（動作後）',
+   desc:'「〜てから」強調A完成後才能做B（有前後依存關係）。「〜た後で」只表示B在A完成後發生（較中性）。',
+   note:'💡 〜てから強調「先A後才B」的必然順序；〜た後で較客觀描述時間先後。',
+   pattern:'動詞て形 ＋ から ／ 動詞た形 ＋ 後で',
+   examples:[
+     {j:'手を洗ってから、ご飯を食べます。',r:'Te wo aratte kara, gohan wo tabemasu.',c:'洗完手後才吃飯。'},
+     {j:'宿題をしてから、ゲームをします。',r:'Shukudai wo shite kara, geemu wo shimasu.',c:'做完功課後打遊戲。'},
+     {j:'卒業した後で、日本に留学します。',r:'Sotsugyou shita ato de, Nihon ni ryuugaku shimasu.',c:'畢業後去日本留學。'},
+     {j:'映画を見てから、感想を書きました。',r:'Eiga wo mite kara, kansou wo kakimashita.',c:'看完電影後寫了感想。'},
+     {j:'仕事が終わった後で、飲みに行きましょう。',r:'Shigoto ga owatta ato de, nomi ni ikimashou.',c:'工作結束後去喝一杯吧。'},
+     {j:'シャワーを浴びてから寝ます。',r:'Shawaa wo abite kara nemasu.',c:'洗澡後睡覺。'},
+     {j:'ご飯を食べた後で、散歩します。',r:'Gohan wo tabeta ato de, sanpo shimasu.',c:'吃完飯後散步。'},
+   ]},
+  {id:'n4-5',level:'N4',title:'〜たり〜たりする（例示）',
+   desc:'列舉多個動作或狀態的例子，表示「有時做A、有時做B…」或「做A之類的事」。',
+   note:'💡 〜たり〜たりする的句尾動詞する可改為します、した、していますなど根據時態調整。',
+   pattern:'動詞た形＋り＋ 動詞た形＋り ＋ する',
+   examples:[
+     {j:'週末は映画を見たり、本を読んだりします。',r:'Shuumatsu wa eiga wo mitari, hon wo yondari shimasu.',c:'週末有時看電影、有時讀書。'},
+     {j:'子供たちは走ったり、跳んだりしています。',r:'Kodomotachi wa hashittari, tondari shite imasu.',c:'孩子們有時跑、有時跳。'},
+     {j:'日本語を話したり、書いたりする練習をします。',r:'Nihongo wo hanashitari, kaitari suru renshuu wo shimasu.',c:'練習說和寫日文之類的事。'},
+     {j:'友達と食事をしたり、カフェで話したりしました。',r:'Tomodachi to shokuji wo shitari, kafe de hanashitari shimashita.',c:'和朋友吃飯或在咖啡廳聊天。'},
+     {j:'音楽を聞いたり、ゲームをしたりして時間を過ごします。',r:'Ongaku wo kiitari, geemu wo shitari shite jikan wo sugoshimasu.',c:'聽音樂或打遊戲度過時間。'},
+     {j:'この料理は辛かったり、甘かったりします。',r:'Kono ryouri wa karakattari, amakattari shimasu.',c:'這道菜有時辣有時甜（味道不一定）。'},
+   ]},
+  // ── N3 ──────────────────────────────────────
+  {id:'n3-1',level:'N3',title:'可能形（〜られる・〜できる）',
+   desc:'表示「能夠做…」的能力或可能性。グループ1：語幹＋える；グループ2：語幹＋られる；する→できる；くる→こられる。',
+   note:'💡 日常口語中，グループ2動詞的可能形「〜られる」常縮略為「〜れる」（ら抜き言葉），如「食べられる→食べれる」。',
+   pattern:'可能形 ＋ います / ます',
+   examples:[
+     {j:'日本語が話せます。',r:'Nihongo ga hanasemasu.',c:'我能說日語。'},
+     {j:'この漢字が読めません。',r:'Kono kanji ga yomemasen.',c:'我不能讀這個漢字。'},
+     {j:'料理ができます。',r:'Ryouri ga dekimasu.',c:'我會做料理。'},
+     {j:'早起きが苦手で、6時に起きられません。',r:'Hayaoki ga nigate de, rokuji ni okiramasen.',c:'我不擅長早起，6點起不來。'},
+     {j:'この仕事は一人でできますか。',r:'Kono shigoto wa hitori de dekimasu ka.',c:'這個工作一個人能做嗎？'},
+     {j:'子供の頃は泳げませんでしたが、今は泳げます。',r:'Kodomo no koro wa oyogemasen deshita ga, ima wa oyogemasu.',c:'小時候不會游泳，但現在會了。'},
+     {j:'このドアは鍵がかかっていて開けられません。',r:'Kono doa wa kagi ga kakatte ite akeraremasen.',c:'這扇門鎖著，打不開。'},
+     {j:'日本語で日記が書けるようになりました。',r:'Nihongo de nikki ga kakeru you ni narimashita.',c:'我能用日語寫日記了。'},
+   ]},
+  {id:'n3-2',level:'N3',title:'条件形（〜たら・〜ば・〜と・〜なら）',
+   desc:'四種條件形各有不同語感：たら（假設完成後）；ば（若滿足條件）；と（自然必然結果）；なら（以對方前提為條件）。',
+   note:'💡 と用於自然規律、一般事實；たら最廣泛；ば偏書面；なら先接受對方說的再提條件。',
+   pattern:'動詞た形＋ら ／ 動詞ば形 ／ 動詞辞書形＋と ／ 名詞/普通形＋なら',
+   examples:[
+     {j:'雨が降ったら、家にいます。',r:'Ame ga futtara, ie ni imasu.',c:'如果下雨就待在家。（たら）'},
+     {j:'もっと練習すれば、上手になります。',r:'Motto renshuu sureba, jouzu ni narimasu.',c:'如果多練習就會變好。（ば）'},
+     {j:'春になると、桜が咲きます。',r:'Haru ni naru to, sakura ga sakimasu.',c:'春天一到，櫻花就會開放。（と）'},
+     {j:'日本語を勉強するなら、毎日練習が大切です。',r:'Nihongo wo benkyou suru nara, mainichi renshuu ga taisetsu desu.',c:'如果要學日語，每天練習很重要。（なら）'},
+     {j:'お金があれば、世界旅行をしたいです。',r:'O-kane ga areba, sekai ryokou wo shitai desu.',c:'如果有錢，想環遊世界。（ば）'},
+     {j:'このボタンを押すと、ドアが開きます。',r:'Kono botan wo osu to, doa ga akimasu.',c:'按下這個按鈕，門就會開。（と）'},
+     {j:'宿題が終わったら、遊んでもいいですよ。',r:'Shukudai ga owattara, asonde mo ii desu yo.',c:'作業做完的話，可以玩喔。（たら）'},
+   ]},
+  {id:'n3-3',level:'N3',title:'受身形（〜られる 受身）',
+   desc:'用於表示被動，即主語受到他人動作的影響。常用於表示讓說話者感到困擾（迷惑受身）的情境。',
+   note:'💡 受身形與可能形（グループ2）外形相同，需從語境判斷。受身動作的施者用「に」標記。',
+   pattern:'グループ1：語幹＋あ行＋れる ／ グループ2：語幹＋られる',
+   examples:[
+     {j:'先生に褒められました。',r:'Sensei ni homeraremashita.',c:'被老師表揚了。'},
+     {j:'雨に降られて、濡れました。',r:'Ame ni furarete, nuremashita.',c:'被雨淋濕了。（迷惑受身）'},
+     {j:'財布を盗まれました。',r:'Saifu wo nusumaremashita.',c:'錢包被偷了。'},
+     {j:'友達に秘密を話されてしまいました。',r:'Tomodachi ni himitsu wo hanasarete shimaimashita.',c:'被朋友說出了秘密。'},
+     {j:'この小説はたくさんの人に読まれています。',r:'Kono shousetsu wa takusan no hito ni yomarete imasu.',c:'這部小說被很多人閱讀。'},
+     {j:'電車の中で足を踏まれました。',r:'Densha no naka de ashi wo fumaremashita.',c:'在電車裡腳被踩了。'},
+     {j:'この映画は世界中で愛されています。',r:'Kono eiga wa sekaijuu de aisarete imasu.',c:'這部電影在全世界被喜愛。'},
+   ]},
+  {id:'n3-4',level:'N3',title:'〜てみる（試みる）',
+   desc:'表示嘗試做某事，帶有「試試看」的語感。強調動作的嘗試性質，而非確定性。',
+   note:'💡 「〜てみてください」是請人嘗試的禮貌表達；「〜てみました」表示已嘗試過。',
+   pattern:'動詞て形 ＋ みる',
+   examples:[
+     {j:'日本料理を作ってみました。',r:'Nihon ryouri wo tsukutte mimashita.',c:'嘗試做了日本料理。'},
+     {j:'この薬を飲んでみてください。',r:'Kono kusuri wo nonde mite kudasai.',c:'請試著吃這個藥。'},
+     {j:'難しそうですが、挑戦してみます。',r:'Muzukashisou desu ga, chousen shite mimasu.',c:'雖然看起來難，但我會挑戰試試看。'},
+     {j:'新しいカフェに行ってみましょう。',r:'Atarashii kafe ni itte mimashou.',c:'試著去新開的咖啡廳吧。'},
+     {j:'一度考えてみます。',r:'Ichido kangaete mimasu.',c:'我考慮一下（試著想想看）。'},
+     {j:'日本語で話してみましたが、難しかったです。',r:'Nihongo de hanashite mimashita ga, muzukashikatta desu.',c:'試著用日語說話，但很難。'},
+     {j:'この本を読んでみたら、とても面白かったです。',r:'Kono hon wo yonde mitara, totemo omoshirokatta desu.',c:'試著讀了這本書，非常有趣。'},
+   ]},
+  // ── N2 ──────────────────────────────────────
+  {id:'n2-1',level:'N2',title:'使役形（〜させる）',
+   desc:'表示讓某人做某事（命令或許可）。使役者用「が/は」，被使役者用「を」（不自願）或「に」（自願/允許）。',
+   note:'💡 使役受身形「〜させられる」表示被迫做某事，表達說話者的無奈。',
+   pattern:'グループ1：語幹＋あ行＋せる ／ グループ2：語幹＋させる ／ する→させる',
+   examples:[
+     {j:'部長は社員に残業させました。',r:'Buchou wa shain ni zangyou sasemashita.',c:'部長讓員工加班。'},
+     {j:'母は子供に野菜を食べさせます。',r:'Haha wa kodomo ni yasai wo tabesasemasu.',c:'媽媽讓孩子吃蔬菜。'},
+     {j:'先生は生徒に発表させました。',r:'Sensei wa seito ni happyou sasemashita.',c:'老師讓學生發表。'},
+     {j:'親は子供を自由に遊ばせました。',r:'Oya wa kodomo wo jiyuu ni asobasemashita.',c:'父母讓孩子自由玩耍。'},
+     {j:'毎日3時間勉強させられています。',r:'Mainichi sanjikan benkyou saserarete imasu.',c:'每天被迫學習3小時。（使役受身）'},
+     {j:'部下に報告書を作成させました。',r:'Buka ni houkokusho wo sakusei sasemashita.',c:'讓下屬製作了報告書。'},
+     {j:'子供を一人で旅行させるのは心配です。',r:'Kodomo wo hitori de ryokou saseru no wa shinpai desu.',c:'讓孩子獨自旅行令人擔心。'},
+   ]},
+  {id:'n2-2',level:'N2',title:'〜てしまう（完了・後悔）',
+   desc:'表示動作完全完成（有時含有遺憾或意外的語氣），或無法挽回的完成狀態。口語縮略為「〜ちゃう/〜じゃう」。',
+   note:'💡 「してしまいました」可以是中性的完成，也可以表示遺憾。語境決定語氣。口語：しちゃった、食べちゃった。',
+   pattern:'動詞て形 ＋ しまう',
+   examples:[
+     {j:'財布を忘れてしまいました。',r:'Saifu wo wasurete shimaimashita.',c:'（不小心）忘帶錢包了。'},
+     {j:'ケーキを全部食べてしまいました。',r:'Keeki wo zenbu tabete shimaimashita.',c:'把蛋糕全部吃完了。'},
+     {j:'電車に乗り遅れてしまいました。',r:'Densha ni noriokurete shimaimashita.',c:'（不小心）錯過電車了。'},
+     {j:'大切な書類をなくしてしまいました。',r:'Taisetsu na shorui wo nakushite shimaimashita.',c:'把重要文件弄丟了。'},
+     {j:'宿題をしないで寝てしまいました。',r:'Shukudai wo shinai de nete shimaimashita.',c:'沒做作業就睡著了。'},
+     {j:'つい余計なことを言ってしまいました。',r:'Tsui yokei na koto wo itte shimaimashita.',c:'不小心說了多餘的話。'},
+     {j:'もう全部食べちゃった！',r:'Mou zenbu tabechatta!',c:'已經全部吃完了！（口語）'},
+   ]},
+  {id:'n2-3',level:'N2',title:'〜ておく（準備・放置）',
+   desc:'表示「事先做好…」的準備性動作，或任由某種狀態維持（放置）。強調為了未來某個目的而預先完成。',
+   note:'💡 口語縮略：〜ておく→〜とく（例：買っておく→買っとく）',
+   pattern:'動詞て形 ＋ おく',
+   examples:[
+     {j:'旅行の前にホテルを予約しておきました。',r:'Ryokou no mae ni hoteru wo yoyaku shite okimashita.',c:'旅行前事先預訂了飯店。'},
+     {j:'会議の前に資料を準備しておきます。',r:'Kaigi no mae ni shiryou wo junbi shite okimasu.',c:'開會前事先準備好資料。'},
+     {j:'冷蔵庫に食べ物を入れておいてください。',r:'Reizouko ni tabemono wo irete oite kudasai.',c:'請事先把食物放進冰箱。'},
+     {j:'試験のために単語を暗記しておきます。',r:'Shiken no tame ni tango wo anki shite okimasu.',c:'為了考試事先記好單字。'},
+     {j:'電気をつけたままにしておきました。',r:'Denki wo tsuketa mama ni shite okimashita.',c:'讓燈保持亮著（放置狀態）。'},
+     {j:'質問をメモしておくといいですよ。',r:'Shitsumon wo memo shite oku to ii desu yo.',c:'事先把問題記下來會比較好喔。'},
+     {j:'明日の朝ごはんのために食材を買っておきます。',r:'Ashita no asagohan no tame ni shokuzai wo katte okimasu.',c:'為了明天早餐事先買好食材。'},
+   ]},
+  // ── N1 ──────────────────────────────────────
+  {id:'n1-1',level:'N1',title:'〜ながら（同時進行）',
+   desc:'表示同時進行兩個動作。主要動作在後，次要（附帶）動作在前用ながら連接。主語必須相同。',
+   note:'💡 〜ながら的動作主語必須相同。ながら也有「雖然…卻…」的讓步用法（逆接），例：知りながら黙っている。',
+   pattern:'動詞ます形語幹 ＋ ながら',
+   examples:[
+     {j:'音楽を聞きながら、勉強します。',r:'Ongaku wo kikinagara, benkyou shimasu.',c:'一邊聽音樂一邊學習。'},
+     {j:'歩きながら、スマホを見るのは危険です。',r:'Arukinagara, sumaho wo miru no wa kiken desu.',c:'邊走路邊看手機很危險。'},
+     {j:'コーヒーを飲みながら、話しましょう。',r:'Koohii wo nominagara, hanashimashou.',c:'我們一邊喝咖啡一邊聊吧。'},
+     {j:'働きながら、夜間学校に通っています。',r:'Hatarakinagara, yakan gakkou ni kayotte imasu.',c:'一邊工作一邊上夜校。'},
+     {j:'申し訳ないと知りながら、断ってしまいました。',r:'Moushiwake nai to shiri nagara, kotowatte shimaimashita.',c:'雖然知道很抱歉，卻還是拒絕了。（讓步）'},
+     {j:'泣きながら笑うなんて、不思議ですね。',r:'Nakinagara warau nante, fushigi desu ne.',c:'一邊哭一邊笑，真奇怪呢。'},
+     {j:'彼女は歌いながら料理を作っています。',r:'Kanojo wa utainagara ryouri wo tsukutte imasu.',c:'她一邊唱歌一邊做菜。'},
+   ]},
+  {id:'n1-2',level:'N1',title:'〜ばかり（只/剛剛）',
+   desc:'①「名詞＋ばかり」：只有、淨是…；②「動詞た形＋ばかり」：剛剛做完…；③「動詞て形＋ばかり」：老是…',
+   note:'💡 ばかり有「只、淨」（限定）、「剛剛」（時間）、「老是」（頻率）三種主要用法，需根據前接形式判斷。',
+   pattern:'名詞/動詞た形/動詞て形 ＋ ばかり',
+   examples:[
+     {j:'彼はゲームばかりしています。',r:'Kare wa geemu bakari shite imasu.',c:'他只玩遊戲（淨玩遊戲）。'},
+     {j:'日本に来たばかりで、まだ慣れていません。',r:'Nihon ni kita bakari de, mada narete imasen.',c:'剛來日本，還不習慣。'},
+     {j:'食べてばかりいると、太りますよ。',r:'Tabete bakari iru to, futori masu yo.',c:'老是吃的話會胖喔。'},
+     {j:'彼女は文句ばかり言います。',r:'Kanojo wa monku bakari iimasu.',c:'她淨抱怨。'},
+     {j:'この映画を見たばかりです。',r:'Kono eiga wo mita bakari desu.',c:'我剛看完這部電影。'},
+     {j:'入社したばかりの新人です。',r:'Nyuusha shita bakari no shinjin desu.',c:'是剛入職的新人。'},
+     {j:'心配ばかりしていても仕方ないですよ。',r:'Shinpai bakari shite ite mo shikata nai desu yo.',c:'只是擔心也沒用喔。'},
+   ]},
+  {id:'n1-3',level:'N1',title:'〜に対して（針對・相對）',
+   desc:'「AにBする/である」表示A是B的對象/相對方。可表示態度對象、對比關係（一方…另一方…）。',
+   note:'💡 比較：〜に対して（廣泛的針對）vs 〜について（就某話題討論）vs 〜に関して（就某事項的書面表達）',
+   pattern:'名詞 ＋ に対して ／ に対する ＋ 名詞',
+   examples:[
+     {j:'先生に対して失礼な態度を取ってはいけません。',r:'Sensei ni taishite shitsurei na taido wo totte wa ikemasen.',c:'不能對老師採取失禮的態度。'},
+     {j:'お客様に対して丁寧に接することが大切です。',r:'O-kyakusama ni taishite teinei ni sessuru koto ga taisetsu desu.',c:'對客人禮貌對待很重要。'},
+     {j:'父は仕事に対して真剣です。',r:'Chichi wa shigoto ni taishite shinken desu.',c:'父親對工作很認真。'},
+     {j:'彼女は私の意見に対して強く反論しました。',r:'Kanojo wa watashi no iken ni taishite tsuyoku hanron shimashita.',c:'她強烈反駁了我的意見。'},
+     {j:'兄が内向的なのに対して、弟は社交的です。',r:'Ani ga naikoukei na no ni taishite, otouto wa shakouteki desu.',c:'相對於哥哥的內向，弟弟很外向。（對比）'},
+     {j:'政府の政策に対して、市民が抗議しています。',r:'Seifu no seisaku ni taishite, shimin ga kougi shite imasu.',c:'市民針對政府政策進行抗議。'},
+   ]},
+];
+
+// Verb Conjugation Data
+const verbGroups = [
+  {
+    group:'グループ１（五段動詞 / u-verbs）',
+    desc:'語尾以 u 段音節（く・ぐ・す・つ・ぬ・む・ぶ・う・る）結尾的動詞。て形和た形變化較複雜，需熟記規則。',
+    forms:['辞書形','ます形','て形','た形','ない形','可能形','受身形','使役形','命令形'],
+    verbs:[
+      {dict:'書く',r:'kaku',m:'寫',   forms:['書く','書きます','書いて','書いた','書かない','書ける','書かれる','書かせる','書け']},
+      {dict:'泳ぐ',r:'oyogu',m:'游泳', forms:['泳ぐ','泳ぎます','泳いで','泳いだ','泳がない','泳げる','泳がれる','泳がせる','泳げ']},
+      {dict:'話す',r:'hanasu',m:'說話', forms:['話す','話します','話して','話した','話さない','話せる','話される','話させる','話せ']},
+      {dict:'待つ',r:'matsu',m:'等待', forms:['待つ','待ちます','待って','待った','待たない','待てる','待たれる','待たせる','待て']},
+      {dict:'飲む',r:'nomu',m:'喝',   forms:['飲む','飲みます','飲んで','飲んだ','飲まない','飲める','飲まれる','飲ませる','飲め']},
+      {dict:'遊ぶ',r:'asobu',m:'玩耍', forms:['遊ぶ','遊びます','遊んで','遊んだ','遊ばない','遊べる','遊ばれる','遊ばせる','遊べ']},
+      {dict:'読む',r:'yomu',m:'讀',   forms:['読む','読みます','読んで','読んだ','読まない','読める','読まれる','読ませる','読め']},
+      {dict:'行く',r:'iku',m:'去',    forms:['行く','行きます','行って','行った','行かない','行ける','行かれる','行かせる','行け']},
+    ]
+  },
+  {
+    group:'グループ２（一段動詞 / ru-verbs）',
+    desc:'語尾為「る」且倒數第二音是 i 段（る→iru）或 e 段（る→eru）音節的動詞。活用規則較一致，去る後加變化。',
+    forms:['辞書形','ます形','て形','た形','ない形','可能形','受身形','使役形','命令形'],
+    verbs:[
+      {dict:'食べる',r:'taberu',m:'吃',   forms:['食べる','食べます','食べて','食べた','食べない','食べられる','食べられる','食べさせる','食べろ']},
+      {dict:'見る',r:'miru',m:'看',       forms:['見る','見ます','見て','見た','見ない','見られる','見られる','見させる','見ろ']},
+      {dict:'起きる',r:'okiru',m:'起床',   forms:['起きる','起きます','起きて','起きた','起きない','起きられる','起きられる','起きさせる','起きろ']},
+      {dict:'寝る',r:'neru',m:'睡覺',     forms:['寝る','寝ます','寝て','寝た','寝ない','寝られる','寝られる','寝させる','寝ろ']},
+      {dict:'覚える',r:'oboeru',m:'記住',  forms:['覚える','覚えます','覚えて','覚えた','覚えない','覚えられる','覚えられる','覚えさせる','覚えろ']},
+      {dict:'着る',r:'kiru',m:'穿（上衣）',forms:['着る','着ます','着て','着た','着ない','着られる','着られる','着させる','着ろ']},
+    ]
+  },
+  {
+    group:'グループ３（不規則動詞）',
+    desc:'只有兩個不規則動詞：する（做）和くる（來）。這兩個動詞的活用不遵循一般規則，必須單獨記憶。',
+    forms:['辞書形','ます形','て形','た形','ない形','可能形','受身形','使役形','命令形'],
+    verbs:[
+      {dict:'する',r:'suru',m:'做',  forms:['する','します','して','した','しない','できる','される','させる','しろ/せよ']},
+      {dict:'くる',r:'kuru',m:'來',  forms:['くる','きます','きて','きた','こない','こられる','こられる','こさせる','こい']},
+    ]
+  }
+];
+
+const conversationScenarios = [
+  {id:1,title:'日常問候',desc:'早上見面的問候',icon:'☀️',
+   dialogues:[
+    {speaker:'A',j:'おはようございます',r:'Ohayou gozaimasu',c:'早安',grammar:'丁寧形：晨間問候'},
+    {speaker:'B',j:'おはようございます。今日はいい天気ですね。',r:'Ohayou gozaimasu. Kyou wa ii tenki desu ne.',c:'早安，今天天氣很好呢。',grammar:'「ね」：尋求共鳴'},
+    {speaker:'A',j:'本当ですね。今日も頑張りましょう。',r:'Hontou desu ne. Kyou mo ganbarimashou.',c:'確實呢，今天也要加油。',grammar:'「ましょう」：邀請形'},
+    {speaker:'B',j:'はい、よろしくお願いします。',r:'Hai, yoroshiku onegaishimasu.',c:'好的，請多多指教。',grammar:'標準禮貌用語'},
+   ]},
+  {id:2,title:'自我介紹',desc:'初次見面的介紹',icon:'👋',
+   dialogues:[
+    {speaker:'A',j:'初めまして。私は田中と申します。',r:'Hajimemashite. Watashi wa Tanaka to moushimasu.',c:'初次見面，我叫田中。',grammar:'「と申します」：謙遜形'},
+    {speaker:'B',j:'初めまして。佐藤です。よろしくお願いします。',r:'Hajimemashite. Satou desu. Yoroshiku onegaishimasu.',c:'初次見面，我是佐藤，請多多指教。',grammar:'自我介紹句型'},
+    {speaker:'A',j:'どちらからいらっしゃいましたか。',r:'Dochira kara irasshaimashita ka.',c:'請問您從哪裡來？',grammar:'「いらっしゃる」：敬語'},
+    {speaker:'B',j:'台湾から来ました。今は東京で働いています。',r:'Taiwan kara kimashita. Ima wa Toukyou de hataraite imasu.',c:'從台灣來的，現在在東京工作。',grammar:'ています：持續狀態'},
+   ]},
+  {id:3,title:'餐廳點餐',desc:'在餐廳用餐',icon:'🍜',
+   dialogues:[
+    {speaker:'店員',j:'いらっしゃいませ。何名様ですか。',r:'Irasshaimase. Nanmei-sama desu ka.',c:'歡迎光臨，請問幾位？',grammar:'様：尊稱'},
+    {speaker:'客',j:'二人です。',r:'Futari desu.',c:'兩位。',grammar:'人數表達'},
+    {speaker:'店員',j:'こちらへどうぞ。ご注文はお決まりですか。',r:'Kochira e douzo. Go-chuumon wa o-kimari desu ka.',c:'請這邊，決定好了嗎？',grammar:'「どうぞ」：引導'},
+    {speaker:'客',j:'ラーメンと餃子をお願いします。',r:'Raamen to gyouza wo onegaishimasu.',c:'我要拉麵和餃子。',grammar:'點餐句型'},
+    {speaker:'店員',j:'かしこまりました。少々お待ちください。',r:'Kashikomarimashita. Shoushou omachi kudasai.',c:'明白了，請稍候。',grammar:'「かしこまりました」：最高敬語'},
+   ]},
+  {id:4,title:'購物對話',desc:'在商店購物',icon:'🛍️',
+   dialogues:[
+    {speaker:'店員',j:'何かお探しですか。',r:'Nanika osagashi desu ka.',c:'您在找什麼嗎？',grammar:'お探し：尊敬語'},
+    {speaker:'客',j:'プレゼントを探しています。',r:'Purezento wo sagashite imasu.',c:'我在找禮物。',grammar:'ています：進行式'},
+    {speaker:'店員',j:'どのようなものをお考えですか。',r:'Dono you na mono wo o-kangae desu ka.',c:'您在考慮什麼樣的東西？',grammar:'お考え：尊敬語'},
+    {speaker:'客',j:'これはいくらですか。',r:'Kore wa ikura desu ka.',c:'這個多少錢？',grammar:'價格詢問'},
+    {speaker:'店員',j:'三千円でございます。',r:'Sanzen-en de gozaimasu.',c:'三千日圓。',grammar:'「でございます」：最高丁寧語'},
+   ]},
+  {id:5,title:'問路',desc:'詢問方向',icon:'🗺️',
+   dialogues:[
+    {speaker:'A',j:'すみません、駅はどこですか。',r:'Sumimasen, eki wa doko desu ka.',c:'不好意思，車站在哪裡？',grammar:'すみません：引起注意'},
+    {speaker:'B',j:'この道をまっすぐ行って、角を右に曲がってください。',r:'Kono michi wo massugu itte, kado wo migi ni magatte kudasai.',c:'沿這條路直走，在路口右轉。',grammar:'て形：連接動作'},
+    {speaker:'A',j:'どのくらいかかりますか。',r:'Dono kurai kakarimasu ka.',c:'大約需要多久？',grammar:'かかる：花費時間'},
+    {speaker:'B',j:'歩いて五分ぐらいです。',r:'Aruite gofun gurai desu.',c:'走路大約五分鐘。',grammar:'ぐらい：大約'},
+   ]},
+  {id:6,title:'醫院就診',desc:'在醫院看診',icon:'🏥',
+   dialogues:[
+    {speaker:'A',j:'すみません、具合が悪くて。',r:'Sumimasen, guai ga warukute.',c:'不好意思，我身體不舒服。',grammar:'〜くて：原因（い形容詞）'},
+    {speaker:'B',j:'どうなさいましたか。どこが痛いですか。',r:'Dou nasaimashita ka. Doko ga itai desu ka.',c:'您怎麼了？哪裡痛？',grammar:'なさる：「する」的尊敬語'},
+    {speaker:'A',j:'昨日から頭が痛くて、熱もあります。',r:'Kinou kara atama ga itakute, netsu mo arimasu.',c:'從昨天開始頭痛，也發燒了。',grammar:'〜から：從某時間點開始'},
+    {speaker:'B',j:'体温を測ってみましょう。薬を出しますね。',r:'Taion wo hakatte mimashou. Kusuri wo dashimasu ne.',c:'量一下體溫吧。我開藥給您。',grammar:'〜てみる：試著做'},
+    {speaker:'A',j:'この薬はどのように飲めばいいですか。',r:'Kono kusuri wa dono you ni nomeba ii desu ka.',c:'這個藥應該怎麼服用？',grammar:'〜ばいい：怎麼做比較好'},
+   ]},
+  {id:7,title:'便利商店',desc:'在便利商店',icon:'🏪',
+   dialogues:[
+    {speaker:'店員',j:'いらっしゃいませ。',r:'Irasshaimase.',c:'歡迎光臨。',grammar:'慣用問候語'},
+    {speaker:'客',j:'このお弁当を温めてもらえますか。',r:'Kono o-bentou wo atatamete moraemasu ka.',c:'可以幫我加熱這個便當嗎？',grammar:'〜てもらえますか：請求（禮貌）'},
+    {speaker:'店員',j:'はい、少々お待ちください。レジ袋はご利用ですか。',r:'Hai, shoushou omachi kudasai. Reji bukuro wa goriyou desu ka.',c:'好的，請稍等。需要購物袋嗎？',grammar:'ご利用：敬語'},
+    {speaker:'客',j:'はい、一枚ください。ポイントカードを使います。',r:'Hai, ichimai kudasai. Pointo kaado wo tsukaimasu.',c:'好的，請給我一個。我要用集點卡。',grammar:'〜を使います：使用'},
+    {speaker:'店員',j:'ありがとうございます。またお越しください。',r:'Arigatou gozaimasu. Mata o-koshi kudasai.',c:'謝謝，歡迎再次光臨。',grammar:'またお越しください：送客語'},
+   ]},
+  {id:8,title:'機場',desc:'在機場的對話',icon:'✈️',
+   dialogues:[
+    {speaker:'A',j:'チェックインをお願いします。',r:'Chekku-in wo onegai shimasu.',c:'我要辦理登機手續。',grammar:'〜をお願いします：請求'},
+    {speaker:'B',j:'パスポートと航空券をご提示ください。',r:'Pasupooto to koukuuken wo go-teiji kudasai.',c:'請出示護照和機票。',grammar:'ご提示：尊敬語'},
+    {speaker:'A',j:'荷物を預けたいのですが、何キロまで大丈夫ですか。',r:'Nimotsu wo azuketai no desu ga, nan kiro made daijoubu desu ka.',c:'我想托運行李，最多幾公斤？',grammar:'〜たいのですが：委婉表達希望'},
+    {speaker:'B',j:'エコノミークラスは23キロまでです。窓側と通路側、どちらがよろしいですか。',r:'Ekonomii kurasu wa nijuusan kiro made desu. Madogawa to tsuurogawa, dochira ga yoroshii desu ka.',c:'經濟艙最多23公斤。靠窗和靠走道，您想要哪邊？',grammar:'どちら：哪邊（禮貌）'},
+    {speaker:'A',j:'窓側をお願いします。',r:'Madogawa wo onegai shimasu.',c:'靠窗請。',grammar:'簡潔請求'},
+   ]},
+  {id:9,title:'學校課堂',desc:'上課中的對話',icon:'📚',
+   dialogues:[
+    {speaker:'先生',j:'今日は〜ながらの使い方を練習しましょう。',r:'Kyou wa ~nagara no tsukaikata wo renshuu shimashou.',c:'今天來練習ながら的用法吧。',grammar:'〜ましょう：提議'},
+    {speaker:'生徒',j:'先生、質問があります。〜ながらと〜つつの違いは何ですか。',r:'Sensei, shitsumon ga arimasu. ~nagara to ~tsutsu no chigai wa nan desu ka.',c:'老師，我有問題。ながら和つつ的差別是什麼？',grammar:'違いは何ですか：詢問差異'},
+    {speaker:'先生',j:'いい質問ですね。〜つつは書き言葉、〜ながらは話し言葉に多く使われます。',r:'Ii shitsumon desu ne. ~tsutsu wa kakikotoba, ~nagara wa hanashikotoba ni ooku tsukawaremasu.',c:'問得好。つつ多用於書面語，ながら多用於口語。',grammar:'受身：tsukawaremasu'},
+    {speaker:'生徒',j:'わかりました。例文を作ってみます。',r:'Wakarimashita. Reibun wo tsukutte mimasu.',c:'我明白了。我來試著造例句。',grammar:'〜てみる：嘗試'},
+   ]},
+  {id:10,title:'電話應對',desc:'電話中的對話',icon:'📞',
+   dialogues:[
+    {speaker:'B',j:'はい、田中商事でございます。',r:'Hai, Tanaka Shouji de gozaimasu.',c:'您好，這裡是田中商事。',grammar:'でございます：最高丁寧語'},
+    {speaker:'A',j:'お世話になっております。山田商会の佐藤と申します。',r:'Osewa ni natte orimasu. Yamada Shoukai no Satou to moushimasu.',c:'承蒙您的照顧。我是山田商會的佐藤。',grammar:'ビジネス電話の定型'},
+    {speaker:'B',j:'佐藤様でいらっしゃいますね。いつもお世話になっております。',r:'Satou-sama de irasshaimasu ne. Itsumo osewa ni natte orimasu.',c:'您是佐藤先生/女士吧。一直承蒙您的照顧。',grammar:'〜でいらっしゃる：尊敬語'},
+    {speaker:'A',j:'山田部長はいらっしゃいますでしょうか。',r:'Yamada buchou wa irasshaimasu deshou ka.',c:'請問山田部長在嗎？',grammar:'いらっしゃる：いる的尊敬語'},
+    {speaker:'B',j:'少々お待ちください。ただいま確認いたします。',r:'Shoushou omachi kudasai. Tadaima kakunin itashimasu.',c:'請稍候，我現在為您確認。',grammar:'いたします：する的謙讓語'},
+   ]},
+];
+
+const pronunciationData = {
+  daily:{label:'日常用語',icon:'☀️',items:[
+    {j:'おはようございます。',r:'Ohayou gozaimasu.',c:'早安。'},
+    {j:'ありがとうございます。',r:'Arigatou gozaimasu.',c:'非常感謝。'},
+    {j:'すみません。',r:'Sumimasen.',c:'對不起 / 請問。'},
+    {j:'よろしくお願いします。',r:'Yoroshiku onegaishimasu.',c:'請多多指教。'},
+    {j:'お元気ですか。',r:'O-genki desu ka.',c:'您好嗎？'},
+    {j:'私は日本語を勉強しています。',r:'Watashi wa nihongo wo benkyou shite imasu.',c:'我正在學習日語。'},
+    {j:'これはいくらですか。',r:'Kore wa ikura desu ka.',c:'這個多少錢？'},
+    {j:'もう一度言ってください。',r:'Mou ichido itte kudasai.',c:'請再說一次。'},
+  ]},
+  travel:{label:'旅行用語',icon:'✈️',items:[
+    {j:'駅はどこですか。',r:'Eki wa doko desu ka.',c:'車站在哪裡？'},
+    {j:'この電車は○○に行きますか。',r:'Kono densha wa ○○ ni ikimasu ka.',c:'這班電車去○○嗎？'},
+    {j:'ホテルを予約したいのですが。',r:'Hoteru wo yoyaku shitai no desu ga.',c:'我想預訂飯店。'},
+    {j:'写真を撮ってもいいですか。',r:'Shashin wo totte mo ii desu ka.',c:'可以拍照嗎？'},
+    {j:'迷子になってしまいました。',r:'Maigo ni natte shimaimashita.',c:'我迷路了。'},
+    {j:'空港へはどう行けばいいですか。',r:'Kuukou e wa dou ikeba ii desu ka.',c:'去機場怎麼走？'},
+  ]},
+  business:{label:'商務用語',icon:'💼',items:[
+    {j:'お世話になっております。',r:'Osewa ni natte orimasu.',c:'承蒙您的照顧。'},
+    {j:'承知いたしました。',r:'Shouchi itashimashita.',c:'我明白了。'},
+    {j:'よろしくお願いいたします。',r:'Yoroshiku onegai itashimasu.',c:'敬請多多關照。'},
+    {j:'ご確認をお願いします。',r:'Go-kakunin wo onegai shimasu.',c:'請您確認。'},
+    {j:'少々お待ちください。',r:'Shoushou omachi kudasai.',c:'請稍候。'},
+    {j:'失礼いたします。',r:'Shitsurei itashimasu.',c:'失禮了。'},
+  ]},
+  grammar:{label:'文法練習句',icon:'📖',items:[
+    {j:'私は毎日学校に行きます。',r:'Watashi wa mainichi gakkou ni ikimasu.',c:'我每天去學校。'},
+    {j:'音楽を聞きながら、勉強します。',r:'Ongaku wo kikinagara, benkyou shimasu.',c:'一邊聽音樂一邊學習。'},
+    {j:'日本に行ったことがありますか。',r:'Nihon ni itta koto ga arimasu ka.',c:'你去過日本嗎？'},
+    {j:'宿題をしてから、ゲームをします。',r:'Shukudai wo shite kara, geemu wo shimasu.',c:'做完功課後打遊戲。'},
+    {j:'この本を読んでみてください。',r:'Kono hon wo yonde mite kudasai.',c:'請試著讀這本書。'},
+    {j:'雨が降ったら、家にいます。',r:'Ame ga futtara, ie ni imasu.',c:'如果下雨就待在家。'},
+  ]},
+};
+
+const grammarQuizData = [
+  {level:'N5',q:'「彼女は今___電話をしています。」空格應填入：',blank:true,sentence:'彼女は今___電話をしています。',
+   options:['は','が','を','で'],answer:1,explanation:'「が」標記動作的主語（強調）。在描述正在進行的動作時，「が」可以標記主語。'},
+  {level:'N5',q:'「電車___学校___行きます」正確的助詞是？',blank:false,
+   options:['で/に','に/を','を/で','が/に'],answer:0,explanation:'「で」表示使用交通工具的手段；「に」表示移動的目的地。電車で（手段）、学校に（目的地）。'},
+  {level:'N5',q:'「この映画はあまり___」正確否定形是？',blank:false,
+   options:['好きじゃありません','好きくないです','好きでないです','好きないです'],answer:0,explanation:'な形容詞「好き」的否定形是「好きじゃありません」（口語：好きじゃない）。'},
+  {level:'N5',q:'「昨日、図書館___本を読みました。」空格應填？',blank:true,sentence:'昨日、図書館___本を読みました。',
+   options:['に','を','が','で'],answer:3,explanation:'「で」表示動作進行的場所。在圖書館「裡面」讀書，要用「で」。「に」是位置存在，「で」是動作場所。'},
+  {level:'N5',q:'「___食べましたか？」— 「はい、もう食べました。」いつ食べましたか？',blank:false,
+   options:['今から','もう（すでに）','これから','あとで'],answer:1,explanation:'「もう」表示「已經」，「もう食べました」意為已經吃了。'},
+  {level:'N4',q:'「手を洗って___、ご飯を食べます。」表示順序，空格應填？',blank:true,sentence:'手を洗って___、ご飯を食べます。',
+   options:['から','ので','て','が'],answer:0,explanation:'「〜てから」強調「先A再B」的必然順序。洗手之後才吃飯。'},
+  {level:'N4',q:'「日本に___ことがありますか。」（曾去過）空格動詞形是？',blank:true,sentence:'日本に___ことがありますか。',
+   options:['行く','行き','行った','行って'],answer:2,explanation:'「〜たことがある」表示過去的經驗。動詞要用「た形」（過去式）。'},
+  {level:'N4',q:'「明日は早起き___なりません。」表示義務，空格應填？',blank:true,sentence:'明日は早起き___なりません。',
+   options:['しなければ','してから','したら','しても'],answer:0,explanation:'「〜なければなりません」表示必須做某事的義務。動詞用ない形（なければ）。'},
+  {level:'N4',q:'「週末は映画を見___本を読んだりします。」表示列舉的空格？',blank:true,sentence:'週末は映画を見___本を読んだりします。',
+   options:['たり','て','ながら','から'],answer:0,explanation:'「〜たり〜たりする」表示列舉多個動作的例子。前後都要用た形＋り。'},
+  {level:'N3',q:'「日本語が___ようになりました。」表示「能夠說了」，空格應填？',blank:true,sentence:'日本語が___ようになりました。',
+   options:['話す','話し','話せる','話した'],answer:2,explanation:'「〜ようになりました」表示「變得能夠…」。前接可能形「話せる」表示能說日語。'},
+  {level:'N3',q:'「先生に___ました。」（被老師稱讚）正確受身形是？',blank:false,
+   options:['褒められ','褒めさせ','褒めて','褒められさせ'],answer:0,explanation:'受身形（被動）：グループ2動詞語幹＋られる。「褒める→褒められる」。被老師稱讚＝先生に褒められた。'},
+  {level:'N3',q:'「もっと練習すれば、___なります。」條件形，空格應填？',blank:true,sentence:'もっと練習すれば、___なります。',
+   options:['上手に','上手く','上手で','上手が'],answer:0,explanation:'「上手になります」：な形容詞＋になります表示「變得…」。上手（な形）接になる時用「上手に」。'},
+  {level:'N3',q:'「この料理を___みてください。」（試吃）空格應填？',blank:true,sentence:'この料理を___みてください。',
+   options:['食べて','食べ','食べる','食べた'],answer:0,explanation:'「〜てみる」表示嘗試。動詞て形＋みる。食べる→食べて→食べてみる。'},
+  {level:'N2',q:'「財布を___しまいました。」（不小心忘了）空格應填？',blank:true,sentence:'財布を___しまいました。',
+   options:['忘れて','忘れた','忘れる','忘れ'],answer:0,explanation:'「〜てしまう」表示（往往含遺憾語氣的）完成。動詞て形＋しまう。忘れる→忘れて→忘れてしまった。'},
+  {level:'N2',q:'「会議の前に資料を準備して___。」（事先）空格應填？',blank:true,sentence:'会議の前に資料を準備して___。',
+   options:['おきます','しまいます','みます','あります'],answer:0,explanation:'「〜ておく」表示事先做好準備（為了將來）。資料を準備しておく＝事先準備好資料。'},
+  {level:'N2',q:'「部長は社員に残業___ました。」（讓員工加班）空格？',blank:true,sentence:'部長は社員に残業___ました。',
+   options:['させ','され','させられ','させて'],answer:0,explanation:'使役形（讓某人做）：する→させる。部長讓（させ）員工做的，所以是使役形「させました」。'},
+  {level:'N1',q:'「コーヒーを飲み___、話しましょう。」空格應填？',blank:true,sentence:'コーヒーを飲み___、話しましょう。',
+   options:['ながら','てから','たり','つつ'],answer:0,explanation:'「〜ながら」表示同時進行兩個動作。一邊喝咖啡一邊聊天，用「ながら」連接。'},
+  {level:'N1',q:'「彼はゲーム___しています。」（淨玩遊戲）空格應填？',blank:true,sentence:'彼はゲーム___しています。',
+   options:['ばかり','だけ','しか','ため'],answer:0,explanation:'「〜ばかり」表示「只是、淨是」。ゲームばかり＝只玩遊戲，有時含負面評價。「だけ」較中性，「しか」接否定形。'},
+  {level:'N1',q:'「お客様___丁寧に接することが大切です。」空格助詞？',blank:true,sentence:'お客様___丁寧に接することが大切です。',
+   options:['に対して','について','のために','によって'],answer:0,explanation:'「〜に対して」表示行為或態度的對象方向。對客人（お客様に対して）採取禮貌的態度。「について」是就某話題討論。'},
+  {level:'N1',q:'「日本に来た___で、まだ慣れていません。」（剛來）空格？',blank:true,sentence:'日本に来た___で、まだ慣れていません。',
+   options:['ばかり','だけ','ところ','もの'],answer:0,explanation:'「〜たばかり」表示剛剛完成某動作。来たばかり＝剛來。「〜たところ」也有類似意思，但ばかり更強調「剛剛」的新鮮感。'},
+];
+
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let currentSection = 'home';
+let currentCategory = 'greetings';
+let searchResults = null;
+let searchCount = 20;
+let kanaType = 'hiragana';
+let grammarFilter = 'all';
+let currentScenario = 0;
+let currentGrammarPane = 'list';
+let currentQuizPane = 'kana';
+let currentPronCat = 'daily';
+let diceState = {};  // { grammarId: [remaining indices] }
+let quizState = { phase:'start', type:'romaji-to-kana', questions:[], idx:0, score:0 };
+let grammarQuizState = { phase:'start', questions:[], idx:0, score:0, level:'all', showExplanation:false };
+let recognition = null;
+let activeRecordBtn = null;
+
+// ════════════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════════════
+function showSection(name) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  document.querySelector('[data-tab="'+name+'"]').classList.add('active');
+  currentSection = name;
+  if (name==='kana' && !document.getElementById('kanaGrid').children.length) renderKana();
+  if (name==='grammar' && !document.getElementById('grammarList').children.length) { renderGrammar(); renderVerbConj(); }
+  if (name==='pronunciation') { renderPronunciation(); requestMicPermission('pronMicBanner'); }
+  if (name==='conversation') { if (!document.getElementById('scenarioGrid').children.length) renderConversation(); requestMicPermission('convMicBanner'); }
+  if (name==='quiz') { renderQuiz(); renderGrammarQuiz(); }
+  if (name==='home') { buildCatRow(); renderPhrases(); }
+}
+
+function showGrammarPane(pane, btn) {
+  document.querySelectorAll('#sec-grammar .inner-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#sec-grammar .inner-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('gp-'+pane).classList.add('active');
+  currentGrammarPane = pane;
+  if (pane==='verb' && !document.getElementById('verbConjContainer').children.length) renderVerbConj();
+}
+
+function showQuizPane(pane, btn) {
+  document.querySelectorAll('#sec-quiz .inner-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#sec-quiz .inner-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('qp-'+pane).classList.add('active');
+  currentQuizPane = pane;
+}
+
+// ════════════════════════════════════════════
+// HOME
+// ════════════════════════════════════════════
+function buildCatRow() {
+  const row = document.getElementById('catRow');
+  if (row.children.length) return;
+  Object.entries(phrases).forEach(([key, cat]) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn-cat' + (key===currentCategory?' active':'');
+    btn.textContent = cat.icon+' '+cat.label;
+    btn.onclick = () => setCategory(btn, key);
+    row.appendChild(btn);
+  });
+}
+
+function renderPhrases() {
+  const grid = document.getElementById('phraseGrid');
+  const list = searchResults ? searchResults : (phrases[currentCategory]?.items || []);
+  grid.innerHTML = list.map((p,i) => `
+    <div class="phrase-card" style="animation-delay:${i*30}ms">
+      <div class="card-top">
+        <button class="btn-audio" onclick="speak('${escJs(p.j)}',this)" title="播放發音">🔊</button>
+      </div>
+      <div class="card-jp">${p.j}</div>
+      <div class="card-romaji">${p.r}</div>
+      <div class="card-cn">${p.c}</div>
+    </div>
+  `).join('');
+}
+
+function setCategory(btn, cat) {
+  document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentCategory = cat;
+  searchResults = null;
+  document.getElementById('catRow').style.display = '';
+  document.getElementById('resultsBar').style.display = 'none';
+  renderPhrases();
+}
+
+function setCount(btn, n) {
+  document.querySelectorAll('.btn-count').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  searchCount = n;
+}
+
+async function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  const btn = document.getElementById('btnSearch');
+  btn.disabled = true;
+  const apiKey = localStorage.getItem('claude_api_key');
+  let usedAI = false;
+
+  if (apiKey) {
+    btn.innerHTML = '⏳ AI 生成中…';
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-haiku-4-5-20251001',
+          max_tokens: 2048,
+          messages: [{
+            role: 'user',
+            content: `你是日語教學助手。請為「${q}」情境生成 ${searchCount} 個實用日文語句（丁寧體・禮貌形）。\n要求：\n1. 貼近「${q}」真實使用場景\n2. 包含各種句型（問句/回答/請求/感謝）\n3. 只回傳 JSON 陣列，每項格式：{"j":"日文","r":"羅馬字（Hepburn）","c":"繁體中文"}\n不要任何說明文字，只輸出陣列。`
+          }]
+        })
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const raw = data.content[0].text.trim();
+      const match = raw.match(/\[[\s\S]*\]/);
+      if (!match) throw new Error('no JSON');
+      searchResults = JSON.parse(match[0]).slice(0, searchCount);
+      usedAI = true;
+    } catch(err) {
+      console.warn('AI search failed:', err);
+      fallbackSearch(q);
+    }
+  } else {
+    btn.innerHTML = '⏳ 搜尋中…';
+    fallbackSearch(q);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '🔍 搜尋';
+  document.getElementById('catRow').style.display = 'none';
+  document.getElementById('resultsBar').style.display = 'flex';
+  const aiTag = usedAI ? ' <span class="api-status">AI</span>' : '';
+  document.getElementById('resultsTitle').innerHTML = '「'+q+'」的相關語句' + aiTag;
+  document.getElementById('resultsCount').textContent = '共 '+searchResults.length+' 個結果';
+  renderPhrases();
+}
+
+function fallbackSearch(q) {
+  const all = Object.values(phrases).flatMap(cat => cat.items);
+  searchResults = all.filter(p =>
+    p.j.includes(q) || p.r.toLowerCase().includes(q.toLowerCase()) || p.c.includes(q)
+  ).slice(0, searchCount);
+  if (!searchResults.length) searchResults = shuffle([...all]).slice(0, Math.min(searchCount, all.length));
+}
+
+function showApiModal() {
+  document.getElementById('apiKeyInput').value = localStorage.getItem('claude_api_key') || '';
+  document.getElementById('apiModal').style.display = 'flex';
+}
+function closeApiModal() { document.getElementById('apiModal').style.display = 'none'; }
+function saveApiKey() {
+  const k = document.getElementById('apiKeyInput').value.trim();
+  if (k) localStorage.setItem('claude_api_key', k);
+  else localStorage.removeItem('claude_api_key');
+  closeApiModal();
+  const btn = document.getElementById('btnSearch');
+  btn.innerHTML = '✓ 已儲存';
+  setTimeout(() => { btn.innerHTML = '🔍 搜尋'; }, 1500);
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
+function clearSearch() {
+  searchResults = null;
+  document.getElementById('searchInput').value = '';
+  document.getElementById('catRow').style.display = '';
+  document.getElementById('resultsBar').style.display = 'none';
+  renderPhrases();
+}
+
+// ════════════════════════════════════════════
+// KANA
+// ════════════════════════════════════════════
+function renderKana() {
+  const grid = document.getElementById('kanaGrid');
+  grid.innerHTML = kanaData.map(row => `
+    <div class="kana-row-block">
+      <div class="kana-row-name">${row.rowName}</div>
+      <div class="kana-row-chars">
+        ${row.chars.map((c,i) => `
+          <div class="kana-char-card" onclick="showKanaDetail(${kanaData.indexOf(row)},${i})">
+            <span class="kana-main">${kanaType==='hiragana'?c.h:c.k}</span>
+            <span class="kana-romaji">${c.r}</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function setKanaType(btn, type) {
+  document.querySelectorAll('.btn-kana-type').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  kanaType = type;
+  document.getElementById('kanaDetail').classList.remove('show');
+  renderKana();
+}
+
+function showKanaDetail(rowIdx, charIdx) {
+  const c = kanaData[rowIdx].chars[charIdx];
+  const vocab = (kanaVocab[kanaType] || {})[c.r] || [];
+  const detail = document.getElementById('kanaDetail');
+  const vocabHTML = vocab.length ? `
+    <div class="kd-vocab-list">
+      ${vocab.map(v => `
+        <div class="kd-vocab-item">
+          <div class="kd-vocab-word">
+            <span class="kd-vocab-jp">${v.w}</span>
+            <span class="kd-vocab-r">${v.r}</span>
+            <span class="kd-vocab-cn">${v.m}</span>
+            <button class="btn-ex-audio" onclick="speak('${escJs(v.w.replace(/（[^）]*）/g,''))}',this)">🔊</button>
+          </div>
+          <div class="kd-vocab-ex-row">
+            <div class="kd-vocab-ex">${v.ex}</div>
+            <button class="btn-ex-audio" onclick="speak('${escJs(v.ex.replace(/（[^）]*）/g,''))}',this)" title="朗讀例句">🔊</button>
+          </div>
+          <div class="kd-vocab-exr">${v.exR} — ${v.exM}</div>
+        </div>`).join('')}
+    </div>` : '<p style="color:var(--ink-3);font-size:.85rem;margin-top:.5rem">詞彙資料建置中…</p>';
+
+  const isKata = kanaType === 'katakana';
+  detail.className = 'kana-detail show' + (isKata ? ' kata-mode' : '');
+  detail.innerHTML = `
+    <div class="kd-top">
+      <div class="kd-chars">
+        <span class="kd-hira">${c.h}</span>
+        <span class="kd-kata">${c.k}</span>
+      </div>
+      <div class="kd-info">
+        <div class="kd-romaji">${c.r}</div>
+        <div class="kd-pron">${c.p}</div>
+        <button class="btn-audio" style="margin-top:.5rem" onclick="speak('${escJs(isKata?c.k:c.h)}',this)">🔊 播放</button>
+      </div>
+    </div>
+    ${vocabHTML}`;
+  detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ════════════════════════════════════════════
+// GRAMMAR
+// ════════════════════════════════════════════
+function renderGrammar() {
+  const list = document.getElementById('grammarList');
+  const filtered = grammarFilter==='all' ? grammarData : grammarData.filter(g => g.level===grammarFilter);
+  list.innerHTML = filtered.map(g => `
+    <div class="grammar-card" id="gc-${g.id}" data-level="${g.level}">
+      <div class="grammar-header" onclick="toggleGrammar('${g.id}')">
+        <span class="level-badge" data-level="${g.level}">${g.level}</span>
+        <span class="grammar-title">${g.title}</span>
+        <span class="grammar-chevron">▼</span>
+      </div>
+      <div class="grammar-body">
+        <p class="grammar-desc">${g.desc}</p>
+        ${g.note?`<div class="grammar-note">${g.note}</div>`:''}
+        <div class="grammar-pattern">${g.pattern}</div>
+        <div class="example-controls">
+          <span class="ex-label">例句：</span>
+          <button class="btn-rnd" onclick="showGExamples('${g.id}',3)">3句</button>
+          <button class="btn-rnd active" onclick="showGExamples('${g.id}',99)">全部</button>
+          <button class="btn-dice" onclick="diceExamples('${g.id}')" title="骰子：不重複隨機">🎲 骰子</button>
+        </div>
+        <div id="exlist-${g.id}">
+          ${g.examples.map(ex => exItemHTML(ex,false)).join('')}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function exItemHTML(ex, highlight) {
+  return `<div class="example-item${highlight?' highlight':''}">
+    <div class="ex-jp">${ex.j}<button class="btn-ex-audio" onclick="speak('${escJs(ex.j)}',this)">🔊</button></div>
+    <div class="ex-romaji">${ex.r}</div>
+    <div class="ex-cn">${ex.c}</div>
+  </div>`;
+}
+
+function toggleGrammar(id) {
+  document.getElementById('gc-'+id).classList.toggle('open');
+}
+
+function filterGrammar(btn, level) {
+  document.querySelectorAll('.btn-level').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  grammarFilter = level;
+  renderGrammar();
+}
+
+function showGExamples(id, n) {
+  const g = grammarData.find(x => x.id===id);
+  if (!g) return;
+  const indices = n >= g.examples.length
+    ? g.examples.map((_,i)=>i)
+    : shuffle([...g.examples.map((_,i)=>i)]).slice(0,n);
+  document.getElementById('exlist-'+id).innerHTML =
+    g.examples.map((ex,i) => exItemHTML(ex, indices.includes(i))).join('');
+}
+
+function diceExamples(id) {
+  const g = grammarData.find(x => x.id===id);
+  if (!g) return;
+  if (!diceState[id] || diceState[id].length===0) {
+    diceState[id] = shuffle([...g.examples.map((_,i)=>i)]);
+  }
+  const n = Math.min(3, diceState[id].length);
+  const indices = diceState[id].splice(0, n);
+  document.getElementById('exlist-'+id).innerHTML =
+    g.examples.map((ex,i) => exItemHTML(ex, indices.includes(i))).join('');
+}
+
+// ════════════════════════════════════════════
+// VERB CONJUGATION
+// ════════════════════════════════════════════
+function renderVerbConj() {
+  const con = document.getElementById('verbConjContainer');
+  con.innerHTML = verbGroups.map(grp => `
+    <div class="verb-group">
+      <div class="verb-group-title">${grp.group}</div>
+      <div class="verb-group-desc">${grp.desc}</div>
+      <div class="verb-table-scroll">
+        <table class="verb-table">
+          <thead>
+            <tr>
+              <th>動詞（意義）</th>
+              ${grp.forms.map(f => `<th>${f}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${grp.verbs.map(v => `
+              <tr>
+                <td>${v.dict}（${v.m}）<span class="v-form-header">${v.r}</span></td>
+                ${v.forms.map((f,i) => `<td onclick="speak('${escJs(f)}',null)" style="cursor:pointer" title="點擊發音">${f}</td>`).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════
+// CONVERSATION
+// ════════════════════════════════════════════
+function renderConversation() {
+  const grid = document.getElementById('scenarioGrid');
+  grid.innerHTML = conversationScenarios.map((s,i) => `
+    <div class="scenario-card${i===0?' active':''}" onclick="selectScenario(${i},this)">
+      <div class="sc-icon">${s.icon}</div>
+      <div class="sc-title">${s.title}</div>
+      <div class="sc-desc">${s.desc}</div>
+    </div>`).join('');
+  showDialogue(0);
+}
+
+function selectScenario(idx, el) {
+  document.querySelectorAll('.scenario-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  currentScenario = idx;
+  showDialogue(idx);
+}
+
+function pickRandomScenario() {
+  const idx = Math.floor(Math.random() * conversationScenarios.length);
+  const cards = document.querySelectorAll('.scenario-card');
+  if (cards.length) selectScenario(idx, cards[idx]);
+  else { currentScenario = idx; showDialogue(idx); }
+}
+
+function showDialogue(idx) {
+  const sc = conversationScenarios[idx];
+  const panel = document.getElementById('dialoguePanel');
+  panel.innerHTML = `
+    <div class="dialogue-panel">
+      <div class="dialogue-header">
+        <span class="dialogue-title">${sc.icon} ${sc.title} — ${sc.desc}</span>
+        <button class="btn-play-all" onclick="playAllDialogue(${idx})">▶ 全部播放</button>
+      </div>
+      <div class="dialogue-body">
+        ${sc.dialogues.map((d,i) => {
+          const isRight = d.speaker==='A' || d.speaker==='客';
+          return `
+          <div class="bubble-row${isRight?' side-right':''}" id="dl-${idx}-${i}">
+            <div class="speaker-avatar ${isRight?'avatar-right':'avatar-left'}">${d.speaker}</div>
+            <div class="bubble-content">
+              <div class="bubble ${isRight?'bubble-right':'bubble-left'}">
+                <div class="bubble-jp">${d.j}
+                  <button class="btn-ex-audio" onclick="speak('${escJs(d.j)}',this)">🔊</button>
+                </div>
+                <div class="bubble-romaji">${d.r}</div>
+                <div class="bubble-cn">${d.c}</div>
+                ${d.grammar?`<div class="bubble-grammar">📝 ${d.grammar}</div>`:''}
+                <div style="margin-top:.4rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+                  <button class="btn-conv-speech" id="csb-${idx}-${i}" onclick="startConvSpeech('${escJs(d.j)}',${idx},${i})">🎤 跟讀</button>
+                  <span class="conv-speech-result" id="csr-${idx}-${i}" style="display:none"></span>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+async function playAllDialogue(idx) {
+  const sc = conversationScenarios[idx];
+  for (let i=0; i<sc.dialogues.length; i++) {
+    const row = document.getElementById('dl-'+idx+'-'+i);
+    const bubble = row ? row.querySelector('.bubble') : null;
+    if (bubble) bubble.style.boxShadow = '0 0 0 2px var(--shu)';
+    await speakAsync(sc.dialogues[i].j);
+    if (bubble) bubble.style.boxShadow = '';
+    await delay(300);
+  }
+}
+
+// ════════════════════════════════════════════
+// PRONUNCIATION
+// ════════════════════════════════════════════
+// ════════════════════════════════════════════
+// MIC PERMISSION
+// ════════════════════════════════════════════
+function requestMicPermission(bannerId) {
+  const banner = document.getElementById(bannerId);
+  if (!banner) return;
+  if (!navigator.mediaDevices?.getUserMedia) {
+    banner.className = 'mic-banner';
+    banner.innerHTML = '⚠️ 此瀏覽器不支援麥克風，建議使用 Chrome 或 Edge。';
+    return;
+  }
+  navigator.mediaDevices.getUserMedia({audio: true})
+    .then(stream => {
+      stream.getTracks().forEach(t => t.stop());
+      banner.className = 'mic-banner granted';
+      banner.innerHTML = '🎤 麥克風已授權，可直接開始錄音練習。';
+      setTimeout(() => { banner.className = 'mic-banner hidden'; }, 3000);
+    })
+    .catch(() => {
+      banner.className = 'mic-banner';
+      banner.innerHTML = '🎤 請允許麥克風權限以使用錄音練習 <button class="btn-mic-req" onclick="requestMicPermission(\''+bannerId+'\')">重新授權</button>';
+    });
+}
+
+let activeConvBtn = null;
+function startConvSpeech(expected, scenIdx, lineIdx) {
+  if (!recognition) recognition = initSpeechRecognition();
+  if (!recognition) { alert('請使用 Chrome 或 Edge 瀏覽器。'); return; }
+
+  const btnId = 'csb-'+scenIdx+'-'+lineIdx;
+  const resId = 'csr-'+scenIdx+'-'+lineIdx;
+  const btn = document.getElementById(btnId);
+  const resEl = document.getElementById(resId);
+  if (!btn) return;
+
+  if (activeConvBtn && activeConvBtn !== btn) {
+    activeConvBtn.classList.remove('recording');
+    activeConvBtn.textContent = '🎤 跟讀';
+    try { recognition.abort(); } catch(e) {}
+  }
+  activeConvBtn = btn;
+  btn.classList.add('recording');
+  btn.textContent = '🎙️ 聆聽中…';
+  resEl.style.display = 'none';
+
+  recognition.onresult = (e) => {
+    const alts = Array.from(e.results[0]).map(r => r.transcript);
+    const spoken = alts[0];
+    const clean = s => s.replace(/[。、！？\s]/g,'');
+    const exact = alts.some(t => clean(t) === clean(expected));
+    const partial = alts.some(t => {
+      const a = clean(t), b = clean(expected);
+      return a.length > 0 && (a.includes(b.slice(0,3)) || b.includes(a.slice(0,3)));
+    });
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 再試';
+    resEl.style.display = 'inline-block';
+    if (exact) {
+      resEl.className = 'conv-speech-result correct';
+      resEl.textContent = '✓ 正確！';
+    } else if (partial) {
+      resEl.className = 'conv-speech-result partial';
+      resEl.textContent = '△ 接近「'+spoken+'」';
+    } else {
+      resEl.className = 'conv-speech-result wrong';
+      resEl.textContent = '✗「'+spoken+'」';
+    }
+    activeConvBtn = null;
+  };
+  recognition.onend = () => {
+    if (btn.classList.contains('recording')) {
+      btn.classList.remove('recording');
+      btn.textContent = '🎤 跟讀';
+      activeConvBtn = null;
+    }
+  };
+  recognition.onerror = (e) => {
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 跟讀';
+    activeConvBtn = null;
+    if (e.error === 'not-allowed') requestMicPermission('convMicBanner');
+  };
+  try { recognition.start(); } catch(e) { recognition = initSpeechRecognition(); recognition && recognition.start(); }
+}
+
+function initSpeechRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { document.getElementById('pronNoSupport').style.display = 'block'; return null; }
+  const r = new SR();
+  r.lang = 'ja-JP';
+  r.continuous = false;
+  r.interimResults = false;
+  r.maxAlternatives = 3;
+  return r;
+}
+
+function renderPronunciation() {
+  const catRow = document.getElementById('pronCatRow');
+  if (!catRow.children.length) {
+    Object.entries(pronunciationData).forEach(([key, cat]) => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-pron-cat' + (key===currentPronCat?' active':'');
+      btn.textContent = cat.icon+' '+cat.label;
+      btn.onclick = () => { currentPronCat = key; renderPronGrid();
+        document.querySelectorAll('.btn-pron-cat').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active'); };
+      catRow.appendChild(btn);
+    });
+  }
+  renderPronGrid();
+}
+
+function renderPronGrid() {
+  const grid = document.getElementById('pronGrid');
+  const cat = pronunciationData[currentPronCat];
+  grid.innerHTML = cat.items.map((item, idx) => `
+    <div class="pron-card" id="pc-${currentPronCat}-${idx}">
+      <div class="pron-card-top">
+        <div class="pron-meta">
+          <div class="pron-jp">${item.j}</div>
+          <div class="pron-romaji">${item.r}</div>
+          <div class="pron-cn">${item.c}</div>
+        </div>
+      </div>
+      <div class="pron-actions">
+        <button class="btn-listen" onclick="speak('${escJs(item.j)}',this)">🔊 聆聽</button>
+        <button class="btn-speak" id="spk-${currentPronCat}-${idx}" onclick="startSpeechPractice('${escJs(item.j)}','${currentPronCat}',${idx})">🎤 練習</button>
+        <span class="pron-result" id="res-${currentPronCat}-${idx}" style="display:none"></span>
+      </div>
+    </div>`).join('');
+}
+
+function startSpeechPractice(expected, cat, idx) {
+  if (!recognition) recognition = initSpeechRecognition();
+  if (!recognition) { alert('您的瀏覽器不支援語音辨識，建議使用 Chrome 或 Edge。'); return; }
+
+  if (activeRecordBtn) {
+    activeRecordBtn.classList.remove('recording');
+    activeRecordBtn.textContent = '🎤 練習';
+    recognition.abort();
+  }
+
+  const btn = document.getElementById('spk-'+cat+'-'+idx);
+  const resultEl = document.getElementById('res-'+cat+'-'+idx);
+  activeRecordBtn = btn;
+
+  btn.classList.add('recording');
+  btn.textContent = '🎙️ 聆聽中...';
+  resultEl.style.display = 'none';
+
+  recognition.onresult = (e) => {
+    const transcripts = Array.from(e.results[0]).map(r => r.transcript);
+    const spoken = transcripts[0];
+    const clean = s => s.replace(/[。、！？\s]/g,'');
+    const match = transcripts.some(t => clean(t) === clean(expected));
+    const partial = transcripts.some(t => {
+      const a = clean(t), b = clean(expected);
+      return a.length > 0 && (a.includes(b.slice(0,3)) || b.includes(a.slice(0,3)));
+    });
+    btn.textContent = '🎤 再試一次';
+    btn.classList.remove('recording');
+    resultEl.style.display = 'inline-block';
+    if (match) {
+      resultEl.className = 'pron-result correct';
+      resultEl.textContent = '✓ 正確！「'+spoken+'」';
+    } else if (partial) {
+      resultEl.className = 'pron-result partial';
+      resultEl.textContent = '△ 接近！「'+spoken+'」';
+    } else {
+      resultEl.className = 'pron-result wrong';
+      resultEl.textContent = '✗ 再試試「'+spoken+'」';
+    }
+    activeRecordBtn = null;
+  };
+
+  recognition.onend = () => {
+    if (btn.classList.contains('recording')) {
+      btn.classList.remove('recording');
+      btn.textContent = '🎤 練習';
+      activeRecordBtn = null;
+    }
+  };
+
+  recognition.onerror = (e) => {
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 練習';
+    activeRecordBtn = null;
+    if (e.error==='not-allowed') alert('請允許麥克風權限後再試。');
+  };
+
+  try { recognition.start(); } catch(e) { recognition = initSpeechRecognition(); }
+}
+
+// ════════════════════════════════════════════
+// QUIZ — 50音
+// ════════════════════════════════════════════
+const hiraganaList = kanaData.flatMap(row => row.chars.map(c => ({h:c.h,k:c.k,r:c.r})));
+
+function renderQuiz() {
+  const con = document.getElementById('quizContainer');
+  if (quizState.phase==='start') {
+    con.innerHTML = `
+      <div class="quiz-start">
+        <div class="quiz-emoji">✍️</div>
+        <div class="quiz-start-title">50音測驗</div>
+        <p style="color:var(--ink-3);margin-bottom:.5rem">測試你的假名辨識能力</p>
+        <div class="quiz-type-row">
+          <button class="btn-quiz-type${quizState.type==='romaji-to-kana'?' active':''}" onclick="setQuizType(this,'romaji-to-kana')">羅馬字 → 假名</button>
+          <button class="btn-quiz-type${quizState.type==='kana-to-romaji'?' active':''}" onclick="setQuizType(this,'kana-to-romaji')">假名 → 羅馬字</button>
+          <button class="btn-quiz-type${quizState.type==='sound-choice'?' active':''}" onclick="setQuizType(this,'sound-choice')">聽音辨字</button>
+        </div>
+        <button class="btn-start" onclick="startQuiz()">開始測驗 →</button>
+      </div>`;
+  } else if (quizState.phase==='quiz') {
+    const q = quizState.questions[quizState.idx];
+    const pct = (quizState.idx/quizState.questions.length*100).toFixed(0);
+    con.innerHTML = `
+      <div class="quiz-question">
+        <div class="quiz-progress">
+          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <span class="progress-text">${quizState.idx+1} / ${quizState.questions.length}</span>
+          <span class="score-badge">✓ ${quizState.score}</span>
+        </div>
+        <div class="question-card">
+          <p class="q-label">${quizState.type==='romaji-to-kana'?'羅馬字對應的假名是？':quizState.type==='kana-to-romaji'?'這個假名的羅馬字是？':'聽聲音，選出對應的假名'}</p>
+          ${quizState.type==='sound-choice'?`<button class="btn-q-audio" onclick="speak('${q.correct.h}',this)">🔊</button>`:
+            quizState.type==='romaji-to-kana'?`<div class="q-main romaji-q">${q.correct.r}</div>`:
+            `<div class="q-main">${q.correct.h}</div>`}
+        </div>
+        <div class="options-grid">
+          ${q.options.map((opt,i) => `
+            <button class="btn-option" onclick="answerKanaQuiz(${i})" id="opt-${i}">
+              <span class="opt-kana">${opt.h}</span>
+              <span class="opt-romaji">${opt.r}</span>
+            </button>`).join('')}
+        </div>
+      </div>`;
+  } else {
+    const pct = Math.round(quizState.score/quizState.questions.length*100);
+    const msg = pct>=90?'優秀！🎉 假名掌握得非常好！':pct>=70?'不錯！👍 繼續練習！':'加油！💪 多練習幾次就會進步！';
+    con.innerHTML = `
+      <div class="quiz-result">
+        <div class="result-score">${quizState.score}<span style="font-size:2rem;opacity:.4">/${quizState.questions.length}</span></div>
+        <p class="result-msg">${msg}</p>
+        <p style="color:var(--ink-3);font-size:.85rem;margin-bottom:1.5rem">正確率 ${pct}%</p>
+        <button class="btn-retry" onclick="resetKanaQuiz()">再測一次</button>
+      </div>`;
+  }
+}
+
+function setQuizType(btn, type) {
+  document.querySelectorAll('#qp-kana .btn-quiz-type').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  quizState.type = type;
+}
+
+function startQuiz() {
+  const pool = shuffle([...hiraganaList]).slice(0,10);
+  quizState.questions = pool.map(correct => {
+    const others = shuffle(hiraganaList.filter(x => x.r!==correct.r)).slice(0,3);
+    return {correct, options: shuffle([correct,...others])};
+  });
+  quizState.idx=0; quizState.score=0; quizState.phase='quiz';
+  renderQuiz();
+}
+
+function answerKanaQuiz(optIdx) {
+  const q = quizState.questions[quizState.idx];
+  const correct = q.options[optIdx].r === q.correct.r;
+  if (correct) { quizState.score++; document.getElementById('opt-'+optIdx).classList.add('correct'); speak(q.correct.h,null); }
+  else {
+    document.getElementById('opt-'+optIdx).classList.add('wrong');
+    q.options.forEach((_,i) => { if(q.options[i].r===q.correct.r) document.getElementById('opt-'+i).classList.add('correct'); });
+  }
+  document.querySelectorAll('#qp-kana .btn-option').forEach(b => b.disabled=true);
+  setTimeout(() => { quizState.idx++; if(quizState.idx>=quizState.questions.length) quizState.phase='result'; renderQuiz(); }, 900);
+}
+
+function resetKanaQuiz() { quizState.phase='start'; renderQuiz(); }
+
+// ════════════════════════════════════════════
+// QUIZ — Grammar
+// ════════════════════════════════════════════
+function renderGrammarQuiz() {
+  const con = document.getElementById('grammarQuizContainer');
+  if (grammarQuizState.phase==='start') {
+    con.innerHTML = `
+      <div class="quiz-start">
+        <div class="quiz-emoji">📖</div>
+        <div class="quiz-start-title">文法測驗</div>
+        <p style="color:var(--ink-3);margin-bottom:.5rem">選擇正確的答案</p>
+        <div class="quiz-type-row">
+          <button class="btn-quiz-type${grammarQuizState.level==='all'?' active':''}" onclick="setGQLevel(this,'all')">全部</button>
+          <button class="btn-quiz-type${grammarQuizState.level==='N5'?' active':''}" onclick="setGQLevel(this,'N5')">N5</button>
+          <button class="btn-quiz-type${grammarQuizState.level==='N4'?' active':''}" onclick="setGQLevel(this,'N4')">N4</button>
+          <button class="btn-quiz-type${grammarQuizState.level==='N3'?' active':''}" onclick="setGQLevel(this,'N3')">N3</button>
+          <button class="btn-quiz-type${grammarQuizState.level==='N2'?' active':''}" onclick="setGQLevel(this,'N2')">N2</button>
+          <button class="btn-quiz-type${grammarQuizState.level==='N1'?' active':''}" onclick="setGQLevel(this,'N1')">N1</button>
+        </div>
+        <button class="btn-start" onclick="startGrammarQuiz()">開始測驗 →</button>
+      </div>`;
+  } else if (grammarQuizState.phase==='quiz') {
+    const q = grammarQuizState.questions[grammarQuizState.idx];
+    const pct = (grammarQuizState.idx/grammarQuizState.questions.length*100).toFixed(0);
+    con.innerHTML = `
+      <div class="quiz-question">
+        <div class="quiz-progress">
+          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <span class="progress-text">${grammarQuizState.idx+1} / ${grammarQuizState.questions.length}</span>
+          <span class="score-badge">✓ ${grammarQuizState.score}</span>
+        </div>
+        <div class="question-card">
+          <p class="q-label"><span class="level-badge" data-level="${q.level}" style="display:inline-block;margin-right:.5rem">${q.level}</span>選擇正確答案</p>
+          ${q.blank?`<div class="q-sentence">${q.sentence.replace('___','<span class="q-blank">＿＿＿</span>')}</div>`:
+            `<div class="q-sentence" style="font-size:1rem">${q.q}</div>`}
+        </div>
+        <div class="options-grid" id="gq-options">
+          ${q.options.map((opt,i) => `
+            <button class="btn-option full" onclick="answerGrammarQuiz(${i})" id="gopt-${i}">${opt}</button>`).join('')}
+        </div>
+        <div id="gq-explanation" style="display:none"></div>
+      </div>`;
+  } else {
+    const pct = Math.round(grammarQuizState.score/grammarQuizState.questions.length*100);
+    const msg = pct>=90?'優秀！🎉 文法掌握非常好！':pct>=70?'不錯！👍 再鞏固一下！':'加油！💪 多複習文法教學！';
+    con.innerHTML = `
+      <div class="quiz-result">
+        <div class="result-score">${grammarQuizState.score}<span style="font-size:2rem;opacity:.4">/${grammarQuizState.questions.length}</span></div>
+        <p class="result-msg">${msg}</p>
+        <p style="color:var(--ink-3);font-size:.85rem;margin-bottom:1.5rem">正確率 ${pct}%</p>
+        <button class="btn-retry" onclick="resetGrammarQuiz()">再測一次</button>
+      </div>`;
+  }
+}
+
+function setGQLevel(btn, level) {
+  document.querySelectorAll('#qp-grammar .btn-quiz-type').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  grammarQuizState.level = level;
+}
+
+function startGrammarQuiz() {
+  let pool = grammarQuizData;
+  if (grammarQuizState.level!=='all') pool = pool.filter(q => q.level===grammarQuizState.level);
+  grammarQuizState.questions = shuffle([...pool]).slice(0, Math.min(10, pool.length));
+  grammarQuizState.idx=0; grammarQuizState.score=0; grammarQuizState.phase='quiz';
+  renderGrammarQuiz();
+}
+
+function answerGrammarQuiz(optIdx) {
+  const q = grammarQuizState.questions[grammarQuizState.idx];
+  const correct = optIdx === q.answer;
+  if (correct) grammarQuizState.score++;
+  document.getElementById('gopt-'+optIdx).classList.add(correct?'correct':'wrong');
+  if (!correct) document.getElementById('gopt-'+q.answer).classList.add('correct');
+  document.querySelectorAll('#gq-options .btn-option').forEach(b => b.disabled=true);
+  const expEl = document.getElementById('gq-explanation');
+  expEl.style.display = 'block';
+  expEl.className = 'q-explanation';
+  expEl.textContent = '💡 '+q.explanation;
+  setTimeout(() => {
+    grammarQuizState.idx++;
+    if (grammarQuizState.idx>=grammarQuizState.questions.length) grammarQuizState.phase='result';
+    renderGrammarQuiz();
+  }, 2000);
+}
+
+function resetGrammarQuiz() { grammarQuizState.phase='start'; renderGrammarQuiz(); }
+
+// ════════════════════════════════════════════
+// AUDIO
+// ════════════════════════════════════════════
+function speak(text, btn) {
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'ja-JP'; utt.rate = 0.85;
+  if (btn) { btn.classList.add('playing'); utt.onend = () => btn.classList.remove('playing'); }
+  window.speechSynthesis.speak(utt);
+}
+
+function speakAsync(text) {
+  return new Promise(res => {
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang = 'ja-JP'; utt.rate = 0.85;
+    utt.onend = res; utt.onerror = res;
+    window.speechSynthesis.speak(utt);
+  });
+}
+
+// ════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════
+function shuffle(arr) {
+  for (let i=arr.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+  return arr;
+}
+function delay(ms) { return new Promise(r => setTimeout(r,ms)); }
+function escJs(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"'); }
+
+// Init
+buildCatRow();
+renderPhrases();
+</script>
+
+<!-- API Key Modal -->
+<div id="apiModal" class="api-modal-overlay" style="display:none" onclick="if(event.target===this)closeApiModal()">
+  <div class="api-modal">
+    <h3>⚙️ Claude AI 語句生成</h3>
+    <p>輸入 Claude API 金鑰，即可針對<strong>任意情境</strong>（如：滑雪、婚禮、求職面試…）用 AI 即時生成道地日文語句與發音練習。</p>
+    <p style="color:var(--shu)">🔑 取得免費金鑰：<a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color:var(--shu);text-decoration:underline">console.anthropic.com</a></p>
+    <p style="color:var(--ink-3)">金鑰僅儲存於本機瀏覽器（localStorage），不會傳至任何第三方伺服器。</p>
+    <input class="api-key-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-...">
+    <div class="api-modal-btns">
+      <button class="btn-api-cancel" onclick="closeApiModal()">取消</button>
+      <button class="btn-api-save" onclick="saveApiKey()">儲存金鑰</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

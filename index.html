@@ -167,6 +167,8 @@ section.active{display:block}
 .btn-conv-speech{padding:.28rem .6rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:6px;font-size:.74rem;color:var(--shu);cursor:pointer;transition:all .2s;font-family:inherit;flex-shrink:0}
 .btn-conv-speech:hover{background:var(--shu);color:#fff}
 .btn-conv-speech.recording{background:var(--shu);color:#fff;animation:pulse 1s infinite}
+.btn-conv-replay{padding:.22rem .55rem;background:var(--washi-alt);border:1px solid var(--border);border-radius:6px;font-size:.7rem;color:var(--ink-3);cursor:pointer;font-family:inherit;transition:all .2s;flex-shrink:0}
+.btn-conv-replay:hover,.btn-conv-replay.playing{background:var(--ink);color:#fff;border-color:var(--ink)}
 .conv-speech-result{font-size:.74rem;padding:.18rem .45rem;border-radius:4px;margin-left:.3rem}
 .conv-speech-result.correct{background:#e8f5e9;color:#2e7d32}
 .conv-speech-result.partial{background:#fff8e1;color:#f57f17}
@@ -335,6 +337,11 @@ section.active{display:block}
 .result-msg{font-size:1.1rem;color:var(--ink-2);margin-bottom:2rem}
 .btn-retry{padding:.8rem 2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
 .btn-retry:hover{background:var(--washi);border-color:var(--border-s);box-shadow:var(--sh-md)}
+.btn-gq-nav{flex:1;padding:.65rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--ink-3);font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-gq-nav:hover:not(:disabled){background:var(--washi);border-color:var(--border-s);color:var(--ink)}
+.btn-gq-nav:disabled{opacity:.35;cursor:default}
+.btn-gq-nav.primary{background:var(--shu);border-color:var(--shu);color:#fff}
+.btn-gq-nav.primary:hover:not(:disabled){background:var(--shu-h)}
 .results-bar{max-width:1200px;margin:1.5rem auto 0;padding:0 1.5rem;display:flex;align-items:center;gap:1rem}
 .results-title{font-family:'Zen Old Mincho',serif;font-size:1.1rem;color:var(--ink)}
 .results-count{font-size:.82rem;color:var(--ink-3)}
@@ -383,7 +390,6 @@ section.active{display:block}
     <div class="search-box">
       <div class="search-row">
         <input class="search-input" id="searchInput" type="text" placeholder="搜尋主題… 例如：滑雪、婚禮、醫院">
-        <button class="btn-api-key" onclick="showApiModal()" title="設定 Gemini AI 金鑰">⚙️</button>
         <button class="btn-search" id="btnSearch" onclick="doSearch()">🔍 搜尋</button>
       </div>
       <div class="count-row">
@@ -1324,6 +1330,77 @@ const grammarData = [
      {j:'兄が内向的なのに対して、弟は社交的です。',r:'Ani ga naikoukei na no ni taishite, otouto wa shakouteki desu.',c:'相對於哥哥的內向，弟弟很外向。（對比）'},
      {j:'政府の政策に対して、市民が抗議しています。',r:'Seifu no seisaku ni taishite, shimin ga kougi shite imasu.',c:'市民針對政府政策進行抗議。'},
    ]},
+  // ── 追加 N3 ──
+  {id:'n3-5',level:'N3',title:'〜ようになる（変化の到達）',
+   desc:'表示某種能力或習慣慢慢地發生變化，強調漸進的「結果狀態」。前接動詞辞書形（能力變化）或否定形（喪失習慣）。',
+   note:'💡 〜ようにする（主動努力維持習慣）vs 〜ようになる（自然發生的變化）',
+   pattern:'動詞辞書形 ／ 動詞ない形 ＋ ようになる',
+   examples:[
+     {j:'練習したら、ピアノが弾けるようになりました。',r:'Renshuu shitara, piano ga hikeru you ni narimashita.',c:'練習後，會彈鋼琴了。'},
+     {j:'日本に住んで、日本語が少し話せるようになりました。',r:'Nihon ni sunde, nihongo ga sukoshi hanaseru you ni narimashita.',c:'住在日本後，能稍微說日語了。'},
+     {j:'子供が野菜を食べられるようになりました。',r:'Kodomo ga yasai wo taberareru you ni narimashita.',c:'孩子能吃蔬菜了（變得能吃了）。'},
+     {j:'最近、早起きできるようになりました。',r:'Saikin, hayaoki dekiru you ni narimashita.',c:'最近能夠早起了。'},
+     {j:'だんだん漢字が読めるようになってきました。',r:'Dandan kanji ga yomeru you ni natte kimashita.',c:'漸漸地能讀漢字了。'},
+     {j:'薬を飲んで、よく眠れるようになりました。',r:'Kusuri wo nonde, yoku nemureru you ni narimashita.',c:'吃了藥，能睡得好了。'},
+   ]},
+  {id:'n3-6',level:'N3',title:'〜ために（目的・原因）',
+   desc:'① 目的：意志動詞辞書形＋ために「為了…」；② 原因：名詞/普通形＋ために「因為…」（客觀原因，書面）',
+   note:'💡 目的用法只接意志動詞（走る・食べる）；ように接可能形或非意志動詞（分かる・見える）。',
+   pattern:'意志動詞辞書形 ／ 名詞・普通形 ＋ ために',
+   examples:[
+     {j:'健康のために、毎日運動しています。',r:'Kenkou no tame ni, mainichi undou shite imasu.',c:'為了健康，每天運動。'},
+     {j:'日本語を覚えるために、毎日ノートに書いています。',r:'Nihongo wo oboeru tame ni, mainichi nooto ni kaite imasu.',c:'為了記住日語，每天寫筆記。'},
+     {j:'台風のために、電車が止まりました。',r:'Taifu no tame ni, densha ga tomarimashita.',c:'因為颱風，電車停了（原因）。'},
+     {j:'病気のために、試合に出られませんでした。',r:'Byouki no tame ni, shiai ni deraremasen deshita.',c:'因為生病，無法出賽。'},
+     {j:'将来のために、今から貯金しています。',r:'Shourai no tame ni, ima kara chokin shite imasu.',c:'為了將來，從現在開始存錢。'},
+     {j:'合格するために、毎日10時間勉強します。',r:'Goukaku suru tame ni, mainichi juujikan benkyou shimasu.',c:'為了合格，每天學習10小時。'},
+   ]},
+  // ── 追加 N2 ──
+  {id:'n2-4',level:'N2',title:'〜わけではない（部分否定）',
+   desc:'表示「並非（完全）如此」的部分否定。否定對方的過度推斷，或澄清「不是說…（只是…）」。',
+   note:'💡 わけではない（不一定如此）vs わけがない（不可能如此）vs わけにはいかない（不得不/不能）',
+   pattern:'動詞普通形 ／ 形容詞普通形 ／ 名詞 ＋ というわけではない',
+   examples:[
+     {j:'日本語が嫌いなわけではありません。ただ難しいだけです。',r:'Nihongo ga kirai na wake de wa arimasen. Tada muzukashii dake desu.',c:'並不是討厭日語，只是很難而已。'},
+     {j:'全員が賛成しているわけではありません。',r:'Zen\'in ga sansei shite iru wake de wa arimasen.',c:'並非所有人都贊成。'},
+     {j:'お金があれば幸せになれるわけではない。',r:'O-kane ga areba shiawase ni nareru wake de wa nai.',c:'有錢並不一定就能幸福。'},
+     {j:'毎日練習しているわけではないが、少しは上手になった。',r:'Mainichi renshuu shite iru wake de wa nai ga, sukoshi wa jouzu ni natta.',c:'雖然並非每天練習，但稍微進步了。'},
+     {j:'嫌いだというわけではないが、あまり好きでもない。',r:'Kirai da to iu wake de wa nai ga, amari suki de mo nai.',c:'並不是討厭，但也談不上喜歡。'},
+   ]},
+  {id:'n2-5',level:'N2',title:'〜にもかかわらず（逆接）',
+   desc:'書面語，表示「儘管…卻…」的強烈逆接。比「〜のに」更正式，強調前後的強烈對比。',
+   note:'💡 〜にもかかわらず接名詞/普通形，比「のに」語氣更書面、更強烈。',
+   pattern:'名詞 ／ 動詞・形容詞普通形 ＋ にもかかわらず',
+   examples:[
+     {j:'雨にもかかわらず、大勢のお客が来ました。',r:'Ame ni mo kakawarazu, oozei no okyaku ga kimashita.',c:'儘管下雨，仍有很多客人來了。'},
+     {j:'努力したにもかかわらず、試験に落ちてしまいました。',r:'Doryoku shita ni mo kakawarazu, shiken ni ochite shimaimashita.',c:'儘管努力了，還是考試不及格。'},
+     {j:'危険にもかかわらず、救助に向かいました。',r:'Kiken ni mo kakawarazu, kyuujo ni mukaimashita.',c:'儘管危險，仍前去救援。'},
+     {j:'体調が悪いにもかかわらず、仕事を続けました。',r:'Taichou ga warui ni mo kakawarazu, shigoto wo tsuzukemashita.',c:'儘管身體不適，還是繼續工作。'},
+     {j:'注意したにもかかわらず、同じミスを繰り返した。',r:'Chuui shita ni mo kakawarazu, onaji misu wo kurikaeshita.',c:'儘管注意了，還是重複了同樣的錯誤。'},
+   ]},
+  // ── 追加 N1 ──
+  {id:'n1-4',level:'N1',title:'〜ざるを得ない（不得不）',
+   desc:'表示「迫不得已、不得不做某事」，有受到外部壓力或情況強制的含意。比「なければならない」語氣更強且書面。',
+   note:'💡 接法：動詞ない形去ない＋ざるを得ない。例外：する→せざるを得ない（非しざるを得ない）',
+   pattern:'動詞ない形語幹 ＋ ざるを得ない（する→せざるを得ない）',
+   examples:[
+     {j:'上司の命令には従わざるを得ない。',r:'Joushi no meirei ni wa shitagawazaru wo enai.',c:'對上司的命令不得不服從。'},
+     {j:'証拠がある以上、認めざるを得ません。',r:'Shouko ga aru ijou, mitomezaru wo emasen.',c:'既然有證據，不得不承認。'},
+     {j:'急な仕事が入ったので、旅行をキャンセルせざるを得なかった。',r:'Kyuu na shigoto ga haitta node, ryokou wo kyanseru sezaru wo enakatta.',c:'因為臨時有工作，不得不取消旅行。'},
+     {j:'予算削減のため、人員を減らさざるを得ない状況です。',r:'Yosan sakugen no tame, jin\'in wo herasazaru wo enai joukyou desu.',c:'由於預算削減，處於不得不裁員的狀況。'},
+     {j:'事態がここまで来ると、専門家に相談せざるを得ません。',r:'Jitai ga koko made kuru to, senmonka ni soudan sezaru wo emasen.',c:'事態發展到這一步，不得不諮詢專家。'},
+   ]},
+  {id:'n1-5',level:'N1',title:'〜とはいえ（雖說如此）',
+   desc:'書面語，表示「雖然（前提/事實成立），但…」的讓步轉折。承認前提的同時，提出與之對立或修正的看法。',
+   note:'💡 とはいえ比「けれども」或「が」更書面、更強調對前提的承認。',
+   pattern:'名詞・動詞・形容詞普通形 ＋ とはいえ',
+   examples:[
+     {j:'N1合格とはいえ、まだ勉強することがたくさんあります。',r:'N1 goukaку to wa ie, mada benkyou suru koto ga takusan arimasu.',c:'雖說通過了N1，但還有很多需要學習。'},
+     {j:'冬とはいえ、今日は暖かいですね。',r:'Fuyu to wa ie, kyou wa atatakai desu ne.',c:'雖說是冬天，今天還挺暖和的呢。'},
+     {j:'ベテランとはいえ、油断は禁物です。',r:'Beteran to wa ie, yudan wa kinmotsu desu.',c:'雖說是老手，但大意是大忌。'},
+     {j:'冗談とはいえ、そういうことは言うべきではありません。',r:'Joudan to wa ie, sou iu koto wa iu beki de wa arimasen.',c:'雖說是開玩笑，但那種話是不應該說的。'},
+     {j:'便利とはいえ、スマートフォンにも問題点はある。',r:'Benri to wa ie, sumaatofon ni mo mondaiten wa aru.',c:'雖說方便，智慧型手機也有其問題。'},
+   ]},
 ];
 
 // Verb Conjugation Data
@@ -1444,6 +1521,63 @@ const conversationScenarios = [
     {speaker:'A',j:'山田部長はいらっしゃいますでしょうか。',r:'Yamada buchou wa irasshaimasu deshou ka.',c:'請問山田部長在嗎？',grammar:'いらっしゃる：いる的尊敬語'},
     {speaker:'B',j:'少々お待ちください。ただいま確認いたします。',r:'Shoushou omachi kudasai. Tadaima kakunin itashimasu.',c:'請稍候，我現在為您確認。',grammar:'いたします：する的謙讓語'},
    ]},
+  {id:11,title:'租屋看房',desc:'洽詢公寓租賃',icon:'🏠',
+   dialogues:[
+    {speaker:'A',j:'すみません、このアパートをまだ募集していますか。',r:'Sumimasen, kono apaato wo mada boshuu shite imasu ka.',c:'請問，這間公寓還在招租嗎？',grammar:'〜ていますか：詢問進行中的狀態'},
+    {speaker:'B',j:'はい、まだ空いています。内見なさいますか。',r:'Hai, mada aite imasu. Naiken nasaimasu ka.',c:'是的，還有空房。您要來看房嗎？',grammar:'なさる：する的尊敬語'},
+    {speaker:'A',j:'家賃はいくらですか。管理費は含まれていますか。',r:'Yachin wa ikura desu ka. Kanrihi wa fukumarete imasu ka.',c:'租金多少錢？含管理費嗎？',grammar:'受身形：fukumarete（被包含）'},
+    {speaker:'B',j:'月7万円で、管理費は別途5千円かかります。',r:'Tsuki nana-man en de, kanrihi wa betsuto go-sen en kakarimasu.',c:'月租7萬日圓，管理費另計5千日圓。',grammar:'〜かかる：花費（金錢/時間）'},
+    {speaker:'A',j:'ペットを飼ってもいいですか。',r:'Petto wo katte mo ii desu ka.',c:'可以養寵物嗎？',grammar:'〜てもいいですか：詢問許可'},
+    {speaker:'B',j:'申し訳ございませんが、ペット不可となっております。',r:'Moushiwake gozaimasen ga, petto fuka to natte orimasu.',c:'非常抱歉，這裡不允許養寵物。',grammar:'〜となっております：規定（最高丁寧語）'},
+   ]},
+  {id:12,title:'銀行開戶',desc:'在銀行辦理業務',icon:'🏦',
+   dialogues:[
+    {speaker:'A',j:'口座を開設したいのですが。',r:'Kouza wo kaisetsu shitai no desu ga.',c:'我想開戶。',grammar:'〜たいのですが：委婉表達希望'},
+    {speaker:'B',j:'身分証明書をお持ちですか。パスポートか免許証で大丈夫です。',r:'Mibun shoumeisho wo o-mochi desu ka. Pasupooto ka menkyoshou de daijoubu desu.',c:'您帶了身份證明文件嗎？護照或駕照都可以。',grammar:'お持ちですか：持つ的尊敬語'},
+    {speaker:'A',j:'パスポートを持ってきました。印鑑は必要ですか。',r:'Pasupooto wo motte kimashita. Inkan wa hitsuyou desu ka.',c:'我帶了護照。需要印章嗎？',grammar:'〜てきました：帶來（移動完成）'},
+    {speaker:'B',j:'最近はサインでも構いません。ATMカードも同時に申し込めますよ。',r:'Saikin wa sain demo kamaimasen. ATM kaado mo douji ni moushikomemasu yo.',c:'最近簽名也可以。同時也可以申請提款卡喔。',grammar:'〜でも構いません：也沒關係'},
+    {speaker:'A',j:'ネットバンキングも登録できますか。',r:'Netto bankingu mo touroku dekimasu ka.',c:'也可以登記網路銀行嗎？',grammar:'〜できますか：詢問可能性'},
+   ]},
+  {id:13,title:'郵局寄件',desc:'在郵局寄包裹',icon:'📮',
+   dialogues:[
+    {speaker:'A',j:'台湾にこの荷物を送りたいのですが。',r:'Taiwan ni kono nimotsu wo okuritai no desu ga.',c:'我想把這個包裹寄到台灣。',grammar:'〜たいのですが：委婉請求'},
+    {speaker:'B',j:'普通便と速達、どちらになさいますか。',r:'Futsuu-bin to sokutatsu, dochira ni nasaimasu ka.',c:'您要寄平信還是快捷？',grammar:'なさる：する的尊敬語'},
+    {speaker:'A',j:'速達でお願いします。どのくらいかかりますか。',r:'Sokutatsu de onegaishimasu. Dono kurai kakarimasu ka.',c:'請寄快捷，大概要多久？',grammar:'かかる：花費時間'},
+    {speaker:'B',j:'大体5日から7日ほどかかります。こちらに宛先をご記入ください。',r:'Daitai itsuka kara nanoka hodo kakarimasu. Kochira ni atesaki wo go-kinyuu kudasai.',c:'大約需要5到7天，請在這裡填寫收件地址。',grammar:'ご記入ください：尊敬語（記入的要求）'},
+    {speaker:'A',j:'中身は何ですか、と聞かれたら何と書けばいいですか。',r:'Nakami wa nan desu ka, to kikaretara nan to kakeba ii desu ka.',c:'如果被問到內容物，應該怎麼填？',grammar:'受身＋たら：被問到的話'},
+   ]},
+  {id:14,title:'美髮沙龍',desc:'在髮廊剪髮',icon:'💇',
+   dialogues:[
+    {speaker:'店員',j:'いらっしゃいませ。本日はどのようになさいますか。',r:'Irasshaimase. Honjitsu wa dono you ni nasaimasu ka.',c:'歡迎光臨，今天想怎麼做？',grammar:'どのようになさいますか：尊敬語（詢問需求）'},
+    {speaker:'客',j:'少し短くして、毛先を軽くしたいです。',r:'Sukoshi mijikaku shite, kesaki wo karuku shitai desu.',c:'稍微剪短一點，髮尾弄輕一點。',grammar:'〜て（連用）、〜たい：希望'},
+    {speaker:'店員',j:'どのくらい切りますか。肩につくくらいはいかがですか。',r:'Dono kurai kirimasu ka. Kata ni tsuku kurai wa ikaga desu ka.',c:'要剪多長？剪到肩膀的長度如何？',grammar:'いかがですか：「どうですか」的禮貌說法'},
+    {speaker:'客',j:'はい、それでお願いします。パーマはかけないでください。',r:'Hai, sore de onegaishimasu. Paama wa kakenai de kudasai.',c:'好的，就這樣麻煩了。請不要燙髮。',grammar:'〜ないでください：請不要做…'},
+    {speaker:'店員',j:'かしこまりました。シャンプーからよろしいですか。',r:'Kashikomarimashita. Shanpuu kara yoroshii desu ka.',c:'明白了，先從洗頭開始可以嗎？',grammar:'かしこまりました：最高敬語（了解）'},
+   ]},
+  {id:15,title:'居酒屋',desc:'在居酒屋聚餐',icon:'🍺',
+   dialogues:[
+    {speaker:'店員',j:'いらっしゃいませ！何名様ですか。喫煙席と禁煙席どちらがよろしいですか。',r:'Irasshaimase! Nanmei-sama desu ka. Kitsuen-seki to kin\'en-seki dochira ga yoroshii desu ka.',c:'歡迎光臨！請問幾位？您要吸煙區還是禁煙區？',grammar:'どちらがよろしいですか：二擇一的禮貌詢問'},
+    {speaker:'A',j:'四人です。禁煙席をお願いします。とりあえずビールを四つください。',r:'Yonin desu. Kin\'en-seki wo onegaishimasu. Toriaezu biiru wo yottsu kudasai.',c:'四位，請安排禁煙區。先來四杯啤酒。',grammar:'とりあえず：首先、暫且'},
+    {speaker:'B',j:'このお店の名物は何ですか。おすすめを教えてください。',r:'Kono o-mise no meibutsu wa nan desu ka. Osusume wo oshiete kudasai.',c:'這家店的招牌是什麼？請告訴我推薦的菜。',grammar:'〜てください：請告訴我'},
+    {speaker:'店員',j:'唐揚げとだし巻き卵が人気です。飲み放題のコースもございます。',r:'Karaage to dashimaki tamago ga ninki desu. Nomi-hodai no koosu mo gozaimasu.',c:'炸雞和高湯玉子燒很受歡迎。也有無限暢飲套餐。',grammar:'〜放題：無限制（飲み放題＝暢飲）'},
+    {speaker:'A',j:'じゃあ、全員で飲み放題コースにします。',r:'Jaa, zen\'in de nomi-hodai koosu ni shimasu.',c:'那麼，全員選擇暢飲套餐。',grammar:'〜にします：決定選擇'},
+   ]},
+  {id:16,title:'天氣閒聊',desc:'關於天氣的日常對話',icon:'🌤️',
+   dialogues:[
+    {speaker:'A',j:'今日はいい天気ですね。散歩日和ですね。',r:'Kyou wa ii tenki desu ne. Sanpo biyori desu ne.',c:'今天天氣真好呢，適合散步呢。',grammar:'〜日和：適合…的好天氣'},
+    {speaker:'B',j:'本当に。でも午後から雨が降るそうですよ。',r:'Hontou ni. Demo gogo kara ame ga furu sou desu yo.',c:'確實，但聽說下午會下雨喔。',grammar:'〜そうです（伝聞）：聽說…'},
+    {speaker:'A',j:'えっ、そうなんですか。傘を持ってきたほうがよかったですね。',r:'E, sou nan desu ka. Kasa wo motte kita hou ga yokatta desu ne.',c:'誒，這樣啊。帶把傘來就好了呢。',grammar:'〜たほうがよかった：做了某事就好了（後悔）'},
+    {speaker:'B',j:'最近、天気が変わりやすくて困りますね。',r:'Saikin, tenki ga kawariyasukute komarimasu ne.',c:'最近天氣多變，真令人煩惱呢。',grammar:'〜やすい：容易…；〜て困る：因…而困擾'},
+    {speaker:'A',j:'台風シーズンも近いですし、気をつけましょう。',r:'Taifu shiizun mo chikaku desu shi, ki wo tsukemashou.',c:'颱風季節也快到了，要小心。',grammar:'〜ですし：列舉理由；気をつけましょう：注意吧'},
+   ]},
+  {id:17,title:'超市購物',desc:'在超市買東西',icon:'🛒',
+   dialogues:[
+    {speaker:'A',j:'すみません、豆腐はどこにありますか。',r:'Sumimasen, toufu wa doko ni arimasu ka.',c:'請問豆腐在哪裡？',grammar:'〜はどこにありますか：詢問位置'},
+    {speaker:'店員',j:'豆腐は冷蔵コーナーの奥にございます。お醤油の隣です。',r:'Toufu wa reizou koonaa no oku ni gozaimasu. O-shouyu no tonari desu.',c:'豆腐在冷藏區的最裡面，就在醬油旁邊。',grammar:'〜にございます：在（です的最高丁寧語）'},
+    {speaker:'A',j:'ありがとうございます。これは今日の特売品ですか。',r:'Arigatou gozaimasu. Kore wa kyou no tokubai-hin desu ka.',c:'謝謝，這是今天的特價商品嗎？',grammar:'特売品：特價商品'},
+    {speaker:'店員',j:'はい、本日限りのタイムセールです。20パーセントオフになっています。',r:'Hai, honjitsu kagiri no taimu seeru desu. Nijuu paasento ofu ni natte imasu.',c:'是的，是今日限定的限時特賣，打了八折。',grammar:'〜限り：僅限…；〜になっています：目前的狀態'},
+    {speaker:'A',j:'じゃ、二つもらいます。袋は有料ですか。',r:'Ja, futatsu moraimasu. Fukuro wa yuuryou desu ka.',c:'那我拿兩個。袋子要收費嗎？',grammar:'〜もらいます：我要（拿取）'},
+   ]},
 ];
 
 const pronunciationData = {
@@ -1464,6 +1598,8 @@ const pronunciationData = {
     {j:'写真を撮ってもいいですか。',r:'Shashin wo totte mo ii desu ka.',c:'可以拍照嗎？'},
     {j:'迷子になってしまいました。',r:'Maigo ni natte shimaimashita.',c:'我迷路了。'},
     {j:'空港へはどう行けばいいですか。',r:'Kuukou e wa dou ikeba ii desu ka.',c:'去機場怎麼走？'},
+    {j:'荷物を預けてもいいですか。',r:'Nimotsu wo azukete mo ii desu ka.',c:'可以寄放行李嗎？'},
+    {j:'この近くにコンビニはありますか。',r:'Kono chikaku ni konbini wa arimasu ka.',c:'這附近有便利商店嗎？'},
   ]},
   business:{label:'商務用語',icon:'💼',items:[
     {j:'お世話になっております。',r:'Osewa ni natte orimasu.',c:'承蒙您的照顧。'},
@@ -1472,11 +1608,17 @@ const pronunciationData = {
     {j:'ご確認をお願いします。',r:'Go-kakunin wo onegai shimasu.',c:'請您確認。'},
     {j:'少々お待ちください。',r:'Shoushou omachi kudasai.',c:'請稍候。'},
     {j:'失礼いたします。',r:'Shitsurei itashimasu.',c:'失禮了。'},
+    {j:'ご連絡が遅れて申し訳ございません。',r:'Go-renraku ga okurete moushiwake gozaimasen.',c:'非常抱歉聯絡晚了。'},
+    {j:'ご検討のほど、よろしくお願いいたします。',r:'Go-kentou no hodo, yoroshiku onegai itashimasu.',c:'敬請考慮，謝謝。'},
+    {j:'資料をお送りいたします。',r:'Shiryou wo o-okuri itashimasu.',c:'我將資料寄送給您。'},
   ]},
   grammar:{label:'文法練習句',icon:'📖',items:[
     {j:'私は毎日学校に行きます。',r:'Watashi wa mainichi gakkou ni ikimasu.',c:'我每天去學校。'},
     {j:'音楽を聞きながら、勉強します。',r:'Ongaku wo kikinagara, benkyou shimasu.',c:'一邊聽音樂一邊學習。'},
     {j:'日本に行ったことがありますか。',r:'Nihon ni itta koto ga arimasu ka.',c:'你去過日本嗎？'},
+    {j:'試験に合格するために、毎日練習しています。',r:'Shiken ni goukaku suru tame ni, mainichi renshuu shite imasu.',c:'為了考試合格，每天練習。'},
+    {j:'体調が悪いにもかかわらず、仕事を続けました。',r:'Taichou ga warui ni mo kakawarazu, shigoto wo tsuzukemashita.',c:'儘管身體不適，還是繼續工作了。'},
+    {j:'この仕事はキャンセルせざるを得ない状況です。',r:'Kono shigoto wa kyanseru sezaru wo enai joukyou desu.',c:'這份工作處於不得不取消的狀況。'},
     {j:'宿題をしてから、ゲームをします。',r:'Shukudai wo shite kara, geemu wo shimasu.',c:'做完功課後打遊戲。'},
     {j:'この本を読んでみてください。',r:'Kono hon wo yonde mite kudasai.',c:'請試著讀這本書。'},
     {j:'雨が降ったら、家にいます。',r:'Ame ga futtara, ie ni imasu.',c:'如果下雨就待在家。'},
@@ -1524,6 +1666,67 @@ const grammarQuizData = [
    options:['に対して','について','のために','によって'],answer:0,explanation:'「〜に対して」表示行為或態度的對象方向。對客人（お客様に対して）採取禮貌的態度。「について」是就某話題討論。'},
   {level:'N1',q:'「日本に来た___で、まだ慣れていません。」（剛來）空格？',blank:true,sentence:'日本に来た___で、まだ慣れていません。',
    options:['ばかり','だけ','ところ','もの'],answer:0,explanation:'「〜たばかり」表示剛剛完成某動作。来たばかり＝剛來。「〜たところ」也有類似意思，但ばかり更強調「剛剛」的新鮮感。'},
+  // ── 追加 N5 ──
+  {level:'N5',q:'「これは___本です。」（我的書）空格應填？',blank:true,sentence:'これは___本です。',
+   options:['私の','私が','私を','私は'],answer:0,explanation:'「の」是領格助詞，表示所有或修飾關係。私の本＝我的書。'},
+  {level:'N5',q:'「お名前は___ですか。」正確回答是？',blank:false,
+   options:['田中と申します','田中が言います','田中を呼びます','田中にあります'],answer:0,explanation:'「〜と申します」是「〜と言います」的謙遜形，自我介紹時使用。'},
+  {level:'N5',q:'「毎朝7時___起きます。」助詞是？',blank:true,sentence:'毎朝7時___起きます。',
+   options:['に','で','を','は'],answer:0,explanation:'「に」表示動作發生的具體時間點。7時に起きます＝7點起床。'},
+  {level:'N5',q:'「私は日本語___上手じゃありません。」',blank:true,sentence:'私は日本語___上手じゃありません。',
+   options:['が','を','に','の'],answer:0,explanation:'「が」標記能力或感情的對象。日本語が上手＝日語好。上手・下手・好き・嫌い後接「が」。'},
+  {level:'N5',q:'「A：今どこですか。B：図書館___います。」正確助詞？',blank:true,sentence:'図書館___います。',
+   options:['に','で','を','から'],answer:0,explanation:'「に」表示存在的位置（いる/ある）。「で」表示動作的場所。人在圖書館→図書館にいます。'},
+  // ── 追加 N4 ──
+  {level:'N4',q:'「病気___、会社を休みました。」原因，空格？',blank:true,sentence:'病気___、会社を休みました。',
+   options:['なので','ので','だから','けど'],answer:0,explanation:'「〜なので」：な形容詞/名詞接ので時，需加な。病気＋なので＝因為生病。「ので」表示客觀原因，較「から」禮貌。'},
+  {level:'N4',q:'「先生に___もらいました。」（被老師教了）正確て形是？',blank:true,sentence:'先生に___もらいました。',
+   options:['教えて','教え','教える','教えた'],answer:0,explanation:'「〜てもらう」：動詞て形＋もらう，表示我（主語）獲得他人的動作恩惠。先生に教えてもらう＝請老師教我。'},
+  {level:'N4',q:'「雨が降って___かもしれません。」（也許會下雨）句型？',blank:false,
+   options:['くる','いく','みる','おく'],answer:0,explanation:'「〜てくる」表示狀態從遠到近的變化、或動作從過去延續至今。雨が降ってくる＝雨要來了（天氣變化接近）。'},
+  {level:'N4',q:'「このシャツはちょっと___すぎます。」（太貴了）空格？',blank:true,sentence:'このシャツはちょっと___すぎます。',
+   options:['高','高い','高く','高さ'],answer:0,explanation:'「〜すぎる」前接形容詞語幹（去い）。高い→高＋すぎる＝太貴了。動詞則接ます形語幹：食べすぎる。'},
+  {level:'N4',q:'「熱があるなら、学校を___ほうがいいです。」建議句？',blank:true,sentence:'熱があるなら、学校を___ほうがいいです。',
+   options:['休んだ','休む','休んで','休み'],answer:0,explanation:'「〜たほうがいい」：動詞た形＋ほうがいい，表示「做…比較好」的建議。休んだほうがいい＝請假比較好。'},
+  // ── 追加 N3 ──
+  {level:'N3',q:'「映画を見る___、本を読む___しました。」列舉句？',blank:true,sentence:'映画を見る___、本を読む___しました。',
+   options:['たり/たり','て/て','ながら/て','か/か'],answer:0,explanation:'「〜たり〜たりする」：列舉代表性的動作或狀態。動詞た形＋り，最後加する。見たり読んだりした。'},
+  {level:'N3',q:'「この試験は難し___、合格できませんでした。」',blank:true,sentence:'この試験は難し___、合格できませんでした。',
+   options:['すぎて','くて','なので','ために'],answer:0,explanation:'「〜すぎて」：動作/狀態過於某程度而導致結果。難しすぎて（太難了所以）合格できなかった。'},
+  {level:'N3',q:'「もし宝くじが当たっ___、世界旅行をします。」假設句？',blank:true,sentence:'もし宝くじが当たっ___、世界旅行をします。',
+   options:['たら','ると','れば','なら'],answer:0,explanation:'「もし〜たら」：表示假設，もし（如果）常與たら搭配。当たったら＝如果中了（彩票）的話。'},
+  {level:'N3',q:'「子供の頃、よく公園___遊びました。」',blank:true,sentence:'子供の頃、よく公園___遊びました。',
+   options:['で','に','を','へ'],answer:0,explanation:'「で」表示動作進行的場所。公園で遊ぶ＝在公園玩。「に」是存在場所（いる・ある）。'},
+  {level:'N3',q:'「日本語が___ように、毎日練習しています。」目的？',blank:true,sentence:'日本語が___ように、毎日練習しています。',
+   options:['上手になる','上手に','上手','上手な'],answer:0,explanation:'「〜ように（目的）」：非意志動詞/可能形前接，表示為達成某狀態而努力。上手になるように練習する。'},
+  // ── 追加 N2 ──
+  {level:'N2',q:'「試験に合格する___、毎日勉強しています。」目的？',blank:true,sentence:'試験に合格する___、毎日勉強しています。',
+   options:['ために','ように','から','ので'],answer:0,explanation:'「〜ために」：意志動詞前接，表示目的「為了…」。合格するために＝為了合格。「ように」前接可能形或非意志動詞。'},
+  {level:'N2',q:'「彼の意見___わからないでもない。」委婉同意？',blank:true,sentence:'彼の意見___わからないでもない。',
+   options:['も','が','は','を'],answer:0,explanation:'「〜もわからないでもない」：雙重否定，委婉表示理解。「わからないでもない＝也不是不理解」即有一定程度的認同。'},
+  {level:'N2',q:'「この問題は難しい___、答えられます。」（雖然難但能答）',blank:true,sentence:'この問題は難しい___、答えられます。',
+   options:['ですが','ので','から','ために'],answer:0,explanation:'「〜ですが」：前後形成對比或讓步，「雖然…但是…」。「ので」「から」是原因，無法表達對比。'},
+  {level:'N2',q:'「資料を見___、説明してください。」邊看邊說明？',blank:true,sentence:'資料を見___、説明してください。',
+   options:['ながら','てから','たあとで','つつ'],answer:0,explanation:'「〜ながら」：同時進行兩個動作（主語相同）。資料を見ながら説明する＝邊看資料邊說明。'},
+  {level:'N2',q:'「今さら謝っ___、許してもらえないでしょう。」',blank:true,sentence:'今さら謝っ___、許してもらえないでしょう。',
+   options:['ても','たら','て','から'],answer:0,explanation:'「〜ても」：即使做了也…（逆接假設）。今さら謝っても＝即使現在道歉也（無法獲得原諒）。'},
+  // ── 追加 N1 ──
+  {level:'N1',q:'「社長___おっしゃる通りです。」空格？',blank:true,sentence:'社長___おっしゃる通りです。',
+   options:['の','が','は','に'],answer:0,explanation:'「〜のおっしゃる通り」：の是準體助詞，連接おっしゃる（言う的尊敬語）的修飾語。社長の（言葉の）おっしゃる通り。'},
+  {level:'N1',q:'「この計画は実施___値するものです。」（值得）',blank:true,sentence:'この計画は実施___値するものです。',
+   options:['に','を','が','で'],answer:0,explanation:'「〜に値する」固定搭配：值得…。名詞＋に値する。実施に値する＝值得實施。'},
+  {level:'N1',q:'「彼女の言葉は胸に___。」（刺入心中）',blank:true,sentence:'彼女の言葉は胸に___。',
+   options:['刺さった','刺さって','刺さる','刺さり'],answer:0,explanation:'文意是「她的話刺入了心中」（過去完成）。刺さった是刺さる（Group 1）的た形（過去式）。'},
+  {level:'N1',q:'「あの映画は感動的___あまり、泣いてしまいました。」',blank:true,sentence:'あの映画は感動的___あまり、泣いてしまいました。',
+   options:['な','の','だった','に'],answer:0,explanation:'「〜なあまり」：な形容詞＋なあまり，表示由於某情感過強而導致意想不到的結果。感動的なあまり＝由於太感動。'},
+  {level:'N1',q:'「必要に___じて、対応します。」',blank:true,sentence:'必要に___じて、対応します。',
+   options:['応','呼応','ため','準'],answer:0,explanation:'「必要に応じて」是固定慣用句：根據需要。応じる（符合/回應）的て形。'},
+  {level:'N1',q:'「そんなことを言うようでは、到底信頼___。」（無法信任）',blank:true,sentence:'そんなことを言うようでは、到底信頼___。',
+   options:['できません','できます','しません','します'],answer:0,explanation:'「到底〜できない」：完全無法…（與否定搭配的副詞）。到底できません＝根本無法。'},
+  {level:'N1',q:'「彼は疲れ___も、最後まで走り続けた。」（雖然累）',blank:true,sentence:'彼は疲れ___も、最後まで走り続けた。',
+   options:['ながら','て','つつ','ので'],answer:2,explanation:'「〜つつも」：書面語，雖然…卻…（對比/讓步）。疲れつつも走り続けた＝雖然疲憊卻繼續跑。比ながら更偏書面。'},
+  {level:'N1',q:'「予算の___、計画を縮小せざるを得ない。」',blank:true,sentence:'予算の___、計画を縮小せざるを得ない。',
+   options:['都合上','せいで','おかげで','ために'],answer:0,explanation:'「〜の都合上」：由於…的緣故（常用於說明不得不這樣做的客觀理由）。予算の都合上＝由於預算的緣故。'},
 ];
 
 // ════════════════════════════════════════════
@@ -1541,7 +1744,7 @@ let currentQuizPane = 'kana';
 let currentPronCat = 'daily';
 let diceState = {};  // { grammarId: [remaining indices] }
 let quizState = { phase:'start', type:'romaji-to-kana', questions:[], idx:0, score:0 };
-let grammarQuizState = { phase:'start', questions:[], idx:0, score:0, level:'all', showExplanation:false };
+let grammarQuizState = { phase:'start', questions:[], idx:0, score:0, level:'all', answers:[], answered:false };
 let recognition = null;
 let activeRecordBtn = null;
 
@@ -1975,10 +2178,11 @@ function showDialogue(idx) {
                 <div class="bubble-romaji">${d.r}</div>
                 <div class="bubble-cn">${d.c}</div>
                 ${d.grammar?`<div class="bubble-grammar">📝 ${d.grammar}</div>`:''}
-                <div style="margin-top:.4rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">
+                <div style="margin-top:.4rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap" id="csbrow-${idx}-${i}">
                   <button class="btn-conv-speech" id="csb-${idx}-${i}" onclick="startConvSpeech('${escJs(d.j)}',${idx},${i})">🎤 跟讀</button>
                   <span class="conv-speech-result" id="csr-${idx}-${i}" style="display:none"></span>
                 </div>
+                <div id="csreplay-${idx}-${i}" style="display:none;margin-top:.25rem;gap:.35rem;flex-wrap:wrap;align-items:center;display:none"></div>
               </div>
             </div>
           </div>`;
@@ -2069,6 +2273,14 @@ function startConvSpeech(expected, scenIdx, lineIdx) {
       resEl.className = 'conv-speech-result wrong';
       resEl.textContent = '✗「'+spoken+'」';
     }
+    // show replay buttons
+    const replayDiv = document.getElementById('csreplay-'+scenIdx+'-'+lineIdx);
+    if (replayDiv) {
+      replayDiv.style.display = 'flex';
+      replayDiv.innerHTML =
+        '<button class="btn-conv-replay" onclick="speak(\''+escJs(expected)+'\',this)" title="重播原句">🔊 聽原句</button>'+
+        (spoken ? '<button class="btn-conv-replay" onclick="speak(\''+escJs(spoken)+'\',this)" title="播放我說的">🎙 播我的</button>' : '');
+    }
     activeConvBtn = null;
   };
   recognition.onend = () => {
@@ -2131,6 +2343,7 @@ function renderPronGrid() {
         <button class="btn-speak" id="spk-${currentPronCat}-${idx}" onclick="startSpeechPractice('${escJs(item.j)}','${currentPronCat}',${idx})">🎤 練習</button>
         <span class="pron-result" id="res-${currentPronCat}-${idx}" style="display:none"></span>
       </div>
+      <div id="pronreplay-${currentPronCat}-${idx}" style="display:none;gap:.35rem;flex-wrap:wrap;align-items:center;margin-top:.3rem"></div>
     </div>`).join('');
 }
 
@@ -2173,6 +2386,14 @@ function startSpeechPractice(expected, cat, idx) {
     } else {
       resultEl.className = 'pron-result wrong';
       resultEl.textContent = '✗ 再試試「'+spoken+'」';
+    }
+    // show replay buttons
+    const replayDiv = document.getElementById('pronreplay-'+cat+'-'+idx);
+    if (replayDiv) {
+      replayDiv.style.display = 'flex';
+      replayDiv.innerHTML =
+        '<button class="btn-conv-replay" onclick="speak(\''+escJs(expected)+'\',this)" title="重播原句">🔊 聽原句</button>'+
+        (spoken ? '<button class="btn-conv-replay" onclick="speak(\''+escJs(spoken)+'\',this)" title="播放我說的">🎙 播我的</button>' : '');
     }
     activeRecordBtn = null;
   };
@@ -2305,7 +2526,10 @@ function renderGrammarQuiz() {
       </div>`;
   } else if (grammarQuizState.phase==='quiz') {
     const q = grammarQuizState.questions[grammarQuizState.idx];
-    const pct = (grammarQuizState.idx/grammarQuizState.questions.length*100).toFixed(0);
+    const pct = ((grammarQuizState.idx+1)/grammarQuizState.questions.length*100).toFixed(0);
+    const prev = grammarQuizState.answers[grammarQuizState.idx]; // undefined if not yet answered
+    const hasPrev = grammarQuizState.idx > 0;
+    const isAnswered = prev !== undefined;
     con.innerHTML = `
       <div class="quiz-question">
         <div class="quiz-progress">
@@ -2319,19 +2543,42 @@ function renderGrammarQuiz() {
             `<div class="q-sentence" style="font-size:1rem">${q.q}</div>`}
         </div>
         <div class="options-grid" id="gq-options">
-          ${q.options.map((opt,i) => `
-            <button class="btn-option full" onclick="answerGrammarQuiz(${i})" id="gopt-${i}">${opt}</button>`).join('')}
+          ${q.options.map((opt,i) => {
+            let cls = 'btn-option full';
+            if (isAnswered) {
+              if (i === q.answer) cls += ' correct';
+              else if (i === prev) cls += ' wrong';
+            }
+            return `<button class="${cls}" ${isAnswered?'disabled':''} onclick="answerGrammarQuiz(${i})" id="gopt-${i}">${opt}</button>`;
+          }).join('')}
         </div>
-        <div id="gq-explanation" style="display:none"></div>
+        <div id="gq-explanation" class="q-explanation" style="display:${isAnswered?'block':'none'}">${isAnswered?'💡 '+q.explanation:''}</div>
+        <div class="gq-nav" style="display:flex;justify-content:space-between;margin-top:1rem;gap:.5rem">
+          <button class="btn-gq-nav" onclick="navGrammarQuiz(-1)" ${hasPrev?'':'disabled'}>← 上一題</button>
+          ${isAnswered ? `<button class="btn-gq-nav primary" onclick="navGrammarQuiz(1)">${grammarQuizState.idx+1>=grammarQuizState.questions.length?'查看結果 →':'下一題 →'}</button>` : '<span></span>'}
+        </div>
       </div>`;
   } else {
     const pct = Math.round(grammarQuizState.score/grammarQuizState.questions.length*100);
     const msg = pct>=90?'優秀！🎉 文法掌握非常好！':pct>=70?'不錯！👍 再鞏固一下！':'加油！💪 多複習文法教學！';
+    const wrongItems = grammarQuizState.questions.map((q,i) => ({q, chosen: grammarQuizState.answers[i]}))
+      .filter(({q,chosen}) => chosen !== q.answer);
     con.innerHTML = `
       <div class="quiz-result">
         <div class="result-score">${grammarQuizState.score}<span style="font-size:2rem;opacity:.4">/${grammarQuizState.questions.length}</span></div>
         <p class="result-msg">${msg}</p>
-        <p style="color:var(--ink-3);font-size:.85rem;margin-bottom:1.5rem">正確率 ${pct}%</p>
+        <p style="color:var(--ink-3);font-size:.85rem;margin-bottom:1.2rem">正確率 ${pct}%</p>
+        ${wrongItems.length>0?`
+        <div style="text-align:left;margin-bottom:1.2rem">
+          <div style="font-size:.82rem;font-weight:700;color:var(--shu);margin-bottom:.6rem">✗ 答錯的題目（共 ${wrongItems.length} 題）</div>
+          ${wrongItems.map(({q,chosen})=>`
+            <div style="background:var(--washi-alt);border:1px solid var(--border);border-radius:10px;padding:.6rem .8rem;margin-bottom:.5rem;font-size:.8rem">
+              <div style="color:var(--ink);margin-bottom:.25rem">${q.blank?q.sentence:q.q}</div>
+              <div style="color:var(--shu)">✗ 你的答案：${q.options[chosen]}</div>
+              <div style="color:var(--moss,#5a7a3a)">✓ 正確答案：${q.options[q.answer]}</div>
+              <div style="color:var(--ink-3);margin-top:.2rem">💡 ${q.explanation}</div>
+            </div>`).join('')}
+        </div>`:'<p style="color:var(--moss,#5a7a3a);font-size:.9rem;margin-bottom:1rem">🎉 全部答對，太厲害了！</p>'}
         <button class="btn-retry" onclick="resetGrammarQuiz()">再測一次</button>
       </div>`;
   }
@@ -2346,30 +2593,35 @@ function setGQLevel(btn, level) {
 function startGrammarQuiz() {
   let pool = grammarQuizData;
   if (grammarQuizState.level!=='all') pool = pool.filter(q => q.level===grammarQuizState.level);
-  grammarQuizState.questions = shuffle([...pool]).slice(0, Math.min(10, pool.length));
+  grammarQuizState.questions = shuffle([...pool]).slice(0, Math.min(20, pool.length));
   grammarQuizState.idx=0; grammarQuizState.score=0; grammarQuizState.phase='quiz';
+  grammarQuizState.answers=[]; grammarQuizState.answered=false;
   renderGrammarQuiz();
 }
 
 function answerGrammarQuiz(optIdx) {
+  if (grammarQuizState.answers[grammarQuizState.idx] !== undefined) return; // already answered
   const q = grammarQuizState.questions[grammarQuizState.idx];
   const correct = optIdx === q.answer;
   if (correct) grammarQuizState.score++;
-  document.getElementById('gopt-'+optIdx).classList.add(correct?'correct':'wrong');
-  if (!correct) document.getElementById('gopt-'+q.answer).classList.add('correct');
-  document.querySelectorAll('#gq-options .btn-option').forEach(b => b.disabled=true);
-  const expEl = document.getElementById('gq-explanation');
-  expEl.style.display = 'block';
-  expEl.className = 'q-explanation';
-  expEl.textContent = '💡 '+q.explanation;
-  setTimeout(() => {
-    grammarQuizState.idx++;
-    if (grammarQuizState.idx>=grammarQuizState.questions.length) grammarQuizState.phase='result';
-    renderGrammarQuiz();
-  }, 2000);
+  grammarQuizState.answers[grammarQuizState.idx] = optIdx;
+  renderGrammarQuiz();
 }
 
-function resetGrammarQuiz() { grammarQuizState.phase='start'; renderGrammarQuiz(); }
+function navGrammarQuiz(dir) {
+  const newIdx = grammarQuizState.idx + dir;
+  if (dir > 0 && grammarQuizState.answers[grammarQuizState.idx] === undefined) return;
+  if (newIdx < 0) return;
+  if (newIdx >= grammarQuizState.questions.length) {
+    grammarQuizState.phase = 'result';
+    renderGrammarQuiz();
+    return;
+  }
+  grammarQuizState.idx = newIdx;
+  renderGrammarQuiz();
+}
+
+function resetGrammarQuiz() { grammarQuizState.phase='start'; grammarQuizState.answers=[]; renderGrammarQuiz(); }
 
 // ════════════════════════════════════════════
 // AUDIO

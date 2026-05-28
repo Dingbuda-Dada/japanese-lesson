@@ -133,9 +133,62 @@ section.active{display:block}
 .kd-vocab-jp{font-family:'Zen Old Mincho',serif;font-size:1.1rem;color:var(--ink)}
 .kd-vocab-r{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--ink-3)}
 .kd-vocab-cn{font-size:.82rem;color:var(--shu);font-weight:600}
-.kd-vocab-ex{font-size:.82rem;color:var(--ink-2);margin-top:.2rem;line-height:1.5;flex:1}
-.kd-vocab-ex-row{display:flex;align-items:flex-start;gap:.4rem;margin-top:.2rem}
-.kd-vocab-exr{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3)}
+.kd-vocab-ex{font-size:.82rem;color:var(--ink-2);line-height:1.6;display:inline}
+.kd-vocab-ex-row{margin-top:.3rem;line-height:1.8}
+.kd-vocab-exr{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);display:block;margin-top:.1rem}
+/* Pronunciation Guide */
+.pron-guide{max-width:800px}
+.pg-section{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.6rem;margin-bottom:1.2rem;box-shadow:var(--sh-sm)}
+.pg-section h3{font-family:'Zen Old Mincho',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.pg-section p{font-size:.88rem;color:var(--ink-2);line-height:1.75;margin-bottom:.6rem}
+.pg-table{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.84rem}
+.pg-table th{background:var(--washi-alt);padding:.5rem .8rem;text-align:left;border:1px solid var(--border);font-weight:600;color:var(--ink-2)}
+.pg-table td{padding:.5rem .8rem;border:1px solid var(--border);color:var(--ink);line-height:1.55}
+.pg-table td:first-child{font-family:'Zen Old Mincho',serif;font-size:1rem;font-weight:700;color:var(--shu);text-align:center;width:80px}
+.pg-tag{display:inline-block;padding:.12rem .5rem;border-radius:4px;font-size:.74rem;font-weight:600;font-family:'JetBrains Mono',monospace}
+.pg-tag.high{background:#E8F5E9;color:#1B4332;border:1px solid #A8D5A8}
+.pg-tag.low{background:#EBF5FB;color:#1A5276;border:1px solid #AED6F1}
+.pg-tag.fall{background:var(--shu-pale);color:#7B241C;border:1px solid var(--shu-border)}
+.pitch-demo{display:flex;align-items:flex-end;gap:2px;padding:.4rem 0;flex-wrap:wrap}
+.pitch-mora{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:28px}
+.pitch-kana{font-family:'Zen Old Mincho',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
+.pitch-dot{width:10px;height:10px;border-radius:50%;background:var(--shu)}
+.pitch-high{margin-bottom:0}.pitch-low{margin-bottom:18px}
+.pitch-line{height:2px;background:var(--shu);flex:1;align-self:flex-end;margin-bottom:5px}
+/* Particle Tab */
+.particle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+.particle-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}
+.particle-card-header{padding:.7rem 1rem;background:var(--washi-alt);display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--border)}
+.particle-sym{font-family:'Zen Old Mincho',serif;font-size:1.6rem;font-weight:900;color:var(--shu);min-width:32px}
+.particle-name{font-size:.88rem;font-weight:700;color:var(--ink)}
+.particle-body{padding:.8rem 1rem}
+.particle-use{font-size:.8rem;color:var(--ink-2);padding:.25rem 0;border-bottom:1px dashed var(--border);line-height:1.6}
+.particle-use:last-child{border-bottom:none}
+.particle-use strong{color:var(--ink);margin-right:.3rem}
+.particle-ex{font-family:'Zen Old Mincho',serif;font-size:.9rem;color:var(--shu);margin-top:.15rem}
+/* Verb usage examples */
+.verb-usage{margin-top:1.5rem;background:var(--washi-alt);border-radius:12px;padding:1rem 1.2rem}
+.verb-usage-title{font-size:.82rem;font-weight:700;color:var(--ink-2);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+.verb-usage-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem}
+.verb-usage-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem}
+.verb-usage-form{font-size:.72rem;font-weight:700;color:var(--shu);margin-bottom:.2rem}
+.verb-usage-jp{font-family:'Zen Old Mincho',serif;font-size:.9rem;color:var(--ink);line-height:1.5}
+.verb-usage-cn{font-size:.75rem;color:var(--ink-3)}
+/* AI Dialogue loading */
+.ai-dialogue-loading{text-align:center;padding:2.5rem;color:var(--ink-3);font-size:.9rem}
+.ai-spin{display:inline-block;width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--shu);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:.5rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.btn-ai-dice{padding:.3rem .7rem;border-radius:8px;background:var(--gold-bg);border:1px solid var(--gold-border);color:var(--gold);font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;flex-shrink:0}
+.btn-ai-dice:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-ai-dice.loading{opacity:.6;cursor:default;pointer-events:none}
+/* Accuracy badge */
+.pron-accuracy{display:inline-block;padding:.15rem .5rem;border-radius:6px;font-size:.78rem;font-weight:700;font-family:'JetBrains Mono',monospace;margin-left:.4rem}
+.pron-accuracy.great{background:#E8F5E9;color:#1B4332}
+.pron-accuracy.ok{background:#FEF9E7;color:#7D6608}
+.pron-accuracy.poor{background:var(--shu-pale);color:#7B241C}
+/* Record playback */
+.btn-rec-play{padding:.3rem .7rem;background:var(--washi-alt);border:1px solid var(--border);border-radius:6px;font-size:.75rem;color:var(--ink-3);cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem}
+.btn-rec-play:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 /* API key modal */
 .api-modal-overlay{position:fixed;inset:0;background:rgba(28,28,30,.45);z-index:2000;display:flex;align-items:center;justify-content:center}
 .api-modal{background:var(--surface);border-radius:16px;padding:2rem;max-width:420px;width:92%;box-shadow:0 24px 64px rgba(0,0,0,.18)}
@@ -247,7 +300,8 @@ section.active{display:block}
 .scenario-card.active{border-color:var(--shu);background:var(--shu-pale);box-shadow:0 2px 8px rgba(192,57,43,.15)}
 .sc-icon{font-size:1.6rem;margin-bottom:.4rem;line-height:1}
 .sc-title{font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.2rem}
-.sc-desc{font-size:.74rem;color:var(--ink-3);line-height:1.5}
+.sc-desc{font-size:.74rem;color:var(--ink-3);line-height:1.5;margin-bottom:.5rem}
+.gram-key{font-weight:700;color:var(--gold)}
 .dialogue-panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--sh-md)}
 .dialogue-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;background:var(--washi-alt)}
 .dialogue-title{font-family:'Zen Old Mincho',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
@@ -424,12 +478,121 @@ section.active{display:block}
       <div class="section-title-rule"></div>
       <p class="section-desc">點擊任意假名，查看發音、單詞與例句</p>
     </div>
-    <div class="kana-toggle">
-      <button class="btn-kana-type active" onclick="setKanaType(this,'hiragana')">平假名 ひらがな</button>
-      <button class="btn-kana-type" onclick="setKanaType(this,'katakana')">片假名 カタカナ</button>
+    <div class="inner-tabs">
+      <button class="inner-tab active" id="ktab-grid" onclick="showKanaPane('grid',this)">あ 五十音表</button>
+      <button class="inner-tab" id="ktab-guide" onclick="showKanaPane('guide',this)">🔉 發音指南</button>
     </div>
-    <div id="kanaDetail" class="kana-detail"></div>
-    <div id="kanaGrid"></div>
+    <div id="kp-grid" class="inner-pane active">
+      <div class="kana-toggle">
+        <button class="btn-kana-type active" onclick="setKanaType(this,'hiragana')">平假名 ひらがな</button>
+        <button class="btn-kana-type" onclick="setKanaType(this,'katakana')">片假名 カタカナ</button>
+      </div>
+      <div id="kanaDetail" class="kana-detail"></div>
+      <div id="kanaGrid"></div>
+    </div>
+    <div id="kp-guide" class="inner-pane">
+      <div class="pron-guide">
+
+        <div class="pg-section">
+          <h3>🎵 日語音調（高低アクセント）</h3>
+          <p>日語使用「音高重音」：每個音節（拍）有<strong>高（H）</strong>或<strong>低（L）</strong>兩種音高。東京標準語有四類音調型：</p>
+          <table class="pg-table">
+            <tr><th>類型</th><th>說明</th><th>例詞</th><th>音高示意</th></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">平板型</td><td>第一拍低，之後全高，後面助詞也保持高</td><td>みず（水）、はし（箸）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高高高…</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">頭高型</td><td>第一拍高，之後全低（下降在第1拍後）</td><td>あめ（雨）、かみ（紙）</td><td><span class="pg-tag high">高</span>→<span class="pg-tag low">低低低…</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">中高型</td><td>第一拍低，中間某拍後下降</td><td>たまご（卵）、こころ（心）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高</span>→<span class="pg-tag fall">降↓</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">尾高型</td><td>第一拍低，之後全高，助詞後才下降</td><td>おとこ（男）、はし（橋）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高高</span>→<span class="pg-tag fall">助詞↓</span></td></tr>
+          </table>
+          <p style="font-size:.82rem;color:var(--ink-3)">💡 同形假名的音調不同，意思就不同！例如：<strong>はし</strong> — 「橋」（尾高型 LHH）vs「箸」（平板型 LHH助詞不降）vs「端」（頭高型 HL）</p>
+          <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:.8rem">
+            <div>
+              <div style="font-size:.78rem;color:var(--ink-3);margin-bottom:.3rem">あめ（雨）頭高型</div>
+              <div class="pitch-demo">
+                <div class="pitch-mora"><div class="pitch-dot pitch-high"></div><div class="pitch-kana">あ</div></div>
+                <div class="pitch-line" style="height:2px;background:var(--shu);width:20px;align-self:flex-end;margin-bottom:14px"></div>
+                <div class="pitch-mora"><div style="height:10px"></div><div class="pitch-dot" style="background:var(--ink-3)"></div><div class="pitch-kana">め</div></div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:.78rem;color:var(--ink-3);margin-bottom:.3rem">あめ（飴）平板型</div>
+              <div class="pitch-demo">
+                <div class="pitch-mora"><div style="height:10px"></div><div class="pitch-dot" style="background:var(--ink-3)"></div><div class="pitch-kana">あ</div></div>
+                <div class="pitch-line" style="height:2px;background:var(--shu);width:20px;align-self:flex-start;margin-top:14px"></div>
+                <div class="pitch-mora"><div class="pitch-dot pitch-high"></div><div class="pitch-kana">め</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pg-section">
+          <h3>🔤 清音・濁音・半濁音</h3>
+          <p>在基本清音的基礎上，添加符號可改變發音：</p>
+          <table class="pg-table">
+            <tr><th>種類</th><th>符號</th><th>變化說明</th><th>例子</th></tr>
+            <tr><td>清音</td><td>無</td><td>基本無聲（或輕聲）輔音</td><td>か・さ・た・は行</td></tr>
+            <tr><td>濁音</td><td>濁點 ゛</td><td>聲帶振動，變為有聲輔音</td><td>か→が（k→g）、さ→ざ（s→z）、た→だ（t→d）、は→ば（h→b）</td></tr>
+            <tr><td>半濁音</td><td>半濁點 ゜</td><td>は行變為雙唇音 p</td><td>は→ぱ（h→p）、ひ→ぴ、ふ→ぷ、へ→ぺ、ほ→ぽ</td></tr>
+          </table>
+          <p style="font-size:.82rem;color:var(--ink-3)">💡 <strong>連濁（れんだく）</strong>：兩個詞合併時，後詞第一個音節的清音有時自動變濁音。例：はな（花）＋み（見）→ はなみ（花見）；やま（山）＋かわ（川）→ やまがわ（山川）</p>
+        </div>
+
+        <div class="pg-section">
+          <h3>⏸ 促音（っ）— 雙子音</h3>
+          <p><strong>促音「っ」（小寫）</strong>代表停頓一拍，相當於後面輔音被「加倍」。發音時在促音處短暫停頓（約一拍的時間），再發後面的音。</p>
+          <table class="pg-table">
+            <tr><th>例詞</th><th>羅馬字</th><th>中文</th><th>說明</th></tr>
+            <tr><td>きって</td><td>kitte</td><td>郵票</td><td>t+t，停頓後發t音</td></tr>
+            <tr><td>ざっし</td><td>zasshi</td><td>雜誌</td><td>ss，停頓後發sh音</td></tr>
+            <tr><td>にっき</td><td>nikki</td><td>日記</td><td>kk，停頓後發k音</td></tr>
+            <tr><td>まって</td><td>matte</td><td>等一下</td><td>tt，停頓後發t音</td></tr>
+          </table>
+          <p style="font-size:.82rem;color:var(--ink-3)">💡 促音如果寫錯位置，意思完全不同！如：きて（來）vs きって（郵票）</p>
+        </div>
+
+        <div class="pg-section">
+          <h3>📏 長音（伸ばす音）— 拉長母音</h3>
+          <p>日語母音可以延長，相當於發音時間加倍（約兩拍）：</p>
+          <table class="pg-table">
+            <tr><th>母音</th><th>平假名寫法</th><th>片假名寫法</th><th>例詞</th></tr>
+            <tr><td>あ段長音</td><td>あ→ああ（如：おかあさん）</td><td>ア→アー</td><td>おかあさん（母親）、ラーメン</td></tr>
+            <tr><td>い段長音</td><td>い→いい（如：おにいさん）</td><td>イ→イー</td><td>おにいさん（哥哥）、タクシー</td></tr>
+            <tr><td>う段長音</td><td>う→うう（如：くうき）</td><td>ウ→ウー</td><td>くうき（空氣）、スーパー</td></tr>
+            <tr><td>え段長音</td><td>え→えい/ええ</td><td>エ→エー</td><td>えいご（英語）、ケーキ</td></tr>
+            <tr><td>お段長音</td><td>お→おう/おお</td><td>オ→オー</td><td>おおきい（大）、コーヒー</td></tr>
+          </table>
+          <p style="font-size:.82rem;color:var(--ink-3)">💡 片假名的長音用「ー」（長音符）表示，羅馬字通常用重音符號或雙母音表示（如：ā、ū、ō）</p>
+        </div>
+
+        <div class="pg-section">
+          <h3>🔀 拗音（ようおん）— 複合音</h3>
+          <p><strong>拗音</strong>是將い段假名與小寫「ゃ・ゅ・ょ」組合，讀成一拍（不是兩拍）：</p>
+          <table class="pg-table">
+            <tr><th>組合</th><th>發音</th><th>例詞</th><th>意思</th></tr>
+            <tr><td>きゃ・きゅ・きょ</td><td>kya / kyu / kyo</td><td>きゅうり</td><td>小黃瓜</td></tr>
+            <tr><td>しゃ・しゅ・しょ</td><td>sha / shu / sho</td><td>しゃしん・しょくじ</td><td>照片・餐飲</td></tr>
+            <tr><td>ちゃ・ちゅ・ちょ</td><td>cha / chu / cho</td><td>おちゃ</td><td>茶</td></tr>
+            <tr><td>にゃ・にゅ・にょ</td><td>nya / nyu / nyo</td><td>にゅうがく</td><td>入學</td></tr>
+            <tr><td>ひゃ・ひゅ・ひょ</td><td>hya / hyu / hyo</td><td>ひょうじゅん</td><td>標準</td></tr>
+            <tr><td>みゃ・みゅ・みょ</td><td>mya / myu / myo</td><td>みょうじ</td><td>姓氏</td></tr>
+            <tr><td>りゃ・りゅ・りょ</td><td>rya / ryu / ryo</td><td>りょこう</td><td>旅行</td></tr>
+          </table>
+        </div>
+
+        <div class="pg-section">
+          <h3>👃 撥音（ん）— 鼻音 N</h3>
+          <p><strong>ん</strong>是日語唯一一個單獨成音節的輔音，發音隨後接音節變化：</p>
+          <table class="pg-table">
+            <tr><th>後接音</th><th>ん的發音</th><th>例詞</th></tr>
+            <tr><td>ば・ぱ・ま行（雙唇音前）</td><td>m（雙唇鼻音）</td><td>さんぽ → sam-po</td></tr>
+            <tr><td>な・に行（齒齦音前）</td><td>n（齒齦鼻音）</td><td>さんない → san-nai</td></tr>
+            <tr><td>か・が行（軟顎音前）</td><td>ng（軟顎鼻音）</td><td>さんかく → saŋ-kaku</td></tr>
+            <tr><td>文末・母音前・ら行前</td><td>ñ（鼻化元音）</td><td>ほん → hoñ</td></tr>
+          </table>
+          <p style="font-size:.82rem;color:var(--ink-3)">💡 ん獨立成一拍，所以「さんぽ」是3拍（sa-n-po），「かんじ」是4拍（ka-n-ji）</p>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
@@ -443,6 +606,7 @@ section.active{display:block}
     </div>
     <div class="inner-tabs">
       <button class="inner-tab active" onclick="showGrammarPane('list',this)">📋 文法列表</button>
+      <button class="inner-tab" onclick="showGrammarPane('particle',this)">🔤 助詞詳解</button>
       <button class="inner-tab" onclick="showGrammarPane('verb',this)">🔄 動詞變化</button>
     </div>
     <div id="gp-list" class="inner-pane active">
@@ -455,6 +619,10 @@ section.active{display:block}
         <button class="btn-level" data-level="N1" onclick="filterGrammar(this,'N1')">N1</button>
       </div>
       <div id="grammarList"></div>
+    </div>
+    <div id="gp-particle" class="inner-pane">
+      <p style="font-size:.88rem;color:var(--ink-3);margin-bottom:1.2rem;line-height:1.7">助詞是日語句子的「膠水」，標記各成分的語法關係。每個助詞都有其核心功能，以下是最重要的10個助詞詳解。</p>
+      <div class="particle-grid" id="particleGrid"></div>
     </div>
     <div id="gp-verb" class="inner-pane">
       <div id="verbConjContainer"></div>
@@ -470,10 +638,7 @@ section.active{display:block}
       <div class="section-title-rule"></div>
       <p class="section-desc">選擇情景，學習日常日文對話</p>
     </div>
-    <div class="conv-controls">
-      <button class="btn-random-scene" onclick="pickRandomScenario()">🎲 隨機情境</button>
-    </div>
-    <div class="mic-banner hidden" id="convMicBanner">🎤 需要麥克風權限才能使用跟讀練習 <button class="btn-mic-req" onclick="requestMicPermission('convMicBanner')">授權麥克風</button></div>
+    <div class="mic-banner hidden" id="convMicBanner">🎤 需要麥克風權限 <button class="btn-mic-req" onclick="requestMicPermission('convMicBanner')">授權麥克風</button></div>
     <div class="scenario-grid" id="scenarioGrid"></div>
     <div id="dialoguePanel"></div>
   </div>
@@ -1727,6 +1892,49 @@ const grammarQuizData = [
    options:['ながら','て','つつ','ので'],answer:2,explanation:'「〜つつも」：書面語，雖然…卻…（對比/讓步）。疲れつつも走り続けた＝雖然疲憊卻繼續跑。比ながら更偏書面。'},
   {level:'N1',q:'「予算の___、計画を縮小せざるを得ない。」',blank:true,sentence:'予算の___、計画を縮小せざるを得ない。',
    options:['都合上','せいで','おかげで','ために'],answer:0,explanation:'「〜の都合上」：由於…的緣故（常用於說明不得不這樣做的客觀理由）。予算の都合上＝由於預算的緣故。'},
+  // ── 更多 N5 ──
+  {level:'N5',q:'「あの人___だれですか。」正確助詞？',blank:true,sentence:'あの人___だれですか。',
+   options:['は','が','を','で'],answer:0,explanation:'「は」標記主題，詢問「那個人是誰」時主題用は。「が」用於強調新信息主語，如「誰が来た」。'},
+  {level:'N5',q:'「花屋___花を買いました。」花店是場所，用哪個助詞？',blank:true,sentence:'花屋___花を買いました。',
+   options:['で','に','を','へ'],answer:0,explanation:'「で」表示動作（買）發生的場所。「に」表示存在場所（ある・いる）。花屋で花を買う＝在花店買花。'},
+  {level:'N5',q:'「A：コーヒーと紅茶と___がいいですか。B：コーヒーをください。」',blank:false,
+   options:['どちら','どれ','どこ','どうやって'],answer:0,explanation:'「どちら」用於二選一的禮貌詢問（哪個）。「どれ」是三個以上的選擇。'},
+  {level:'N5',q:'「もう___ですか。 — いいえ、まだです。」（還沒）',blank:false,
+   options:['終わった','終わります','終わって','終わる'],answer:0,explanation:'「もう〜たですか」詢問是否已完成。回答「まだです」表示「還沒」。もう終わったか＝已經結束了嗎？'},
+  // ── 更多 N4 ──
+  {level:'N4',q:'「先生は学生___作文を書かせました。」助詞？',blank:true,sentence:'先生は学生___作文を書かせました。',
+   options:['に','を','が','で'],answer:0,explanation:'使役句型中，被使役者（自願做）用「に」。強制（不自願）時用「を」。学生に書かせる＝讓學生（自行）寫。'},
+  {level:'N4',q:'「勉強する___、音楽を聞かないほうがいい。」目的條件',blank:true,sentence:'勉強する___、音楽を聞かないほうがいい。',
+   options:['なら','ので','から','ために'],answer:0,explanation:'「〜なら」：以對方前提為條件的建議。「勉強するなら」＝如果你要學習的話，建議不要聽音樂。'},
+  {level:'N4',q:'「この仕事は田中さん___頼もう。」只有田中能做',blank:true,sentence:'この仕事は田中さん___頼もう。',
+   options:['に','を','が','で'],answer:0,explanation:'「〜に頼む」：向某人拜託、委託。田中さんに頼む＝拜託田中先生。（に標記拜託的對象）'},
+  {level:'N4',q:'「この映画は何回見___飽きません。」怎麼看都不膩',blank:true,sentence:'この映画は何回見___飽きません。',
+   options:['ても','たら','れば','から'],answer:0,explanation:'「〜ても」：即使…也…。何回見ても＝不管看幾次都。表示對無論如何的條件都成立的結果。'},
+  // ── 更多 N3 ──
+  {level:'N3',q:'「先生に言われた___、宿題をやりました。」（被說之後）',blank:true,sentence:'先生に言われた___、宿題をやりました。',
+   options:['ので','から','て','ために'],answer:0,explanation:'「〜ので」：表示客觀原因。受身形（言われた）接ので，語氣比「から」更正式禮貌。'},
+  {level:'N3',q:'「彼は病気___、学校を休みました。」客觀原因',blank:true,sentence:'彼は病気___、学校を休みました。',
+   options:['なので','だから','ので','けれど'],answer:0,explanation:'名詞「病気」後接ので時需加「な」→ 病気なので。「ので」表客觀原因，比「から」更禮貌正式。'},
+  {level:'N3',q:'「〜てほしい」表示什麼意思？',blank:false,
+   options:['希望別人做某事','自己想做某事','做某事比較好','已經做了某事'],answer:0,explanation:'「〜てほしい」：希望（別人）做…。例：もっと練習してほしい＝希望你多練習。「〜たい」是自己想做。'},
+  {level:'N3',q:'「彼女は歌___踊ることが得意です。」どちら',blank:true,sentence:'彼女は歌___踊ることが得意です。',
+   options:['ったり','いながら','って','いて'],answer:0,explanation:'「〜たり〜たりする」列舉多個動作。歌ったり踊ったりする＝又唱歌又跳舞等各種活動。'},
+  // ── 更多 N2 ──
+  {level:'N2',q:'「彼が来る___を楽しみにしています。」',blank:true,sentence:'彼が来る___を楽しみにしています。',
+   options:['こと','の','もの','はず'],answer:0,explanation:'「〜ことを楽しみにする」：期待某事的發生（固定搭配）。「楽しみにする」前接こと，不接の。'},
+  {level:'N2',q:'「せっかく来た___、もっとゆっくりしていけばよかった。」',blank:true,sentence:'せっかく来た___、もっとゆっくりしていけばよかった。',
+   options:['のに','から','ので','ために'],answer:0,explanation:'「せっかく〜のに」：難得…卻（遺憾）。せっかく来たのに＝難得來了，卻（沒好好待著）。表示惋惜。'},
+  {level:'N2',q:'「田中さんは部長の話を聞きながら、メモ___いました。」',blank:true,sentence:'田中さんは部長の話を聞きながら、メモ___いました。',
+   options:['を取って','が取って','で取って','に取って'],answer:0,explanation:'「メモを取る」（記筆記）是固定搭配。を取る→て形：を取って。メモを取っていた＝正在做筆記。'},
+  // ── 更多 N1 ──
+  {level:'N1',q:'「いくら探し___、見つかりませんでした。」',blank:true,sentence:'いくら探し___、見つかりませんでした。',
+   options:['ても','から','たから','ながら'],answer:0,explanation:'「いくら〜ても」：不管多麼…也（不）。いくら探しても見つからない＝不管怎麼找也找不到。'},
+  {level:'N1',q:'「上司の指示___、このプロジェクトを進めます。」',blank:true,sentence:'上司の指示___、このプロジェクトを進めます。',
+   options:['に従って','に対して','に応じて','によって'],answer:0,explanation:'「〜に従って」：按照…、遵照…。指示に従う＝遵照指示。「に応じて」是根據情況調整，「によって」是由…決定/手段。'},
+  {level:'N1',q:'「この法律が___以上、従わなければなりません。」',blank:true,sentence:'この法律が___以上、従わなければなりません。',
+   options:['ある','あった','あり','あって'],answer:0,explanation:'「〜以上（は）」：既然…就必須。動詞辞書形＋以上。法律がある以上＝既然有這條法律（就必須遵守）。'},
+  {level:'N1',q:'「彼の実力___、必ず合格できるはずだ。」',blank:true,sentence:'彼の実力___、必ず合格できるはずだ。',
+   options:['なら','なので','だから','ために'],answer:0,explanation:'「〜なら」：如果是…的話（以既知信息為前提）。彼の実力なら＝以他的實力的話，表示說話者基於對方能力的判斷。'},
 ];
 
 // ════════════════════════════════════════════
@@ -1765,6 +1973,13 @@ function showSection(name) {
   if (name==='home') { buildCatRow(); renderPhrases(); }
 }
 
+function showKanaPane(pane, btn) {
+  document.querySelectorAll('#sec-kana .inner-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#sec-kana .inner-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('kp-'+pane).classList.add('active');
+}
+
 function showGrammarPane(pane, btn) {
   document.querySelectorAll('#sec-grammar .inner-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('#sec-grammar .inner-pane').forEach(p => p.classList.remove('active'));
@@ -1772,6 +1987,7 @@ function showGrammarPane(pane, btn) {
   document.getElementById('gp-'+pane).classList.add('active');
   currentGrammarPane = pane;
   if (pane==='verb' && !document.getElementById('verbConjContainer').children.length) renderVerbConj();
+  if (pane==='particle' && !document.getElementById('particleGrid').children.length) renderParticles();
 }
 
 function showQuizPane(pane, btn) {
@@ -2002,10 +2218,9 @@ function showKanaDetail(rowIdx, charIdx) {
             <button class="btn-ex-audio" onclick="speak('${escJs(v.w.replace(/（[^）]*）/g,''))}',this)">🔊</button>
           </div>
           <div class="kd-vocab-ex-row">
-            <div class="kd-vocab-ex">${v.ex}</div>
-            <button class="btn-ex-audio" onclick="speak('${escJs(v.ex.replace(/（[^）]*）/g,''))}',this)" title="朗讀例句">🔊</button>
+            <span class="kd-vocab-ex">${v.ex}</span><button class="btn-ex-audio" onclick="speak('${escJs(v.ex.replace(/（[^）]*）/g,''))}',this)" style="vertical-align:middle;margin-left:.4rem" title="朗讀例句">🔊</button>
+            <span class="kd-vocab-exr">${v.exR} — ${v.exM}</span>
           </div>
-          <div class="kd-vocab-exr">${v.exR} — ${v.exM}</div>
         </div>`).join('')}
     </div>` : '<p style="color:var(--ink-3);font-size:.85rem;margin-top:.5rem">詞彙資料建置中…</p>';
 
@@ -2025,6 +2240,83 @@ function showKanaDetail(rowIdx, charIdx) {
     </div>
     ${vocabHTML}`;
   detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ════════════════════════════════════════════
+// PARTICLE DATA & RENDERING
+// ════════════════════════════════════════════
+const particleData = [
+  {sym:'は',name:'主題助詞',uses:[
+    {label:'主題標記',ex:'私は学生です。',cn:'我是學生。（は標記主題）'},
+    {label:'對比強調',ex:'魚は食べますが、肉は食べません。',cn:'魚我吃，肉我不吃。（は表對比）'},
+    {label:'舊信息',ex:'「田中さんは？」「田中さんは来ません。」',cn:'田中先生是舊話題，接は'},
+  ]},
+  {sym:'が',name:'主格・強調助詞',uses:[
+    {label:'主語標記（新信息）',ex:'誰が来ましたか。',cn:'誰來了？（が強調誰）'},
+    {label:'能力/好惡的對象',ex:'日本語が好きです。',cn:'喜歡日語。（が接好き・嫌い・上手）'},
+    {label:'焦點強調',ex:'彼女が一番きれいです。',cn:'她最漂亮。（強調は她）'},
+  ]},
+  {sym:'を',name:'目的格助詞',uses:[
+    {label:'動詞的直接受詞',ex:'コーヒーを飲みます。',cn:'喝咖啡。（を＋他動詞）'},
+    {label:'經過的場所',ex:'公園を歩きます。',cn:'在公園走路。（を＋移動動詞）'},
+    {label:'離開的起點',ex:'駅を出ます。',cn:'出車站。（を＋出る/離れる）'},
+  ]},
+  {sym:'に',name:'方向・存在・時間助詞',uses:[
+    {label:'存在場所（いる/ある）',ex:'机の上に本があります。',cn:'桌上有書。'},
+    {label:'移動目的地',ex:'東京に行きます。',cn:'去東京。'},
+    {label:'時間點',ex:'7時に起きます。',cn:'7點起床。'},
+    {label:'間接受詞（給予）',ex:'友達にプレゼントをあげます。',cn:'給朋友禮物。'},
+    {label:'動作施者（受身）',ex:'先生に褒められました。',cn:'被老師稱讚。'},
+  ]},
+  {sym:'で',name:'場所・手段・原因助詞',uses:[
+    {label:'動作場所',ex:'図書館で勉強します。',cn:'在圖書館學習。'},
+    {label:'交通工具/手段',ex:'電車で行きます。',cn:'搭電車去。'},
+    {label:'材料/方法',ex:'日本語で話してください。',cn:'請用日語說話。'},
+    {label:'原因（名詞）',ex:'台風で電車が止まりました。',cn:'因為颱風電車停了。'},
+  ]},
+  {sym:'へ',name:'方向助詞',uses:[
+    {label:'移動方向（比に更強調方向）',ex:'日本へ行きます。',cn:'前往日本。（へ強調方向）'},
+    {label:'可與に互換但略有語感差異',ex:'駅へ向かいます。',cn:'朝車站方向前進。'},
+  ]},
+  {sym:'と',name:'共同・引用・條件助詞',uses:[
+    {label:'和（共同行動）',ex:'友達と映画を見ます。',cn:'和朋友看電影。'},
+    {label:'引用内容',ex:'「行きます」と言いました。',cn:'說了「我去」。'},
+    {label:'自然條件（と型）',ex:'春になると、桜が咲きます。',cn:'一到春天，櫻花就開。'},
+  ]},
+  {sym:'も',name:'追加・並列助詞',uses:[
+    {label:'也（追加）',ex:'私も行きます。',cn:'我也去。'},
+    {label:'全部/一個也沒有',ex:'誰も来ませんでした。',cn:'一個人也沒來。（も＋否定）'},
+    {label:'強調數量',ex:'100円もしません。',cn:'連100日圓都不到。'},
+  ]},
+  {sym:'から',name:'起點・原因助詞',uses:[
+    {label:'空間起點',ex:'東京から大阪まで行きます。',cn:'從東京到大阪。'},
+    {label:'時間起點',ex:'9時から会議です。',cn:'從9點開始開會。'},
+    {label:'原因/理由（主觀）',ex:'忙しいから、行けません。',cn:'因為忙，去不了。（から比ので主觀）'},
+  ]},
+  {sym:'まで',name:'終點助詞',uses:[
+    {label:'空間終點',ex:'駅まで歩きます。',cn:'走到車站。'},
+    {label:'時間終點',ex:'5時まで働きます。',cn:'工作到5點。'},
+    {label:'範圍/程度',ex:'こんなことまでするんですか。',cn:'連這種事也做嗎？（強調程度）'},
+  ]},
+];
+
+function renderParticles() {
+  const grid = document.getElementById('particleGrid');
+  grid.innerHTML = particleData.map(p => `
+    <div class="particle-card">
+      <div class="particle-card-header">
+        <span class="particle-sym">${p.sym}</span>
+        <span class="particle-name">${p.name}</span>
+      </div>
+      <div class="particle-body">
+        ${p.uses.map(u => `
+          <div class="particle-use">
+            <strong>${u.label}</strong>
+            <div class="particle-ex" onclick="speak('${escJs(u.ex)}',null)" style="cursor:pointer" title="點擊發音">🔊 ${u.ex}</div>
+            <div style="font-size:.75rem;color:var(--ink-3);margin-top:.1rem">${u.cn}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
 }
 
 // ════════════════════════════════════════════
@@ -2048,7 +2340,6 @@ function renderGrammar() {
           <span class="ex-label">例句：</span>
           <button class="btn-rnd" onclick="showGExamples('${g.id}',3)">3句</button>
           <button class="btn-rnd active" onclick="showGExamples('${g.id}',99)">全部</button>
-          <button class="btn-dice" onclick="diceExamples('${g.id}')" title="骰子：不重複隨機">🎲 骰子</button>
         </div>
         <div id="exlist-${g.id}">
           ${g.examples.map(ex => exItemHTML(ex,false)).join('')}
@@ -2101,6 +2392,17 @@ function diceExamples(id) {
 // ════════════════════════════════════════════
 // VERB CONJUGATION
 // ════════════════════════════════════════════
+const verbFormExamples = {
+  'ます形': [{jp:'毎日日本語を勉強します。',cn:'每天學習日語。（ます形：現在/習慣）'},{jp:'明日学校に行きます。',cn:'明天去學校。（ます形：未來）'}],
+  'て形':   [{jp:'本を読んで、寝ました。',cn:'看了書，然後睡覺了。（て形：動作順序）'},{jp:'音楽を聞いて、リラックスします。',cn:'聽音樂放鬆。（て形：動作連接）'}],
+  'た形':   [{jp:'昨日映画を見ました。',cn:'昨天看了電影。（た形：過去完了）'},{jp:'日本に行ったことがあります。',cn:'有去過日本。（〜たことがある：經驗）'}],
+  'ない形':  [{jp:'明日は学校に行きません。',cn:'明天不去學校。（ない形否定）'},{jp:'食べないでください。',cn:'請不要吃。（ないで：禁止請求）'}],
+  '可能形':  [{jp:'日本語が話せます。',cn:'能說日語。（可能形）'},{jp:'一人でできますか。',cn:'一個人能做嗎？（できる：能夠）'}],
+  '受身形':  [{jp:'先生に褒められました。',cn:'被老師稱讚了。（受身：被動）'},{jp:'友達に秘密を話されました。',cn:'被朋友說出了秘密。（迷惑受身）'}],
+  '使役形':  [{jp:'母は子供に野菜を食べさせます。',cn:'媽媽讓孩子吃蔬菜。（使役：讓～做）'},{jp:'部長は私に残業させました。',cn:'部長讓我加班了。（使役：命令）'}],
+  '命令形':  [{jp:'早く来い！（話し言葉・強い命令）',cn:'快來！（命令形：強烈命令，口語）'},{jp:'もっと練習しろ。',cn:'多練習！（命令形：強烈要求）'}],
+};
+
 function renderVerbConj() {
   const con = document.getElementById('verbConjContainer');
   con.innerHTML = verbGroups.map(grp => `
@@ -2119,10 +2421,23 @@ function renderVerbConj() {
             ${grp.verbs.map(v => `
               <tr>
                 <td>${v.dict}（${v.m}）<span class="v-form-header">${v.r}</span></td>
-                ${v.forms.map((f,i) => `<td onclick="speak('${escJs(f)}',null)" style="cursor:pointer" title="點擊發音">${f}</td>`).join('')}
+                ${v.forms.map(f => `<td onclick="speak('${escJs(f)}',null)" style="cursor:pointer" title="點擊發音">${f}</td>`).join('')}
               </tr>`).join('')}
           </tbody>
         </table>
+      </div>
+      <div class="verb-usage">
+        <div class="verb-usage-title">📖 各活用形的實際用法範例</div>
+        <div class="verb-usage-grid">
+          ${Object.entries(verbFormExamples).map(([form,exs])=>`
+            <div class="verb-usage-item">
+              <div class="verb-usage-form">${form}</div>
+              ${exs.map(e=>`
+                <div class="verb-usage-jp" onclick="speak('${escJs(e.jp.split('（')[0].trim())}',null)" style="cursor:pointer" title="點擊發音">${e.jp}</div>
+                <div class="verb-usage-cn">${e.cn}</div>
+              `).join('')}
+            </div>`).join('')}
+        </div>
       </div>
     </div>`).join('');
 }
@@ -2133,10 +2448,11 @@ function renderVerbConj() {
 function renderConversation() {
   const grid = document.getElementById('scenarioGrid');
   grid.innerHTML = conversationScenarios.map((s,i) => `
-    <div class="scenario-card${i===0?' active':''}" onclick="selectScenario(${i},this)">
+    <div class="scenario-card${i===0?' active':''}" id="sc-card-${i}" onclick="selectScenario(${i},this)">
       <div class="sc-icon">${s.icon}</div>
       <div class="sc-title">${s.title}</div>
       <div class="sc-desc">${s.desc}</div>
+      <button class="btn-ai-dice" id="sc-dice-${i}" onclick="event.stopPropagation();generateAIDialogue(${i})" title="AI 生成新對話">🎲 AI 新對話</button>
     </div>`).join('');
   showDialogue(0);
 }
@@ -2148,11 +2464,78 @@ function selectScenario(idx, el) {
   showDialogue(idx);
 }
 
-function pickRandomScenario() {
-  const idx = Math.floor(Math.random() * conversationScenarios.length);
-  const cards = document.querySelectorAll('.scenario-card');
-  if (cards.length) selectScenario(idx, cards[idx]);
-  else { currentScenario = idx; showDialogue(idx); }
+async function generateAIDialogue(scenIdx) {
+  const sc = conversationScenarios[scenIdx];
+  const apiKey = localStorage.getItem('groq_api_key');
+  if (!apiKey) { alert('AI 金鑰未設定，無法生成對話。'); return; }
+  const diceBtn = document.getElementById('sc-dice-'+scenIdx);
+  if (diceBtn) { diceBtn.classList.add('loading'); diceBtn.textContent='⏳ 生成中…'; }
+  const panel = document.getElementById('dialoguePanel');
+  panel.innerHTML = `<div class="ai-dialogue-loading"><span class="ai-spin"></span>AI 正在為「${sc.title}」情境生成全新對話…</div>`;
+  try {
+    const cnt = incrementUsage();
+    if (cnt > 14400) { panel.innerHTML='<p style="color:var(--shu);padding:1rem">今日 AI 額度已用完，明天再試。</p>'; return; }
+    const prompt = `你是日語教師。請為「${sc.title}（${sc.desc}）」這個情境，用丁寧體（です・ます）創作一段自然的日常對話（6~8句）。
+每一句請包含：speaker（說話者，用中文角色名如「A」「B」「店員」「客」等）、j（日文句子）、r（羅馬字讀音）、c（中文翻譯）、grammar（1個文法要點的說明，格式：「文法名稱：說明」）。
+只輸出純JSON陣列，不加任何markdown或說明文字。
+格式：[{"speaker":"A","j":"...","r":"...","c":"...","grammar":"..."},...]`;
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
+      body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[
+        {role:'system',content:'你是日語教師，只輸出純JSON陣列，不輸出任何說明或markdown。'},
+        {role:'user',content:prompt}
+      ],max_tokens:2048,temperature:0.85})
+    });
+    const data = await res.json();
+    const raw = data.choices[0].message.content.trim();
+    const match = raw.match(/\[[\s\S]*\]/);
+    if (!match) throw new Error('Parse error');
+    const dialogues = JSON.parse(match[0]);
+    // temporarily override the scenario dialogues and show
+    showAIDialogue(scenIdx, sc, dialogues);
+  } catch(e) {
+    panel.innerHTML = `<p style="color:var(--shu);padding:1rem">AI 生成失敗，請重試。（${e.message}）</p>`;
+  } finally {
+    if (diceBtn) { diceBtn.classList.remove('loading'); diceBtn.textContent='🎲 AI 新對話'; }
+  }
+}
+
+function showAIDialogue(scenIdx, sc, dialogues) {
+  const panel = document.getElementById('dialoguePanel');
+  panel.innerHTML = `
+    <div class="dialogue-panel">
+      <div class="dialogue-header">
+        <span class="dialogue-title">${sc.icon} ${sc.title} — AI 生成版</span>
+        <button class="btn-play-all" onclick="playCustomDialogue(${JSON.stringify(dialogues).replace(/"/g,'&quot;')})">▶ 全部播放</button>
+      </div>
+      <div class="dialogue-body">
+        ${dialogues.map((d,i) => {
+          const isRight = d.speaker==='A' || d.speaker==='客';
+          return `
+          <div class="bubble-row${isRight?' side-right':''}">
+            <div class="speaker-avatar ${isRight?'avatar-right':'avatar-left'}">${d.speaker}</div>
+            <div class="bubble-content">
+              <div class="bubble ${isRight?'bubble-right':'bubble-left'}">
+                <div class="bubble-jp">${d.j}
+                  <button class="btn-ex-audio" onclick="speak('${escJs(d.j)}',this)">🔊</button>
+                </div>
+                <div class="bubble-romaji">${d.r}</div>
+                <div class="bubble-cn">${d.c}</div>
+                ${d.grammar?`<div class="bubble-grammar">📝 ${d.grammar}</div>`:''}
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+async function playCustomDialogue(dialogues) {
+  for (const d of dialogues) {
+    await speakAsync(d.j);
+    await delay(300);
+  }
 }
 
 function showDialogue(idx) {
@@ -2167,6 +2550,13 @@ function showDialogue(idx) {
       <div class="dialogue-body">
         ${sc.dialogues.map((d,i) => {
           const isRight = d.speaker==='A' || d.speaker==='客';
+          // parse grammar explanation into structured display
+          const grammarParts = d.grammar ? d.grammar.split('；') : [];
+          const grammarHTML = grammarParts.map(g => {
+            const colon = g.indexOf('：');
+            if (colon > -1) return `<span class="gram-key">${g.slice(0,colon+1)}</span>${g.slice(colon+1)}`;
+            return g;
+          }).join(' ／ ');
           return `
           <div class="bubble-row${isRight?' side-right':''}" id="dl-${idx}-${i}">
             <div class="speaker-avatar ${isRight?'avatar-right':'avatar-left'}">${d.speaker}</div>
@@ -2177,12 +2567,7 @@ function showDialogue(idx) {
                 </div>
                 <div class="bubble-romaji">${d.r}</div>
                 <div class="bubble-cn">${d.c}</div>
-                ${d.grammar?`<div class="bubble-grammar">📝 ${d.grammar}</div>`:''}
-                <div style="margin-top:.4rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap" id="csbrow-${idx}-${i}">
-                  <button class="btn-conv-speech" id="csb-${idx}-${i}" onclick="startConvSpeech('${escJs(d.j)}',${idx},${i})">🎤 跟讀</button>
-                  <span class="conv-speech-result" id="csr-${idx}-${i}" style="display:none"></span>
-                </div>
-                <div id="csreplay-${idx}-${i}" style="display:none;margin-top:.25rem;gap:.35rem;flex-wrap:wrap;align-items:center;display:none"></div>
+                ${d.grammar?`<div class="bubble-grammar">📝 ${grammarHTML}</div>`:''}
               </div>
             </div>
           </div>`;
@@ -2326,6 +2711,21 @@ function renderPronunciation() {
   renderPronGrid();
 }
 
+let mediaRecorderInst = null;
+let audioChunks = [];
+const recordedAudio = {}; // key: cat-idx → blob URL
+
+function calcAccuracy(spoken, expected) {
+  const clean = s => s.replace(/[。、！？\s　]/g,'');
+  const a = clean(spoken), b = clean(expected);
+  if (!a || !b) return 0;
+  // LCS-based character similarity
+  const dp = Array.from({length:a.length+1},()=>new Array(b.length+1).fill(0));
+  for (let i=1;i<=a.length;i++) for (let j=1;j<=b.length;j++)
+    dp[i][j] = a[i-1]===b[j-1] ? dp[i-1][j-1]+1 : Math.max(dp[i-1][j],dp[i][j-1]);
+  return Math.round(dp[a.length][b.length] / b.length * 100);
+}
+
 function renderPronGrid() {
   const grid = document.getElementById('pronGrid');
   const cat = pronunciationData[currentPronCat];
@@ -2343,7 +2743,7 @@ function renderPronGrid() {
         <button class="btn-speak" id="spk-${currentPronCat}-${idx}" onclick="startSpeechPractice('${escJs(item.j)}','${currentPronCat}',${idx})">🎤 練習</button>
         <span class="pron-result" id="res-${currentPronCat}-${idx}" style="display:none"></span>
       </div>
-      <div id="pronreplay-${currentPronCat}-${idx}" style="display:none;gap:.35rem;flex-wrap:wrap;align-items:center;margin-top:.3rem"></div>
+      <div id="pronreplay-${currentPronCat}-${idx}" style="display:none;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.5rem"></div>
     </div>`).join('');
 }
 
@@ -2354,51 +2754,72 @@ function startSpeechPractice(expected, cat, idx) {
   if (activeRecordBtn) {
     activeRecordBtn.classList.remove('recording');
     activeRecordBtn.textContent = '🎤 練習';
-    recognition.abort();
+    try { recognition.abort(); } catch(e) {}
   }
 
   const btn = document.getElementById('spk-'+cat+'-'+idx);
   const resultEl = document.getElementById('res-'+cat+'-'+idx);
+  const replayDiv = document.getElementById('pronreplay-'+cat+'-'+idx);
   activeRecordBtn = btn;
 
   btn.classList.add('recording');
   btn.textContent = '🎙️ 聆聽中...';
   resultEl.style.display = 'none';
+  if (replayDiv) replayDiv.style.display = 'none';
+
+  // Start MediaRecorder for actual audio capture
+  audioChunks = [];
+  if (navigator.mediaDevices?.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
+      try {
+        mediaRecorderInst = new MediaRecorder(stream);
+        mediaRecorderInst.ondataavailable = e => { if(e.data.size>0) audioChunks.push(e.data); };
+        mediaRecorderInst.onstop = () => {
+          stream.getTracks().forEach(t=>t.stop());
+          const blob = new Blob(audioChunks, {type:'audio/webm'});
+          const key = cat+'-'+idx;
+          if (recordedAudio[key]) URL.revokeObjectURL(recordedAudio[key]);
+          recordedAudio[key] = URL.createObjectURL(blob);
+        };
+        mediaRecorderInst.start();
+      } catch(e) { stream.getTracks().forEach(t=>t.stop()); }
+    }).catch(()=>{});
+  }
 
   recognition.onresult = (e) => {
+    if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
     const transcripts = Array.from(e.results[0]).map(r => r.transcript);
     const spoken = transcripts[0];
     const clean = s => s.replace(/[。、！？\s]/g,'');
-    const match = transcripts.some(t => clean(t) === clean(expected));
-    const partial = transcripts.some(t => {
-      const a = clean(t), b = clean(expected);
-      return a.length > 0 && (a.includes(b.slice(0,3)) || b.includes(a.slice(0,3)));
-    });
+    const acc = calcAccuracy(spoken, expected);
+    const accCls = acc>=85?'great':acc>=60?'ok':'poor';
+    const accLabel = acc>=85?'優秀':'ok'?acc>=60:'加油';
     btn.textContent = '🎤 再試一次';
     btn.classList.remove('recording');
     resultEl.style.display = 'inline-block';
-    if (match) {
+    if (acc >= 85) {
       resultEl.className = 'pron-result correct';
-      resultEl.textContent = '✓ 正確！「'+spoken+'」';
-    } else if (partial) {
+      resultEl.innerHTML = `✓ 辨識：「${spoken}」<span class="pron-accuracy great">${acc}%</span>`;
+    } else if (acc >= 50) {
       resultEl.className = 'pron-result partial';
-      resultEl.textContent = '△ 接近！「'+spoken+'」';
+      resultEl.innerHTML = `△ 辨識：「${spoken}」<span class="pron-accuracy ok">${acc}%</span>`;
     } else {
       resultEl.className = 'pron-result wrong';
-      resultEl.textContent = '✗ 再試試「'+spoken+'」';
+      resultEl.innerHTML = `✗ 辨識：「${spoken}」<span class="pron-accuracy poor">${acc}%</span>`;
     }
-    // show replay buttons
-    const replayDiv = document.getElementById('pronreplay-'+cat+'-'+idx);
+    // show replay controls
     if (replayDiv) {
       replayDiv.style.display = 'flex';
+      const recKey = cat+'-'+idx;
       replayDiv.innerHTML =
-        '<button class="btn-conv-replay" onclick="speak(\''+escJs(expected)+'\',this)" title="重播原句">🔊 聽原句</button>'+
-        (spoken ? '<button class="btn-conv-replay" onclick="speak(\''+escJs(spoken)+'\',this)" title="播放我說的">🎙 播我的</button>' : '');
+        `<button class="btn-conv-replay" onclick="speak('${escJs(expected)}',this)">🔊 聽原句</button>`+
+        `<button class="btn-rec-play" id="play-rec-${recKey}" onclick="playRecording('${recKey}')">▶ 播我的錄音</button>`;
     }
     activeRecordBtn = null;
   };
 
   recognition.onend = () => {
+    if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
     if (btn.classList.contains('recording')) {
       btn.classList.remove('recording');
       btn.textContent = '🎤 練習';
@@ -2407,6 +2828,7 @@ function startSpeechPractice(expected, cat, idx) {
   };
 
   recognition.onerror = (e) => {
+    if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
     btn.classList.remove('recording');
     btn.textContent = '🎤 練習';
     activeRecordBtn = null;
@@ -2652,6 +3074,17 @@ function shuffle(arr) {
   return arr;
 }
 function delay(ms) { return new Promise(r => setTimeout(r,ms)); }
+
+function playRecording(key) {
+  const url = recordedAudio[key];
+  if (!url) { alert('尚無錄音，請先按「🎤 練習」錄音。'); return; }
+  const audio = new Audio(url);
+  const btn = document.getElementById('play-rec-'+key);
+  if (btn) { btn.textContent = '▶ 播放中…'; btn.disabled = true; }
+  audio.play().catch(()=>{});
+  audio.onended = () => { if(btn){ btn.textContent='▶ 播我的錄音'; btn.disabled=false; } };
+  audio.onerror = () => { if(btn){ btn.textContent='▶ 播我的錄音'; btn.disabled=false; } };
+}
 function escJs(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"'); }
 
 // ════════════════════════════════════════════

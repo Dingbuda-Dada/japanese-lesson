@@ -44,23 +44,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(253,250,245,.94);backdrop-
 
 /* ── Sections ── */
 section{display:none}
-section.active{display:block}
+section.active{display:block;animation:fadeUp .3s ease}
 
 /* ── Inner tabs ── */
-.inner-tabs{display:flex;gap:.5rem;margin-bottom:2rem;background:var(--washi-alt);border-radius:12px;padding:.4rem;width:fit-content}
-.inner-tab{padding:.45rem 1.2rem;border-radius:8px;border:none;background:transparent;font-family:inherit;font-size:.82rem;font-weight:500;color:var(--ink-3);cursor:pointer;transition:all .2s}
-.inner-tab.active{background:var(--surface);color:var(--ink);box-shadow:var(--sh-sm);font-weight:600}
-.inner-pane{display:none}
+.inner-tabs{display:flex;gap:.4rem;margin-bottom:2rem;background:var(--washi-alt);border-radius:14px;padding:.4rem;width:fit-content;border:1px solid var(--border)}
+.inner-tab{padding:.5rem 1.4rem;border-radius:10px;border:none;background:transparent;font-family:inherit;font-size:.84rem;font-weight:500;color:var(--ink-3);cursor:pointer;transition:all .22s;white-space:nowrap}
+.inner-tab:hover:not(.active){color:var(--ink);background:rgba(28,28,30,.04)}
+.inner-tab.active{background:var(--surface);color:var(--shu);box-shadow:var(--sh-sm);font-weight:700;border:1px solid var(--shu-border)}
+.inner-pane{display:none;animation:fadeUp .25s ease}
 .inner-pane.active{display:block}
 
 /* ── Hero ── */
 .hero{padding:5rem 1.5rem 4rem;text-align:center;max-width:800px;margin:0 auto}
 .hero-kana{font-family:'Zen Old Mincho',serif;font-size:clamp(4rem,12vw,8rem);font-weight:900;line-height:1;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.02em}
 .hero-kana span{color:var(--shu)}
-.hero-sub{font-size:.8rem;color:var(--ink-3);letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.2rem}
-.hero-rule{width:48px;height:2px;background:var(--shu);margin:0 auto 1.2rem;border-radius:1px}
+.hero-sub{font-size:.78rem;color:var(--ink-3);letter-spacing:.35em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero-rule{width:56px;height:3px;background:linear-gradient(90deg,var(--shu),rgba(192,57,43,.25));margin:0 auto 1.2rem;border-radius:2px}
 .hero-title{font-family:'Zen Old Mincho',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:700;margin-bottom:.8rem;color:var(--ink)}
-.hero-desc{color:var(--ink-3);font-size:.92rem;line-height:1.8}
+.hero-desc{color:var(--ink-3);font-size:.92rem;line-height:1.85}
 
 /* ── Search ── */
 .search-wrap{max-width:720px;margin:2.5rem auto 0;padding:0 1.5rem}
@@ -99,10 +100,10 @@ section.active{display:block}
 .card-cn{font-size:1rem;color:var(--ink-2);border-top:1px solid var(--border);padding-top:.75rem;font-weight:500}
 
 /* ── Section Header ── */
-.section-header{text-align:center;margin-bottom:2.5rem;padding-top:3rem}
-.section-kana-title{font-family:'Zen Old Mincho',serif;font-size:2.2rem;font-weight:900;color:var(--ink);margin-bottom:.5rem}
-.section-title-rule{width:40px;height:2px;background:var(--shu);margin:.6rem auto .7rem;border-radius:1px}
-.section-desc{color:var(--ink-3);font-size:.9rem}
+.section-header{text-align:center;margin-bottom:2.5rem;padding-top:3.5rem;position:relative}
+.section-kana-title{font-family:'Zen Old Mincho',serif;font-size:2.5rem;font-weight:900;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.01em}
+.section-title-rule{width:48px;height:3px;background:linear-gradient(90deg,var(--shu),rgba(192,57,43,.3));margin:.7rem auto .8rem;border-radius:2px}
+.section-desc{color:var(--ink-3);font-size:.9rem;letter-spacing:.02em}
 
 /* ── Kana ── */
 .kana-wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem}
@@ -112,8 +113,9 @@ section.active{display:block}
 .kana-row-block{margin-bottom:1.5rem}
 .kana-row-name{font-size:.78rem;color:var(--shu);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;padding-left:.75rem;border-left:3px solid var(--shu)}
 .kana-row-chars{display:flex;gap:.75rem;flex-wrap:wrap}
-.kana-char-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;min-width:90px;text-align:center;cursor:pointer;transition:all .2s;flex:0 0 auto;box-shadow:var(--sh-sm)}
-.kana-char-card:hover{background:var(--shu-pale);border-color:var(--shu-border);transform:scale(1.05);box-shadow:var(--sh-md)}
+.kana-char-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;min-width:88px;text-align:center;cursor:pointer;transition:all .22s;flex:0 0 auto;box-shadow:var(--sh-sm)}
+.kana-char-card:hover{background:var(--shu-pale);border-color:var(--shu-border);transform:translateY(-3px) scale(1.04);box-shadow:var(--sh-md)}
+.kana-char-card.selected{background:var(--shu-pale);border-color:var(--shu);box-shadow:0 0 0 2px rgba(192,57,43,.2)}
 .kana-main{font-family:'Zen Old Mincho',serif;font-size:2rem;font-weight:700;color:var(--ink);display:block;line-height:1.2}
 .kana-romaji{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);margin-top:.25rem;display:block}
 .kana-detail{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--shu);border-radius:16px;padding:1.5rem;margin-bottom:2rem;display:none;animation:fadeUp .3s ease;box-shadow:var(--sh-md)}
@@ -155,17 +157,21 @@ section.active{display:block}
 .pitch-dot{width:10px;height:10px;border-radius:50%;background:var(--shu)}
 .pitch-high{margin-bottom:0}.pitch-low{margin-bottom:18px}
 .pitch-line{height:2px;background:var(--shu);flex:1;align-self:flex-end;margin-bottom:5px}
+.btn-pg-audio{background:none;border:none;cursor:pointer;font-size:.85rem;padding:0 .2rem;color:var(--shu);opacity:.7;vertical-align:middle;transition:opacity .2s;line-height:1}
+.btn-pg-audio:hover{opacity:1}
 /* Particle Tab */
-.particle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem}
-.particle-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}
-.particle-card-header{padding:.7rem 1rem;background:var(--washi-alt);display:flex;align-items:center;gap:.7rem;border-bottom:1px solid var(--border)}
-.particle-sym{font-family:'Zen Old Mincho',serif;font-size:1.6rem;font-weight:900;color:var(--shu);min-width:32px}
-.particle-name{font-size:.88rem;font-weight:700;color:var(--ink)}
-.particle-body{padding:.8rem 1rem}
-.particle-use{font-size:.8rem;color:var(--ink-2);padding:.25rem 0;border-bottom:1px dashed var(--border);line-height:1.6}
+.particle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;margin-top:1rem}
+.particle-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm);transition:all .2s}
+.particle-card:hover{box-shadow:var(--sh-md);border-color:var(--border-s)}
+.particle-card-header{padding:.85rem 1.1rem;background:linear-gradient(135deg,var(--washi-alt),var(--shu-pale));display:flex;align-items:center;gap:.8rem;border-bottom:1px solid var(--border)}
+.particle-sym{font-family:'Zen Old Mincho',serif;font-size:1.9rem;font-weight:900;color:var(--shu);min-width:36px;text-shadow:0 1px 3px rgba(192,57,43,.15)}
+.particle-name{font-size:.9rem;font-weight:700;color:var(--ink)}
+.particle-body{padding:.9rem 1.1rem}
+.particle-use{font-size:.82rem;color:var(--ink-2);padding:.3rem 0;border-bottom:1px dashed var(--border);line-height:1.7}
 .particle-use:last-child{border-bottom:none}
-.particle-use strong{color:var(--ink);margin-right:.3rem}
-.particle-ex{font-family:'Zen Old Mincho',serif;font-size:.9rem;color:var(--shu);margin-top:.15rem}
+.particle-use strong{color:var(--shu);margin-right:.4rem;font-size:.75rem;letter-spacing:.05em}
+.particle-ex{font-family:'Zen Old Mincho',serif;font-size:.95rem;color:var(--ink);margin-top:.2rem;cursor:pointer;transition:color .15s}
+.particle-ex:hover{color:var(--shu)}
 /* Verb usage examples */
 .verb-usage{margin-top:1.5rem;background:var(--washi-alt);border-radius:12px;padding:1rem 1.2rem}
 .verb-usage-title{font-size:.82rem;font-weight:700;color:var(--ink-2);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
@@ -186,6 +192,27 @@ section.active{display:block}
 .pron-accuracy.great{background:#E8F5E9;color:#1B4332}
 .pron-accuracy.ok{background:#FEF9E7;color:#7D6608}
 .pron-accuracy.poor{background:var(--shu-pale);color:#7B241C}
+/* Pronunciation result area redesign */
+.pron-result-area{margin-top:.9rem;background:var(--washi-alt);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;display:none}
+.pron-result-area.visible{display:block}
+.pron-acc-row{display:flex;align-items:center;gap:1rem;margin-bottom:.7rem}
+.pron-acc-circle{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;flex-shrink:0;border:3px solid currentColor}
+.pron-acc-circle.great{color:#1B4332;background:#EAFAF1;border-color:#A8D5A8}
+.pron-acc-circle.ok{color:#7D6608;background:var(--gold-bg);border-color:var(--gold-border)}
+.pron-acc-circle.poor{color:#7B241C;background:var(--shu-pale);border-color:var(--shu-border)}
+.pron-acc-detail{flex:1}
+.pron-acc-bar-wrap{background:var(--border);border-radius:100px;height:8px;overflow:hidden;margin:.3rem 0}
+.pron-acc-bar-fill{height:100%;border-radius:100px;transition:width .6s ease}
+.pron-acc-bar-fill.great{background:linear-gradient(90deg,#52C41A,#1B4332)}
+.pron-acc-bar-fill.ok{background:linear-gradient(90deg,#FAAD14,#D4A017)}
+.pron-acc-bar-fill.poor{background:linear-gradient(90deg,var(--shu),#7B241C)}
+.pron-acc-label{font-size:.8rem;font-weight:600;color:var(--ink-2)}
+.pron-acc-spoken{font-size:.82rem;color:var(--ink-3);margin-top:.1rem}
+.pron-replay-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border)}
+.btn-replay-orig{padding:.5rem 1.1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:8px;color:var(--shu);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:all .2s}
+.btn-replay-orig:hover{background:var(--shu);color:#fff}
+.btn-replay-mine{padding:.5rem 1.1rem;background:var(--surface);border:2px solid var(--ink);border-radius:8px;color:var(--ink);font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:all .2s}
+.btn-replay-mine:hover{background:var(--ink);color:#fff}
 /* Record playback */
 .btn-rec-play{padding:.3rem .7rem;background:var(--washi-alt);border:1px solid var(--border);border-radius:6px;font-size:.75rem;color:var(--ink-3);cursor:pointer;font-family:inherit;transition:all .2s;display:inline-flex;align-items:center;gap:.3rem}
 .btn-rec-play:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -238,8 +265,9 @@ section.active{display:block}
 .btn-level[data-level="N3"].active  {background:#7D6608;border-color:#7D6608}
 .btn-level[data-level="N2"].active  {background:#5B2C6F;border-color:#5B2C6F}
 .btn-level[data-level="N1"].active  {background:var(--shu);border-color:var(--shu)}
-.grammar-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1rem;transition:all .2s;box-shadow:var(--sh-sm);border-left-width:4px}
-.grammar-card:hover{box-shadow:var(--sh-md);border-color:var(--border-s)}
+.grammar-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:.9rem;transition:all .22s;box-shadow:var(--sh-sm);border-left-width:4px}
+.grammar-card:hover{box-shadow:var(--sh-md)}
+.grammar-card.open{box-shadow:var(--sh-md)}
 .grammar-card[data-level="N5"]{border-left-color:#27AE60}
 .grammar-card[data-level="N4"]{border-left-color:#2980B9}
 .grammar-card[data-level="N3"]{border-left-color:#D4AC0D}
@@ -294,20 +322,23 @@ section.active{display:block}
 .conv-controls{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .btn-random-scene{padding:.5rem 1.2rem;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;color:var(--gold);font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-random-scene:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
-.scenario-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.75rem;margin-bottom:2rem}
-.scenario-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm);text-align:center}
-.scenario-card:hover{border-color:var(--shu-border);background:var(--shu-pale);box-shadow:var(--sh-md)}
-.scenario-card.active{border-color:var(--shu);background:var(--shu-pale);box-shadow:0 2px 8px rgba(192,57,43,.15)}
-.sc-icon{font-size:1.6rem;margin-bottom:.4rem;line-height:1}
-.sc-title{font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.2rem}
-.sc-desc{font-size:.74rem;color:var(--ink-3);line-height:1.5;margin-bottom:.5rem}
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;margin-bottom:2rem}
+.scenario-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem .9rem;cursor:pointer;transition:all .22s;box-shadow:var(--sh-sm);text-align:center;position:relative;overflow:hidden}
+.scenario-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(192,57,43,.06),transparent);opacity:0;transition:opacity .2s}
+.scenario-card:hover{border-color:var(--shu-border);box-shadow:var(--sh-md);transform:translateY(-2px)}
+.scenario-card:hover::after{opacity:1}
+.scenario-card.active{border-color:var(--shu);background:linear-gradient(135deg,var(--shu-pale),var(--surface));box-shadow:0 3px 12px rgba(192,57,43,.18)}
+.scenario-card.active::after{opacity:1}
+.sc-icon{font-size:1.7rem;margin-bottom:.4rem;line-height:1}
+.sc-title{font-weight:700;font-size:.88rem;color:var(--ink);margin-bottom:.15rem}
+.sc-desc{font-size:.72rem;color:var(--ink-3);line-height:1.45}
 .gram-key{font-weight:700;color:var(--gold)}
 .dialogue-panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--sh-md)}
-.dialogue-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem;background:var(--washi-alt)}
+.dialogue-header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.8rem;background:linear-gradient(135deg,var(--washi-alt),var(--surface))}
 .dialogue-title{font-family:'Zen Old Mincho',serif;font-size:.95rem;font-weight:700;color:var(--ink)}
-.btn-play-all{margin-left:auto;padding:.4rem 1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:6px;color:var(--shu);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-play-all{padding:.42rem 1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:8px;color:var(--shu);font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;flex-shrink:0}
 .btn-play-all:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
-.dialogue-body{padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem}
+.dialogue-body{padding:1.5rem 1.8rem;display:flex;flex-direction:column;gap:1.3rem}
 .bubble-row{display:flex;gap:.75rem;align-items:flex-start}
 .bubble-row.side-right{flex-direction:row-reverse}
 .speaker-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0;font-family:'Zen Old Mincho',serif;border:1px solid}
@@ -334,20 +365,22 @@ section.active{display:block}
 .pron-cat-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .btn-pron-cat{padding:.45rem 1.2rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);font-family:inherit;font-size:.82rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
 .btn-pron-cat.active{background:var(--ink);border-color:var(--ink);color:#fff}
-.pron-grid{display:flex;flex-direction:column;gap:.75rem}
-.pron-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.5rem;box-shadow:var(--sh-sm);transition:all .2s}
-.pron-card:hover{box-shadow:var(--sh-md);border-color:var(--border-s)}
+.pron-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.85rem}
+.pron-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.3rem 1.5rem;box-shadow:var(--sh-sm);transition:all .2s;position:relative;overflow:hidden}
+.pron-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--shu),rgba(192,57,43,.2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.pron-card:hover{box-shadow:var(--sh-md);border-color:var(--border-s);transform:translateY(-2px)}
+.pron-card:hover::before{transform:scaleX(1)}
 .pron-card-top{display:flex;align-items:flex-start;gap:1rem}
-.pron-jp{font-family:'Zen Old Mincho',serif;font-size:1.3rem;font-weight:700;color:var(--ink);flex:1}
-.pron-meta{margin-top:.2rem}
-.pron-romaji{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-3);margin-bottom:.15rem}
-.pron-cn{font-size:.88rem;color:var(--ink-2)}
-.pron-actions{display:flex;gap:.6rem;margin-top:.9rem;flex-wrap:wrap;align-items:center}
-.btn-listen{padding:.45rem 1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:8px;color:var(--shu);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-listen:hover{background:var(--shu);color:#fff;border-color:var(--shu)}
-.btn-speak{padding:.45rem 1rem;background:var(--washi-alt);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-speak.recording{background:var(--shu);color:#fff;border-color:var(--shu);animation:pulse .8s infinite}
-.btn-speak:hover:not(.recording){background:var(--washi);border-color:var(--border-s)}
+.pron-jp{font-family:'Zen Old Mincho',serif;font-size:1.45rem;font-weight:700;color:var(--ink);flex:1;line-height:1.3}
+.pron-meta{margin-top:.15rem}
+.pron-romaji{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-3);margin-bottom:.2rem;background:var(--washi-alt);display:inline-block;padding:.1rem .45rem;border-radius:4px}
+.pron-cn{font-size:.88rem;color:var(--ink-2);margin-top:.2rem}
+.pron-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;align-items:center}
+.btn-listen{padding:.5rem 1.1rem;background:var(--shu-pale);border:1px solid var(--shu-border);border-radius:9px;color:var(--shu);font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.35rem}
+.btn-listen:hover{background:var(--shu);color:#fff;border-color:var(--shu);transform:translateY(-1px)}
+.btn-speak{padding:.5rem 1.1rem;background:var(--ink);border:1px solid var(--ink);border-radius:9px;color:#fff;font-family:inherit;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.35rem}
+.btn-speak.recording{background:var(--shu);border-color:var(--shu);animation:pulse .8s infinite}
+.btn-speak:hover:not(.recording){background:#333;border-color:#333;transform:translateY(-1px)}
 .pron-result{font-size:.85rem;padding:.4rem .8rem;border-radius:6px;margin-left:.5rem;display:inline-block}
 .pron-result.correct{background:#EAFAF1;color:#1B4332;border:1px solid #ABEBC6}
 .pron-result.partial{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border)}
@@ -355,9 +388,9 @@ section.active{display:block}
 
 /* ── Quiz ── */
 .quiz-wrap{max-width:700px;margin:0 auto;padding:0 1.5rem 4rem}
-.quiz-start{text-align:center;padding:3rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:var(--sh-md)}
-.quiz-emoji{font-size:4rem;margin-bottom:1rem}
-.quiz-start-title{font-family:'Zen Old Mincho',serif;font-size:1.8rem;font-weight:900;color:var(--ink);margin-bottom:.5rem}
+.quiz-start{text-align:center;padding:3.5rem 2rem;background:linear-gradient(135deg,var(--surface),var(--washi-alt));border:1px solid var(--border);border-radius:24px;box-shadow:var(--sh-md)}
+.quiz-emoji{font-size:4.5rem;margin-bottom:1rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,.1))}
+.quiz-start-title{font-family:'Zen Old Mincho',serif;font-size:1.9rem;font-weight:900;color:var(--ink);margin-bottom:.5rem}
 .quiz-type-row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0}
 .btn-quiz-type{padding:.6rem 1.4rem;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--ink-3);font-family:inherit;font-size:.85rem;cursor:pointer;transition:all .2s;box-shadow:var(--sh-sm)}
 .btn-quiz-type.active{background:var(--washi-alt);border-color:var(--border-s);color:var(--ink);font-weight:600}
@@ -369,7 +402,7 @@ section.active{display:block}
 .progress-fill{height:100%;background:var(--shu);border-radius:2px;transition:width .4s ease}
 .progress-text{font-size:.8rem;color:var(--ink-3);white-space:nowrap}
 .score-badge{padding:.25rem .75rem;background:#EAFAF1;border-radius:100px;font-size:.82rem;color:#1B4332;font-weight:600;white-space:nowrap;border:1px solid #ABEBC6}
-.question-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center;margin-bottom:1.5rem;box-shadow:var(--sh-md)}
+.question-card{background:linear-gradient(135deg,var(--surface),var(--washi-alt));border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center;margin-bottom:1.5rem;box-shadow:var(--sh-md)}
 .q-label{font-size:.8rem;color:var(--ink-3);letter-spacing:.1em;margin-bottom:1rem}
 .q-main{font-family:'Zen Old Mincho',serif;font-size:4rem;font-weight:900;color:var(--ink);line-height:1;margin-bottom:.5rem}
 .q-main.romaji-q{font-family:'JetBrains Mono',monospace;font-size:2.5rem}
@@ -404,15 +437,25 @@ section.active{display:block}
 .loading-state{text-align:center;padding:4rem 1.5rem;color:var(--ink-3)}
 .spin{display:inline-block;width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--shu);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:1rem}
 @keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){
+  .pron-grid{grid-template-columns:1fr}
+  .particle-grid{grid-template-columns:1fr}
+  .inner-tabs{width:100%;overflow-x:auto}
+  .dialogue-body{padding:1.2rem}
+}
 @media(max-width:600px){
   .hero-kana{font-size:5rem}
   .phrase-grid{grid-template-columns:1fr}
   .options-grid{grid-template-columns:1fr}
   .btn-option.full{grid-column:span 1}
   .scenario-grid{grid-template-columns:repeat(2,1fr)}
-  .bubble-content{max-width:88%}
+  .bubble-content{max-width:90%}
   .kd-top{flex-direction:column;gap:1rem}
   .verb-table{font-size:.75rem}
+  .section-kana-title{font-size:2rem}
+  .grammar-wrap,.conv-wrap,.pron-wrap,.quiz-wrap{padding:0 1rem 3rem}
+  .kana-wrap{padding:0 1rem 3rem}
+  .pron-intro{flex-direction:column;gap:.8rem}
 }
 </style>
 </head>
@@ -498,15 +541,15 @@ section.active{display:block}
           <p>日語使用「音高重音」：每個音節（拍）有<strong>高（H）</strong>或<strong>低（L）</strong>兩種音高。東京標準語有四類音調型：</p>
           <table class="pg-table">
             <tr><th>類型</th><th>說明</th><th>例詞</th><th>音高示意</th></tr>
-            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">平板型</td><td>第一拍低，之後全高，後面助詞也保持高</td><td>みず（水）、はし（箸）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高高高…</span></td></tr>
-            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">頭高型</td><td>第一拍高，之後全低（下降在第1拍後）</td><td>あめ（雨）、かみ（紙）</td><td><span class="pg-tag high">高</span>→<span class="pg-tag low">低低低…</span></td></tr>
-            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">中高型</td><td>第一拍低，中間某拍後下降</td><td>たまご（卵）、こころ（心）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高</span>→<span class="pg-tag fall">降↓</span></td></tr>
-            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">尾高型</td><td>第一拍低，之後全高，助詞後才下降</td><td>おとこ（男）、はし（橋）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高高</span>→<span class="pg-tag fall">助詞↓</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">平板型</td><td>第一拍低，之後全高，後面助詞也保持高</td><td><button class="btn-pg-audio" onclick="speak('みず',this)">🔊</button>みず（水）、<button class="btn-pg-audio" onclick="speak('はし',this)">🔊</button>はし（箸）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高高高…</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">頭高型</td><td>第一拍高，之後全低（下降在第1拍後）</td><td><button class="btn-pg-audio" onclick="speak('あめ',this)">🔊</button>あめ（雨）、<button class="btn-pg-audio" onclick="speak('かみ',this)">🔊</button>かみ（紙）</td><td><span class="pg-tag high">高</span>→<span class="pg-tag low">低低低…</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">中高型</td><td>第一拍低，中間某拍後下降</td><td><button class="btn-pg-audio" onclick="speak('たまご',this)">🔊</button>たまご（卵）、<button class="btn-pg-audio" onclick="speak('こころ',this)">🔊</button>こころ（心）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高</span>→<span class="pg-tag fall">降↓</span></td></tr>
+            <tr><td style="text-align:center;font-weight:700;color:var(--shu)">尾高型</td><td>第一拍低，之後全高，助詞後才下降</td><td><button class="btn-pg-audio" onclick="speak('おとこ',this)">🔊</button>おとこ（男）、<button class="btn-pg-audio" onclick="speak('はし',this)">🔊</button>はし（橋）</td><td><span class="pg-tag low">低</span>→<span class="pg-tag high">高高</span>→<span class="pg-tag fall">助詞↓</span></td></tr>
           </table>
           <p style="font-size:.82rem;color:var(--ink-3)">💡 同形假名的音調不同，意思就不同！例如：<strong>はし</strong> — 「橋」（尾高型 LHH）vs「箸」（平板型 LHH助詞不降）vs「端」（頭高型 HL）</p>
           <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:.8rem">
             <div>
-              <div style="font-size:.78rem;color:var(--ink-3);margin-bottom:.3rem">あめ（雨）頭高型</div>
+              <div style="font-size:.78rem;color:var(--ink-3);margin-bottom:.3rem">あめ（雨）頭高型 <button class="btn-pg-audio" onclick="speak('あめ',this)">🔊</button></div>
               <div class="pitch-demo">
                 <div class="pitch-mora"><div class="pitch-dot pitch-high"></div><div class="pitch-kana">あ</div></div>
                 <div class="pitch-line" style="height:2px;background:var(--shu);width:20px;align-self:flex-end;margin-bottom:14px"></div>
@@ -514,7 +557,7 @@ section.active{display:block}
               </div>
             </div>
             <div>
-              <div style="font-size:.78rem;color:var(--ink-3);margin-bottom:.3rem">あめ（飴）平板型</div>
+              <div style="font-size:.78rem;color:var(--ink-3);margin-bottom:.3rem">あめ（飴）平板型 <button class="btn-pg-audio" onclick="speak('あめ',this)">🔊</button></div>
               <div class="pitch-demo">
                 <div class="pitch-mora"><div style="height:10px"></div><div class="pitch-dot" style="background:var(--ink-3)"></div><div class="pitch-kana">あ</div></div>
                 <div class="pitch-line" style="height:2px;background:var(--shu);width:20px;align-self:flex-start;margin-top:14px"></div>
@@ -541,10 +584,10 @@ section.active{display:block}
           <p><strong>促音「っ」（小寫）</strong>代表停頓一拍，相當於後面輔音被「加倍」。發音時在促音處短暫停頓（約一拍的時間），再發後面的音。</p>
           <table class="pg-table">
             <tr><th>例詞</th><th>羅馬字</th><th>中文</th><th>說明</th></tr>
-            <tr><td>きって</td><td>kitte</td><td>郵票</td><td>t+t，停頓後發t音</td></tr>
-            <tr><td>ざっし</td><td>zasshi</td><td>雜誌</td><td>ss，停頓後發sh音</td></tr>
-            <tr><td>にっき</td><td>nikki</td><td>日記</td><td>kk，停頓後發k音</td></tr>
-            <tr><td>まって</td><td>matte</td><td>等一下</td><td>tt，停頓後發t音</td></tr>
+            <tr><td><button class="btn-pg-audio" onclick="speak('きって',this)">🔊</button>きって</td><td>kitte</td><td>郵票</td><td>t+t，停頓後發t音</td></tr>
+            <tr><td><button class="btn-pg-audio" onclick="speak('ざっし',this)">🔊</button>ざっし</td><td>zasshi</td><td>雜誌</td><td>ss，停頓後發sh音</td></tr>
+            <tr><td><button class="btn-pg-audio" onclick="speak('にっき',this)">🔊</button>にっき</td><td>nikki</td><td>日記</td><td>kk，停頓後發k音</td></tr>
+            <tr><td><button class="btn-pg-audio" onclick="speak('まって',this)">🔊</button>まって</td><td>matte</td><td>等一下</td><td>tt，停頓後發t音</td></tr>
           </table>
           <p style="font-size:.82rem;color:var(--ink-3)">💡 促音如果寫錯位置，意思完全不同！如：きて（來）vs きって（郵票）</p>
         </div>
@@ -554,11 +597,11 @@ section.active{display:block}
           <p>日語母音可以延長，相當於發音時間加倍（約兩拍）：</p>
           <table class="pg-table">
             <tr><th>母音</th><th>平假名寫法</th><th>片假名寫法</th><th>例詞</th></tr>
-            <tr><td>あ段長音</td><td>あ→ああ（如：おかあさん）</td><td>ア→アー</td><td>おかあさん（母親）、ラーメン</td></tr>
-            <tr><td>い段長音</td><td>い→いい（如：おにいさん）</td><td>イ→イー</td><td>おにいさん（哥哥）、タクシー</td></tr>
-            <tr><td>う段長音</td><td>う→うう（如：くうき）</td><td>ウ→ウー</td><td>くうき（空氣）、スーパー</td></tr>
-            <tr><td>え段長音</td><td>え→えい/ええ</td><td>エ→エー</td><td>えいご（英語）、ケーキ</td></tr>
-            <tr><td>お段長音</td><td>お→おう/おお</td><td>オ→オー</td><td>おおきい（大）、コーヒー</td></tr>
+            <tr><td>あ段長音</td><td>あ→ああ（如：おかあさん）</td><td>ア→アー</td><td><button class="btn-pg-audio" onclick="speak('おかあさん',this)">🔊</button>おかあさん（母親）、<button class="btn-pg-audio" onclick="speak('ラーメン',this)">🔊</button>ラーメン</td></tr>
+            <tr><td>い段長音</td><td>い→いい（如：おにいさん）</td><td>イ→イー</td><td><button class="btn-pg-audio" onclick="speak('おにいさん',this)">🔊</button>おにいさん（哥哥）、<button class="btn-pg-audio" onclick="speak('タクシー',this)">🔊</button>タクシー</td></tr>
+            <tr><td>う段長音</td><td>う→うう（如：くうき）</td><td>ウ→ウー</td><td><button class="btn-pg-audio" onclick="speak('くうき',this)">🔊</button>くうき（空氣）、<button class="btn-pg-audio" onclick="speak('スーパー',this)">🔊</button>スーパー</td></tr>
+            <tr><td>え段長音</td><td>え→えい/ええ</td><td>エ→エー</td><td><button class="btn-pg-audio" onclick="speak('えいご',this)">🔊</button>えいご（英語）、<button class="btn-pg-audio" onclick="speak('ケーキ',this)">🔊</button>ケーキ</td></tr>
+            <tr><td>お段長音</td><td>お→おう/おお</td><td>オ→オー</td><td><button class="btn-pg-audio" onclick="speak('おおきい',this)">🔊</button>おおきい（大）、<button class="btn-pg-audio" onclick="speak('コーヒー',this)">🔊</button>コーヒー</td></tr>
           </table>
           <p style="font-size:.82rem;color:var(--ink-3)">💡 片假名的長音用「ー」（長音符）表示，羅馬字通常用重音符號或雙母音表示（如：ā、ū、ō）</p>
         </div>
@@ -568,13 +611,13 @@ section.active{display:block}
           <p><strong>拗音</strong>是將い段假名與小寫「ゃ・ゅ・ょ」組合，讀成一拍（不是兩拍）：</p>
           <table class="pg-table">
             <tr><th>組合</th><th>發音</th><th>例詞</th><th>意思</th></tr>
-            <tr><td>きゃ・きゅ・きょ</td><td>kya / kyu / kyo</td><td>きゅうり</td><td>小黃瓜</td></tr>
-            <tr><td>しゃ・しゅ・しょ</td><td>sha / shu / sho</td><td>しゃしん・しょくじ</td><td>照片・餐飲</td></tr>
-            <tr><td>ちゃ・ちゅ・ちょ</td><td>cha / chu / cho</td><td>おちゃ</td><td>茶</td></tr>
-            <tr><td>にゃ・にゅ・にょ</td><td>nya / nyu / nyo</td><td>にゅうがく</td><td>入學</td></tr>
-            <tr><td>ひゃ・ひゅ・ひょ</td><td>hya / hyu / hyo</td><td>ひょうじゅん</td><td>標準</td></tr>
-            <tr><td>みゃ・みゅ・みょ</td><td>mya / myu / myo</td><td>みょうじ</td><td>姓氏</td></tr>
-            <tr><td>りゃ・りゅ・りょ</td><td>rya / ryu / ryo</td><td>りょこう</td><td>旅行</td></tr>
+            <tr><td>きゃ・きゅ・きょ</td><td>kya / kyu / kyo</td><td><button class="btn-pg-audio" onclick="speak('きゅうり',this)">🔊</button>きゅうり</td><td>小黃瓜</td></tr>
+            <tr><td>しゃ・しゅ・しょ</td><td>sha / shu / sho</td><td><button class="btn-pg-audio" onclick="speak('しゃしん',this)">🔊</button>しゃしん・<button class="btn-pg-audio" onclick="speak('しょくじ',this)">🔊</button>しょくじ</td><td>照片・餐飲</td></tr>
+            <tr><td>ちゃ・ちゅ・ちょ</td><td>cha / chu / cho</td><td><button class="btn-pg-audio" onclick="speak('おちゃ',this)">🔊</button>おちゃ</td><td>茶</td></tr>
+            <tr><td>にゃ・にゅ・にょ</td><td>nya / nyu / nyo</td><td><button class="btn-pg-audio" onclick="speak('にゅうがく',this)">🔊</button>にゅうがく</td><td>入學</td></tr>
+            <tr><td>ひゃ・ひゅ・ひょ</td><td>hya / hyu / hyo</td><td><button class="btn-pg-audio" onclick="speak('ひょうじゅん',this)">🔊</button>ひょうじゅん</td><td>標準</td></tr>
+            <tr><td>みゃ・みゅ・みょ</td><td>mya / myu / myo</td><td><button class="btn-pg-audio" onclick="speak('みょうじ',this)">🔊</button>みょうじ</td><td>姓氏</td></tr>
+            <tr><td>りゃ・りゅ・りょ</td><td>rya / ryu / ryo</td><td><button class="btn-pg-audio" onclick="speak('りょこう',this)">🔊</button>りょこう</td><td>旅行</td></tr>
           </table>
         </div>
 
@@ -583,10 +626,10 @@ section.active{display:block}
           <p><strong>ん</strong>是日語唯一一個單獨成音節的輔音，發音隨後接音節變化：</p>
           <table class="pg-table">
             <tr><th>後接音</th><th>ん的發音</th><th>例詞</th></tr>
-            <tr><td>ば・ぱ・ま行（雙唇音前）</td><td>m（雙唇鼻音）</td><td>さんぽ → sam-po</td></tr>
-            <tr><td>な・に行（齒齦音前）</td><td>n（齒齦鼻音）</td><td>さんない → san-nai</td></tr>
-            <tr><td>か・が行（軟顎音前）</td><td>ng（軟顎鼻音）</td><td>さんかく → saŋ-kaku</td></tr>
-            <tr><td>文末・母音前・ら行前</td><td>ñ（鼻化元音）</td><td>ほん → hoñ</td></tr>
+            <tr><td>ば・ぱ・ま行（雙唇音前）</td><td>m（雙唇鼻音）</td><td><button class="btn-pg-audio" onclick="speak('さんぽ',this)">🔊</button>さんぽ → sam-po</td></tr>
+            <tr><td>な・に行（齒齦音前）</td><td>n（齒齦鼻音）</td><td><button class="btn-pg-audio" onclick="speak('さんない',this)">🔊</button>さんない → san-nai</td></tr>
+            <tr><td>か・が行（軟顎音前）</td><td>ng（軟顎鼻音）</td><td><button class="btn-pg-audio" onclick="speak('さんかく',this)">🔊</button>さんかく → saŋ-kaku</td></tr>
+            <tr><td>文末・母音前・ら行前</td><td>ñ（鼻化元音）</td><td><button class="btn-pg-audio" onclick="speak('ほん',this)">🔊</button>ほん → hoñ</td></tr>
           </table>
           <p style="font-size:.82rem;color:var(--ink-3)">💡 ん獨立成一拍，所以「さんぽ」是3拍（sa-n-po），「かんじ」是4拍（ka-n-ji）</p>
         </div>
@@ -2247,56 +2290,56 @@ function showKanaDetail(rowIdx, charIdx) {
 // ════════════════════════════════════════════
 const particleData = [
   {sym:'は',name:'主題助詞',uses:[
-    {label:'主題標記',ex:'私は学生です。',cn:'我是學生。（は標記主題）'},
-    {label:'對比強調',ex:'魚は食べますが、肉は食べません。',cn:'魚我吃，肉我不吃。（は表對比）'},
-    {label:'舊信息',ex:'「田中さんは？」「田中さんは来ません。」',cn:'田中先生是舊話題，接は'},
+    {label:'主題標記',ex:'私は学生です。',r:'Watashi wa gakusei desu.',cn:'我是學生。（は標記主題）'},
+    {label:'對比強調',ex:'魚は食べますが、肉は食べません。',r:'Sakana wa tabemasu ga, niku wa tabemasen.',cn:'魚我吃，肉我不吃。（は表對比）'},
+    {label:'舊信息',ex:'田中さんは来ません。',r:'Tanaka-san wa kimasen.',cn:'田中先生不來。（は提起舊話題）'},
   ]},
   {sym:'が',name:'主格・強調助詞',uses:[
-    {label:'主語標記（新信息）',ex:'誰が来ましたか。',cn:'誰來了？（が強調誰）'},
-    {label:'能力/好惡的對象',ex:'日本語が好きです。',cn:'喜歡日語。（が接好き・嫌い・上手）'},
-    {label:'焦點強調',ex:'彼女が一番きれいです。',cn:'她最漂亮。（強調は她）'},
+    {label:'主語標記（新信息）',ex:'誰が来ましたか。',r:'Dare ga kimashita ka.',cn:'誰來了？（が強調誰）'},
+    {label:'能力/好惡的對象',ex:'日本語が好きです。',r:'Nihongo ga suki desu.',cn:'喜歡日語。（が接好き・嫌い・上手）'},
+    {label:'焦點強調',ex:'彼女が一番きれいです。',r:'Kanojo ga ichiban kirei desu.',cn:'她最漂亮。（強調は她）'},
   ]},
   {sym:'を',name:'目的格助詞',uses:[
-    {label:'動詞的直接受詞',ex:'コーヒーを飲みます。',cn:'喝咖啡。（を＋他動詞）'},
-    {label:'經過的場所',ex:'公園を歩きます。',cn:'在公園走路。（を＋移動動詞）'},
-    {label:'離開的起點',ex:'駅を出ます。',cn:'出車站。（を＋出る/離れる）'},
+    {label:'動詞的直接受詞',ex:'コーヒーを飲みます。',r:'Koohii wo nomimasu.',cn:'喝咖啡。（を＋他動詞）'},
+    {label:'經過的場所',ex:'公園を歩きます。',r:'Kouen wo arukimasu.',cn:'在公園走路。（を＋移動動詞）'},
+    {label:'離開的起點',ex:'駅を出ます。',r:'Eki wo demasu.',cn:'出車站。（を＋出る/離れる）'},
   ]},
   {sym:'に',name:'方向・存在・時間助詞',uses:[
-    {label:'存在場所（いる/ある）',ex:'机の上に本があります。',cn:'桌上有書。'},
-    {label:'移動目的地',ex:'東京に行きます。',cn:'去東京。'},
-    {label:'時間點',ex:'7時に起きます。',cn:'7點起床。'},
-    {label:'間接受詞（給予）',ex:'友達にプレゼントをあげます。',cn:'給朋友禮物。'},
-    {label:'動作施者（受身）',ex:'先生に褒められました。',cn:'被老師稱讚。'},
+    {label:'存在場所（いる/ある）',ex:'机の上に本があります。',r:'Tsukue no ue ni hon ga arimasu.',cn:'桌上有書。'},
+    {label:'移動目的地',ex:'東京に行きます。',r:'Toukyou ni ikimasu.',cn:'去東京。'},
+    {label:'時間點',ex:'7時に起きます。',r:'Shichi-ji ni okimasu.',cn:'7點起床。'},
+    {label:'間接受詞（給予）',ex:'友達にプレゼントをあげます。',r:'Tomodachi ni purezento wo agemasu.',cn:'給朋友禮物。'},
+    {label:'動作施者（受身）',ex:'先生に褒められました。',r:'Sensei ni homeraremashita.',cn:'被老師稱讚。'},
   ]},
   {sym:'で',name:'場所・手段・原因助詞',uses:[
-    {label:'動作場所',ex:'図書館で勉強します。',cn:'在圖書館學習。'},
-    {label:'交通工具/手段',ex:'電車で行きます。',cn:'搭電車去。'},
-    {label:'材料/方法',ex:'日本語で話してください。',cn:'請用日語說話。'},
-    {label:'原因（名詞）',ex:'台風で電車が止まりました。',cn:'因為颱風電車停了。'},
+    {label:'動作場所',ex:'図書館で勉強します。',r:'Toshokan de benkyou shimasu.',cn:'在圖書館學習。'},
+    {label:'交通工具/手段',ex:'電車で行きます。',r:'Densha de ikimasu.',cn:'搭電車去。'},
+    {label:'材料/方法',ex:'日本語で話してください。',r:'Nihongo de hanashite kudasai.',cn:'請用日語說話。'},
+    {label:'原因（名詞）',ex:'台風で電車が止まりました。',r:'Taifu de densha ga tomarimashita.',cn:'因為颱風電車停了。'},
   ]},
   {sym:'へ',name:'方向助詞',uses:[
-    {label:'移動方向（比に更強調方向）',ex:'日本へ行きます。',cn:'前往日本。（へ強調方向）'},
-    {label:'可與に互換但略有語感差異',ex:'駅へ向かいます。',cn:'朝車站方向前進。'},
+    {label:'移動方向（比に更強調方向）',ex:'日本へ行きます。',r:'Nihon e ikimasu.',cn:'前往日本。（へ強調方向）'},
+    {label:'朝向某處前進',ex:'駅へ向かいます。',r:'Eki e mukaimasu.',cn:'朝車站方向前進。'},
   ]},
   {sym:'と',name:'共同・引用・條件助詞',uses:[
-    {label:'和（共同行動）',ex:'友達と映画を見ます。',cn:'和朋友看電影。'},
-    {label:'引用内容',ex:'「行きます」と言いました。',cn:'說了「我去」。'},
-    {label:'自然條件（と型）',ex:'春になると、桜が咲きます。',cn:'一到春天，櫻花就開。'},
+    {label:'和（共同行動）',ex:'友達と映画を見ます。',r:'Tomodachi to eiga wo mimasu.',cn:'和朋友看電影。'},
+    {label:'引用内容',ex:'「行きます」と言いました。',r:'"Ikimasu" to iimashita.',cn:'說了「我去」。'},
+    {label:'自然條件（と型）',ex:'春になると、桜が咲きます。',r:'Haru ni naru to, sakura ga sakimasu.',cn:'一到春天，櫻花就開。'},
   ]},
   {sym:'も',name:'追加・並列助詞',uses:[
-    {label:'也（追加）',ex:'私も行きます。',cn:'我也去。'},
-    {label:'全部/一個也沒有',ex:'誰も来ませんでした。',cn:'一個人也沒來。（も＋否定）'},
-    {label:'強調數量',ex:'100円もしません。',cn:'連100日圓都不到。'},
+    {label:'也（追加）',ex:'私も行きます。',r:'Watashi mo ikimasu.',cn:'我也去。'},
+    {label:'一個也沒有（接否定）',ex:'誰も来ませんでした。',r:'Dare mo kimasen deshita.',cn:'一個人也沒來。（も＋否定）'},
+    {label:'強調數量',ex:'100円もしません。',r:'Hyakuen mo shimasen.',cn:'連100日圓都不到。'},
   ]},
   {sym:'から',name:'起點・原因助詞',uses:[
-    {label:'空間起點',ex:'東京から大阪まで行きます。',cn:'從東京到大阪。'},
-    {label:'時間起點',ex:'9時から会議です。',cn:'從9點開始開會。'},
-    {label:'原因/理由（主觀）',ex:'忙しいから、行けません。',cn:'因為忙，去不了。（から比ので主觀）'},
+    {label:'空間起點',ex:'東京から大阪まで行きます。',r:'Toukyou kara Oosaka made ikimasu.',cn:'從東京到大阪。'},
+    {label:'時間起點',ex:'9時から会議です。',r:'Kuji kara kaigi desu.',cn:'從9點開始開會。'},
+    {label:'原因/理由（主觀）',ex:'忙しいから、行けません。',r:'Isogashii kara, ikemasen.',cn:'因為忙，去不了。（から比ので主觀）'},
   ]},
   {sym:'まで',name:'終點助詞',uses:[
-    {label:'空間終點',ex:'駅まで歩きます。',cn:'走到車站。'},
-    {label:'時間終點',ex:'5時まで働きます。',cn:'工作到5點。'},
-    {label:'範圍/程度',ex:'こんなことまでするんですか。',cn:'連這種事也做嗎？（強調程度）'},
+    {label:'空間終點',ex:'駅まで歩きます。',r:'Eki made arukimasu.',cn:'走到車站。'},
+    {label:'時間終點',ex:'5時まで働きます。',r:'Go-ji made hatarakimasu.',cn:'工作到5點。'},
+    {label:'範圍/程度',ex:'こんなことまでするんですか。',r:'Konna koto made suru n desu ka.',cn:'連這種事也做嗎？（強調程度）'},
   ]},
 ];
 
@@ -2313,7 +2356,8 @@ function renderParticles() {
           <div class="particle-use">
             <strong>${u.label}</strong>
             <div class="particle-ex" onclick="speak('${escJs(u.ex)}',null)" style="cursor:pointer" title="點擊發音">🔊 ${u.ex}</div>
-            <div style="font-size:.75rem;color:var(--ink-3);margin-top:.1rem">${u.cn}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ocean);background:rgba(26,82,118,.06);display:inline-block;padding:.08rem .45rem;border-radius:4px;margin:.1rem 0">${u.r||''}</div>
+            <div style="font-size:.75rem;color:var(--ink-3)">${u.cn}</div>
           </div>`).join('')}
       </div>
     </div>`).join('');
@@ -2452,7 +2496,6 @@ function renderConversation() {
       <div class="sc-icon">${s.icon}</div>
       <div class="sc-title">${s.title}</div>
       <div class="sc-desc">${s.desc}</div>
-      <button class="btn-ai-dice" id="sc-dice-${i}" onclick="event.stopPropagation();generateAIDialogue(${i})" title="AI 生成新對話">🎲 AI 新對話</button>
     </div>`).join('');
   showDialogue(0);
 }
@@ -2468,7 +2511,7 @@ async function generateAIDialogue(scenIdx) {
   const sc = conversationScenarios[scenIdx];
   const apiKey = localStorage.getItem('groq_api_key');
   if (!apiKey) { alert('AI 金鑰未設定，無法生成對話。'); return; }
-  const diceBtn = document.getElementById('sc-dice-'+scenIdx);
+  const diceBtn = document.getElementById('dlg-dice-'+scenIdx);
   if (diceBtn) { diceBtn.classList.add('loading'); diceBtn.textContent='⏳ 生成中…'; }
   const panel = document.getElementById('dialoguePanel');
   panel.innerHTML = `<div class="ai-dialogue-loading"><span class="ai-spin"></span>AI 正在為「${sc.title}」情境生成全新對話…</div>`;
@@ -2498,6 +2541,9 @@ async function generateAIDialogue(scenIdx) {
     panel.innerHTML = `<p style="color:var(--shu);padding:1rem">AI 生成失敗，請重試。（${e.message}）</p>`;
   } finally {
     if (diceBtn) { diceBtn.classList.remove('loading'); diceBtn.textContent='🎲 AI 新對話'; }
+    // update header in AI result panel too
+    const dlgDice2 = document.getElementById('dlg-dice-ai');
+    if (dlgDice2) { dlgDice2.classList.remove('loading'); dlgDice2.textContent='🎲 AI 新對話'; }
   }
 }
 
@@ -2506,8 +2552,11 @@ function showAIDialogue(scenIdx, sc, dialogues) {
   panel.innerHTML = `
     <div class="dialogue-panel">
       <div class="dialogue-header">
-        <span class="dialogue-title">${sc.icon} ${sc.title} — AI 生成版</span>
-        <button class="btn-play-all" onclick="playCustomDialogue(${JSON.stringify(dialogues).replace(/"/g,'&quot;')})">▶ 全部播放</button>
+        <span class="dialogue-title">${sc.icon} ${sc.title} — <span style="color:var(--gold);font-size:.8rem">✨ AI 生成</span></span>
+        <div style="display:flex;gap:.5rem;margin-left:auto;flex-shrink:0">
+          <button class="btn-ai-dice" id="dlg-dice-ai" onclick="generateAIDialogue(${scenIdx})">🎲 再生成</button>
+          <button class="btn-play-all" onclick="playCustomDialogue(${JSON.stringify(dialogues).replace(/"/g,'&quot;')})">▶ 全部播放</button>
+        </div>
       </div>
       <div class="dialogue-body">
         ${dialogues.map((d,i) => {
@@ -2545,7 +2594,10 @@ function showDialogue(idx) {
     <div class="dialogue-panel">
       <div class="dialogue-header">
         <span class="dialogue-title">${sc.icon} ${sc.title} — ${sc.desc}</span>
-        <button class="btn-play-all" onclick="playAllDialogue(${idx})">▶ 全部播放</button>
+        <div style="display:flex;gap:.5rem;margin-left:auto;flex-shrink:0">
+          <button class="btn-ai-dice" id="dlg-dice-${idx}" onclick="generateAIDialogue(${idx})">🎲 AI 新對話</button>
+          <button class="btn-play-all" onclick="playAllDialogue(${idx})">▶ 全部播放</button>
+        </div>
       </div>
       <div class="dialogue-body">
         ${sc.dialogues.map((d,i) => {
@@ -2740,10 +2792,19 @@ function renderPronGrid() {
       </div>
       <div class="pron-actions">
         <button class="btn-listen" onclick="speak('${escJs(item.j)}',this)">🔊 聆聽</button>
-        <button class="btn-speak" id="spk-${currentPronCat}-${idx}" onclick="startSpeechPractice('${escJs(item.j)}','${currentPronCat}',${idx})">🎤 練習</button>
-        <span class="pron-result" id="res-${currentPronCat}-${idx}" style="display:none"></span>
+        <button class="btn-speak" id="spk-${currentPronCat}-${idx}" onclick="startSpeechPractice('${escJs(item.j)}','${currentPronCat}',${idx})">🎤 開始練習</button>
       </div>
-      <div id="pronreplay-${currentPronCat}-${idx}" style="display:none;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:.5rem"></div>
+      <div class="pron-result-area" id="res-area-${currentPronCat}-${idx}">
+        <div class="pron-acc-row">
+          <div class="pron-acc-circle" id="res-circle-${currentPronCat}-${idx}">—</div>
+          <div class="pron-acc-detail">
+            <div class="pron-acc-label" id="res-label-${currentPronCat}-${idx}">等待辨識…</div>
+            <div class="pron-acc-bar-wrap"><div class="pron-acc-bar-fill" id="res-bar-${currentPronCat}-${idx}" style="width:0%"></div></div>
+            <div class="pron-acc-spoken" id="res-spoken-${currentPronCat}-${idx}"></div>
+          </div>
+        </div>
+        <div class="pron-replay-row" id="pronreplay-${currentPronCat}-${idx}"></div>
+      </div>
     </div>`).join('');
 }
 
@@ -2753,21 +2814,80 @@ function startSpeechPractice(expected, cat, idx) {
 
   if (activeRecordBtn) {
     activeRecordBtn.classList.remove('recording');
-    activeRecordBtn.textContent = '🎤 練習';
+    activeRecordBtn.textContent = '🎤 開始練習';
     try { recognition.abort(); } catch(e) {}
   }
 
   const btn = document.getElementById('spk-'+cat+'-'+idx);
-  const resultEl = document.getElementById('res-'+cat+'-'+idx);
+  const resultArea = document.getElementById('res-area-'+cat+'-'+idx);
+  const circleEl = document.getElementById('res-circle-'+cat+'-'+idx);
+  const labelEl = document.getElementById('res-label-'+cat+'-'+idx);
+  const barEl = document.getElementById('res-bar-'+cat+'-'+idx);
+  const spokenEl = document.getElementById('res-spoken-'+cat+'-'+idx);
   const replayDiv = document.getElementById('pronreplay-'+cat+'-'+idx);
   activeRecordBtn = btn;
 
   btn.classList.add('recording');
-  btn.textContent = '🎙️ 聆聽中...';
-  resultEl.style.display = 'none';
-  if (replayDiv) replayDiv.style.display = 'none';
+  btn.textContent = '🎙️ 聆聽中…';
+  // Show result area in "listening" state
+  if (resultArea) {
+    resultArea.classList.add('visible');
+    circleEl.className = 'pron-acc-circle';
+    circleEl.textContent = '…';
+    labelEl.textContent = '正在聆聽，請說話…';
+    barEl.style.width = '0%';
+    spokenEl.textContent = '';
+    if (replayDiv) replayDiv.innerHTML = '';
+  }
 
-  // Start MediaRecorder for actual audio capture
+  function setupRecognitionHandlers() {
+    recognition.onresult = (e) => {
+      if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
+      const spoken = Array.from(e.results[0]).map(r => r.transcript)[0] || '';
+      const acc = calcAccuracy(spoken, expected);
+      const accCls = acc>=80?'great':acc>=55?'ok':'poor';
+      const accEmoji = acc>=80?'🎉':acc>=55?'👍':'💪';
+      const accTip = acc>=80?'發音優秀！':acc>=55?'不錯，繼續練習！':'加油！多聽多練';
+      btn.textContent = '🎤 再試一次';
+      btn.classList.remove('recording');
+      if (resultArea) {
+        circleEl.className = 'pron-acc-circle '+accCls;
+        circleEl.textContent = acc+'%';
+        labelEl.textContent = accEmoji+' '+accTip;
+        barEl.className = 'pron-acc-bar-fill '+accCls;
+        barEl.style.width = acc+'%';
+        spokenEl.textContent = '辨識：「'+spoken+'」';
+      }
+      if (replayDiv) {
+        const recKey = cat+'-'+idx;
+        replayDiv.innerHTML =
+          `<button class="btn-replay-orig" onclick="speak('${escJs(expected)}',this)">🔊 聽原句</button>`+
+          `<button class="btn-replay-mine" id="play-rec-${recKey}" onclick="playRecording('${recKey}')">▶ 播我的錄音</button>`;
+      }
+      activeRecordBtn = null;
+    };
+
+    recognition.onend = () => {
+      if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
+      if (btn.classList.contains('recording')) {
+        btn.classList.remove('recording');
+        btn.textContent = '🎤 開始練習';
+        if (labelEl) labelEl.textContent = '未偵測到語音，請再試一次';
+        activeRecordBtn = null;
+      }
+    };
+
+    recognition.onerror = (e) => {
+      if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
+      btn.classList.remove('recording');
+      btn.textContent = '🎤 開始練習';
+      if (labelEl) labelEl.textContent = '語音辨識錯誤，請再試一次';
+      activeRecordBtn = null;
+      if (e.error==='not-allowed') alert('請允許麥克風權限後再試。');
+    };
+  }
+
+  // Fix race condition: start MediaRecorder FIRST, then recognition
   audioChunks = [];
   if (navigator.mediaDevices?.getUserMedia) {
     navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
@@ -2783,59 +2903,18 @@ function startSpeechPractice(expected, cat, idx) {
         };
         mediaRecorderInst.start();
       } catch(e) { stream.getTracks().forEach(t=>t.stop()); }
-    }).catch(()=>{});
+      // Start recognition AFTER MediaRecorder is running
+      setupRecognitionHandlers();
+      try { recognition.start(); } catch(e2) { recognition = initSpeechRecognition(); if(recognition){setupRecognitionHandlers();recognition.start();} }
+    }).catch(() => {
+      // No mic access — just run recognition without recording
+      setupRecognitionHandlers();
+      try { recognition.start(); } catch(e2) { recognition = initSpeechRecognition(); if(recognition){setupRecognitionHandlers();recognition.start();} }
+    });
+  } else {
+    setupRecognitionHandlers();
+    try { recognition.start(); } catch(e) { recognition = initSpeechRecognition(); }
   }
-
-  recognition.onresult = (e) => {
-    if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
-    const transcripts = Array.from(e.results[0]).map(r => r.transcript);
-    const spoken = transcripts[0];
-    const clean = s => s.replace(/[。、！？\s]/g,'');
-    const acc = calcAccuracy(spoken, expected);
-    const accCls = acc>=85?'great':acc>=60?'ok':'poor';
-    const accLabel = acc>=85?'優秀':'ok'?acc>=60:'加油';
-    btn.textContent = '🎤 再試一次';
-    btn.classList.remove('recording');
-    resultEl.style.display = 'inline-block';
-    if (acc >= 85) {
-      resultEl.className = 'pron-result correct';
-      resultEl.innerHTML = `✓ 辨識：「${spoken}」<span class="pron-accuracy great">${acc}%</span>`;
-    } else if (acc >= 50) {
-      resultEl.className = 'pron-result partial';
-      resultEl.innerHTML = `△ 辨識：「${spoken}」<span class="pron-accuracy ok">${acc}%</span>`;
-    } else {
-      resultEl.className = 'pron-result wrong';
-      resultEl.innerHTML = `✗ 辨識：「${spoken}」<span class="pron-accuracy poor">${acc}%</span>`;
-    }
-    // show replay controls
-    if (replayDiv) {
-      replayDiv.style.display = 'flex';
-      const recKey = cat+'-'+idx;
-      replayDiv.innerHTML =
-        `<button class="btn-conv-replay" onclick="speak('${escJs(expected)}',this)">🔊 聽原句</button>`+
-        `<button class="btn-rec-play" id="play-rec-${recKey}" onclick="playRecording('${recKey}')">▶ 播我的錄音</button>`;
-    }
-    activeRecordBtn = null;
-  };
-
-  recognition.onend = () => {
-    if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
-    if (btn.classList.contains('recording')) {
-      btn.classList.remove('recording');
-      btn.textContent = '🎤 練習';
-      activeRecordBtn = null;
-    }
-  };
-
-  recognition.onerror = (e) => {
-    if (mediaRecorderInst && mediaRecorderInst.state==='recording') mediaRecorderInst.stop();
-    btn.classList.remove('recording');
-    btn.textContent = '🎤 練習';
-    activeRecordBtn = null;
-    if (e.error==='not-allowed') alert('請允許麥克風權限後再試。');
-  };
-
-  try { recognition.start(); } catch(e) { recognition = initSpeechRecognition(); }
 }
 
 // ════════════════════════════════════════════

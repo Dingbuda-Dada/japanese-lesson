@@ -1656,44 +1656,61 @@ async function doSearch() {
     }
     btn.innerHTML = '⏳ AI 生成中…';
     try {
-      const prompt = `你是日語教學助手。請為「${q}」情境生成 ${searchCount} 個實用日文語句（丁寧體・禮貌形）。\n要求：\n1. 貼近「${q}」真實使用場景\n2. 包含各種句型（問句/回答/請求/感謝）\n3. 只回傳 JSON 陣列，每項格式：{"j":"日文","r":"羅馬字（Hepburn）","c":"繁體中文"}\n不要任何說明文字，只輸出 JSON 陣列。`;
+      const prompt = `你是專業日語教師。請生成與「${q}」高度相關的日文語句。
+
+【嚴格規定】
+- 每一句都必須直接圍繞「${q}」這個主題，句子內容要包含「${q}」的核心詞彙或具體場景
+- 絕對不可生成與「${q}」無關的通用語句（如「おはようございます」「ありがとうございます」等）
+- 需涵蓋該主題下實際會用到的多種句型：詢問、回答、請求、說明、感謝、建議、描述
+- 語句使用丁寧體（～ます・～です）
+- 共生成 ${searchCount} 句，每句都不同且具體實用
+
+【輸出格式】
+只輸出 JSON 陣列，不含任何其他文字：
+[{"j":"日文句子","r":"Hepburn羅馬字標音","c":"繁體中文翻譯"},...]`;
+
       const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: '你是日語教學專家，輸出內容只能是純 JSON 陣列，絕對不輸出任何說明文字、markdown 或代碼塊符號。' }] },
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
+          })
         }
       );
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error?.message || 'HTTP ' + res.status);
+        const errData = await res.json();
+        const msg = errData.error?.message || 'HTTP ' + res.status;
+        throw new Error(msg);
       }
       const data = await res.json();
       const raw = data.candidates[0].content.parts[0].text.trim();
       const match = raw.match(/\[[\s\S]*\]/);
-      if (!match) throw new Error('no JSON');
+      if (!match) throw new Error('no JSON in response');
       searchResults = JSON.parse(match[0]).slice(0, searchCount);
       usedAI = true;
       incrementUsage();
     } catch(err) {
       console.warn('AI search failed:', err);
-      // Show error message in empty state
-      searchResults = [];
       btn.disabled = false;
       btn.innerHTML = '🔍 搜尋';
       document.getElementById('catRow').style.display = 'none';
       document.getElementById('resultsBar').style.display = 'flex';
       document.getElementById('resultsTitle').innerHTML = '「'+q+'」的相關語句';
       document.getElementById('resultsCount').textContent = '共 0 個結果';
-      const errMsg = err.message.includes('quota') || err.message.includes('429')
-        ? '免費額度已達上限，請稍後再試（通常每分鐘重置）'
-        : '金鑰錯誤，請重新設定';
+      const isQuota = err.message.includes('quota') || err.message.includes('429') || err.message.includes('RESOURCE_EXHAUSTED');
       document.getElementById('phraseGrid').innerHTML = `
-        <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--ink-3)">
-          <div style="font-size:2rem;margin-bottom:.8rem">⚠️</div>
-          <div style="font-size:.95rem;color:var(--ink-2);margin-bottom:.8rem">${errMsg}</div>
-          <button onclick="showApiModal()" style="padding:.5rem 1.1rem;background:var(--shu);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:.85rem;font-family:inherit">⚙️ 設定金鑰</button>
+        <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
+          <div style="font-size:2rem;margin-bottom:.8rem">${isQuota ? '⏱️' : '⚠️'}</div>
+          <div style="font-size:.95rem;color:var(--ink-2);margin-bottom:.5rem">
+            ${isQuota ? '免費額度暫時達到上限' : 'AI 生成失敗'}
+          </div>
+          <div style="font-size:.82rem;color:var(--ink-3)">
+            ${isQuota ? '請等待約 1 分鐘後再試（每分鐘自動重置）' : '請稍後重試'}
+          </div>
         </div>`;
       return;
     }

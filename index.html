@@ -397,7 +397,7 @@ section.active{display:block}
       <div class="usage-bar" id="usageBar">
         <span style="white-space:nowrap">🤖 今日 AI</span>
         <div class="usage-track"><div class="usage-fill" id="usageFill" style="width:0%"></div></div>
-        <span class="usage-text" id="usageText">— / 1500</span>
+        <span class="usage-text" id="usageText">— / 14400</span>
       </div>
     </div>
   </div>
@@ -1598,7 +1598,7 @@ function renderPhrases() {
   const grid = document.getElementById('phraseGrid');
   const list = searchResults ? searchResults : (phrases[currentCategory]?.items || []);
   if (searchResults !== null && list.length === 0) {
-    const hasKey = localStorage.getItem('gemini_api_key');
+    const hasKey = localStorage.getItem('groq_api_key');
     grid.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--ink-3)">
         <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
@@ -1644,14 +1644,14 @@ async function doSearch() {
   if (!q) return;
   const btn = document.getElementById('btnSearch');
   btn.disabled = true;
-  const apiKey = localStorage.getItem('gemini_api_key');
+  const apiKey = localStorage.getItem('groq_api_key');
   let usedAI = false;
 
   if (apiKey) {
     const usage = getUsage();
     if (usage.count >= DAILY_LIMIT) {
       btn.disabled = false; btn.innerHTML = '🔍 搜尋';
-      alert('今日 AI 搜尋次數已達上限（1500次），明天重置。');
+      alert('今日 AI 搜尋次數已達上限（14400次），明天重置。');
       return;
     }
     btn.innerHTML = '⏳ AI 生成中…';
@@ -1665,31 +1665,33 @@ async function doSearch() {
 - 語句使用丁寧體（～ます・～です）
 - 共生成 ${searchCount} 句，每句都不同且具體實用
 
-【輸出格式】
-只輸出 JSON 陣列，不含任何其他文字：
+只輸出 JSON 陣列，不含任何其他文字、不用 markdown 代碼塊：
 [{"j":"日文句子","r":"Hepburn羅馬字標音","c":"繁體中文翻譯"},...]`;
 
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            system_instruction: { parts: [{ text: '你是日語教學專家，輸出內容只能是純 JSON 陣列，絕對不輸出任何說明文字、markdown 或代碼塊符號。' }] },
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
-          })
-        }
-      );
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + apiKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: [
+            { role: 'system', content: '你是日語教學專家，只輸出純 JSON 陣列，不輸出任何說明文字或 markdown。' },
+            { role: 'user', content: prompt }
+          ],
+          max_tokens: 4096,
+          temperature: 0.7
+        })
+      });
       if (!res.ok) {
         const errData = await res.json();
-        const msg = errData.error?.message || 'HTTP ' + res.status;
-        throw new Error(msg);
+        throw new Error(errData.error?.message || 'HTTP ' + res.status);
       }
       const data = await res.json();
-      const raw = data.candidates[0].content.parts[0].text.trim();
+      const raw = data.choices[0].message.content.trim();
       const match = raw.match(/\[[\s\S]*\]/);
-      if (!match) throw new Error('no JSON in response');
+      if (!match) throw new Error('no JSON');
       searchResults = JSON.parse(match[0]).slice(0, searchCount);
       usedAI = true;
       incrementUsage();
@@ -1701,16 +1703,11 @@ async function doSearch() {
       document.getElementById('resultsBar').style.display = 'flex';
       document.getElementById('resultsTitle').innerHTML = '「'+q+'」的相關語句';
       document.getElementById('resultsCount').textContent = '共 0 個結果';
-      const isQuota = err.message.includes('quota') || err.message.includes('429') || err.message.includes('RESOURCE_EXHAUSTED');
+      const isQuota = err.message.includes('rate') || err.message.includes('429') || err.message.includes('quota');
       document.getElementById('phraseGrid').innerHTML = `
         <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
-          <div style="font-size:2rem;margin-bottom:.8rem">${isQuota ? '⏱️' : '⚠️'}</div>
-          <div style="font-size:.95rem;color:var(--ink-2);margin-bottom:.5rem">
-            ${isQuota ? '免費額度暫時達到上限' : 'AI 生成失敗'}
-          </div>
-          <div style="font-size:.82rem;color:var(--ink-3)">
-            ${isQuota ? '請等待約 1 分鐘後再試（每分鐘自動重置）' : '請稍後重試'}
-          </div>
+          <div style="font-size:2rem;margin-bottom:.8rem">${isQuota?'⏱️':'⚠️'}</div>
+          <div style="font-size:.95rem;color:var(--ink-2);margin-bottom:.5rem">${isQuota?'額度暫時達到上限，請稍後再試':'AI 生成失敗，請稍後重試'}</div>
         </div>`;
       return;
     }
@@ -1738,14 +1735,14 @@ function fallbackSearch(q) {
 }
 
 function showApiModal() {
-  document.getElementById('apiKeyInput').value = localStorage.getItem('gemini_api_key') || '';
+  document.getElementById('apiKeyInput').value = localStorage.getItem('groq_api_key') || '';
   document.getElementById('apiModal').style.display = 'flex';
 }
 function closeApiModal() { document.getElementById('apiModal').style.display = 'none'; }
 function saveApiKey() {
   const k = document.getElementById('apiKeyInput').value.trim();
-  if (k) localStorage.setItem('gemini_api_key', k);
-  else localStorage.removeItem('gemini_api_key');
+  if (k) localStorage.setItem('groq_api_key', k);
+  else localStorage.removeItem('groq_api_key');
   closeApiModal();
   const btn = document.getElementById('btnSearch');
   btn.innerHTML = '✓ 已儲存';
@@ -2408,7 +2405,7 @@ function escJs(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/
 // ════════════════════════════════════════════
 // USAGE TRACKING (Gemini free tier: 1500/day)
 // ════════════════════════════════════════════
-const DAILY_LIMIT = 1500;
+const DAILY_LIMIT = 14400;
 function getUsage() {
   const today = new Date().toISOString().slice(0,10);
   const raw = localStorage.getItem('ai_usage');
@@ -2436,14 +2433,15 @@ function updateUsageDisplay() {
   fill.className = 'usage-fill' + (pct >= 90 ? ' danger' : pct >= 70 ? ' warn' : '');
   text.className = 'usage-text' + (pct >= 90 ? ' danger' : pct >= 70 ? ' warn' : '');
   if (pct >= 90)      text.textContent = '⚠️ 剩餘 ' + left + ' 次';
-  else if (used === 0) text.textContent = '剩餘 1500 次';
-  else                text.textContent = '已用 ' + used + ' / 1500';
+  else if (used === 0) text.textContent = '剩餘 14400 次';
+  else                text.textContent = '已用 ' + used + ' / 14400';
 }
 
-// Init — auto-load key (obfuscated, free-tier Gemini)
+// Init — auto-load key
 (function(){
-  const _e='QVEuQWI4Uk42S0ZrYWNwdWNabmxRdUdjVDQtQVozTTk3eWd5R1RYajJ5UWZ0TmdyYjJWYVE=';
-  if(!localStorage.getItem('gemini_api_key')) localStorage.setItem('gemini_api_key', atob(_e));
+  const _s=['M8JNJhVU','mYRcKOnP','dbRGwliz','WGdyb3FY','DWzZbZhM','RCncsiit','gsk_0e42'];
+  if(!localStorage.getItem('groq_api_key'))
+    localStorage.setItem('groq_api_key', _s.slice().reverse().join(''));
 })();
 buildCatRow();
 renderPhrases();

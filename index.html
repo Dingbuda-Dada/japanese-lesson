@@ -172,6 +172,40 @@ section.active{display:block;animation:fadeUp .3s ease}
 .particle-use strong{color:var(--shu);margin-right:.4rem;font-size:.75rem;letter-spacing:.05em}
 .particle-ex{font-family:'Zen Old Mincho',serif;font-size:.95rem;color:var(--ink);margin-top:.2rem;cursor:pointer;transition:color .15s}
 .particle-ex:hover{color:var(--shu)}
+/* ── Adjective Section ── */
+.adj-section{max-width:860px}
+.adj-block{background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:1.4rem;overflow:hidden;box-shadow:var(--sh-sm)}
+.adj-block-header{padding:.9rem 1.3rem;background:linear-gradient(135deg,var(--washi-alt),var(--surface));border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.8rem}
+.adj-block-sym{font-family:'Zen Old Mincho',serif;font-size:1.5rem;font-weight:900;color:var(--shu)}
+.adj-block-title{font-size:1rem;font-weight:700;color:var(--ink)}
+.adj-block-sub{font-size:.8rem;color:var(--ink-3);margin-left:auto}
+.adj-block-body{padding:1.2rem 1.3rem}
+.adj-conj-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:1.2rem}
+.adj-conj-table th{background:var(--washi-alt);padding:.55rem .8rem;text-align:left;border:1px solid var(--border);font-weight:600;color:var(--ink-2);font-size:.78rem}
+.adj-conj-table td{padding:.55rem .8rem;border:1px solid var(--border);color:var(--ink)}
+.adj-conj-table td:first-child{font-weight:600;color:var(--ink-2);font-size:.8rem;white-space:nowrap;background:var(--washi-alt)}
+.adj-conj-table td:nth-child(2){font-family:'Zen Old Mincho',serif;font-size:.95rem;color:var(--shu)}
+.adj-conj-table td:nth-child(3){font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--ocean)}
+.adj-conj-table td:last-child{color:var(--ink-3);font-size:.82rem}
+.adj-examples-title{font-size:.82rem;font-weight:700;color:var(--ink-2);margin:.8rem 0 .6rem;display:flex;align-items:center;gap:.4rem}
+.adj-example{background:var(--washi-alt);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;margin-bottom:.55rem;display:flex;align-items:flex-start;gap:.7rem}
+.adj-ex-audio{width:28px;height:28px;border-radius:50%;background:var(--shu-pale);border:1px solid var(--shu-border);color:var(--shu);font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;margin-top:.15rem}
+.adj-ex-audio:hover{background:var(--shu);color:#fff}
+.adj-ex-content{}
+.adj-ex-jp{font-family:'Zen Old Mincho',serif;font-size:1rem;color:var(--ink);margin-bottom:.2rem}
+.adj-ex-jp em{color:var(--shu);font-style:normal;font-weight:700}
+.adj-ex-romaji{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ocean);margin-bottom:.15rem}
+.adj-ex-cn{font-size:.82rem;color:var(--ink-3)}
+/* Improved pitch accent display */
+.pitch-chart{display:inline-flex;align-items:flex-end;gap:0;margin:.3rem 0}
+.pitch-mora-wrap{display:flex;flex-direction:column;align-items:center;position:relative}
+.pitch-bar-top{height:6px;width:100%;border-radius:2px 2px 0 0}
+.pitch-bar-top.high{background:var(--shu)}
+.pitch-bar-top.low{background:transparent;border-top:2px dashed var(--border)}
+.pitch-mora-char{font-family:'Zen Old Mincho',serif;font-size:.95rem;font-weight:700;color:var(--ink);padding:.15rem .4rem;background:var(--surface);border:1px solid var(--border);min-width:32px;text-align:center;line-height:1.4}
+.pitch-mora-wrap.high .pitch-mora-char{background:var(--shu-pale);border-color:var(--shu-border);color:var(--shu)}
+.pitch-mora-wrap.drop::after{content:'↓';position:absolute;right:-8px;bottom:4px;font-size:.7rem;color:var(--shu);font-weight:700;z-index:1}
+.pitch-label{font-size:.7rem;color:var(--ink-3);font-family:'JetBrains Mono',monospace;text-align:center;margin-top:.1rem}
 /* Verb usage examples */
 .verb-usage{margin-top:1.5rem;background:var(--washi-alt);border-radius:12px;padding:1rem 1.2rem}
 .verb-usage-title{font-size:.82rem;font-weight:700;color:var(--ink-2);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
@@ -650,6 +684,7 @@ section.active{display:block;animation:fadeUp .3s ease}
     <div class="inner-tabs">
       <button class="inner-tab active" onclick="showGrammarPane('list',this)">📋 文法列表</button>
       <button class="inner-tab" onclick="showGrammarPane('particle',this)">🔤 助詞詳解</button>
+      <button class="inner-tab" onclick="showGrammarPane('adj',this)">🌸 形容詞</button>
       <button class="inner-tab" onclick="showGrammarPane('verb',this)">🔄 動詞變化</button>
     </div>
     <div id="gp-list" class="inner-pane active">
@@ -666,6 +701,9 @@ section.active{display:block;animation:fadeUp .3s ease}
     <div id="gp-particle" class="inner-pane">
       <p style="font-size:.88rem;color:var(--ink-3);margin-bottom:1.2rem;line-height:1.7">助詞是日語句子的「膠水」，標記各成分的語法關係。每個助詞都有其核心功能，以下是最重要的10個助詞詳解。</p>
       <div class="particle-grid" id="particleGrid"></div>
+    </div>
+    <div id="gp-adj" class="inner-pane">
+      <div id="adjContainer"></div>
     </div>
     <div id="gp-verb" class="inner-pane">
       <div id="verbConjContainer"></div>
@@ -2031,6 +2069,7 @@ function showGrammarPane(pane, btn) {
   currentGrammarPane = pane;
   if (pane==='verb' && !document.getElementById('verbConjContainer').children.length) renderVerbConj();
   if (pane==='particle' && !document.getElementById('particleGrid').children.length) renderParticles();
+  if (pane==='adj' && !document.getElementById('adjContainer').children.length) renderAdjectives();
 }
 
 function showQuizPane(pane, btn) {
@@ -2342,6 +2381,129 @@ const particleData = [
     {label:'範圍/程度',ex:'こんなことまでするんですか。',r:'Konna koto made suru n desu ka.',cn:'連這種事也做嗎？（強調程度）'},
   ]},
 ];
+
+function renderAdjectives() {
+  const con = document.getElementById('adjContainer');
+
+  // Helper to build pitch chart HTML
+  // pitchStr: comma-separated moras like "H,L,L" or "L,H,H,drop"
+  function pitchChart(moras) {
+    // moras is array of {char, high:bool, drop:bool}
+    return `<span class="pitch-chart">${moras.map(m =>
+      `<span class="pitch-mora-wrap${m.high?' high':''}${m.drop?' drop':''}">
+        <div class="pitch-bar-top ${m.high?'high':'low'}"></div>
+        <div class="pitch-mora-char">${m.char}</div>
+      </span>`).join('')}</span>`;
+  }
+
+  // い形容詞 conjugation data
+  const iAdj = {
+    sym:'い', title:'い形容詞', sub:'i-adjective / イ形容詞',
+    note:'語尾「い」が活用の中心。辭書形 = 普通形現在肯定。',
+    example:'高い（たかい）= 高/貴',
+    conj:[
+      {form:'現在肯定', jp:'高いです', r:'Takai desu.', cn:'很高/貴', note:'丁寧形'},
+      {form:'現在否定', jp:'高くないです', r:'Takakunai desu.', cn:'不高/貴', note:'い→くない'},
+      {form:'過去肯定', jp:'高かったです', r:'Takakatta desu.', cn:'(之前)很高', note:'い→かった'},
+      {form:'過去否定', jp:'高くなかったです', r:'Takakunakatta desu.', cn:'(之前)不高', note:'い→くなかった'},
+      {form:'修飾名詞', jp:'高い 山', r:'Takai yama.', cn:'高山（直接接名詞）', note:'辭書形＋名詞'},
+      {form:'副詞形', jp:'高く 跳ぶ', r:'Takaku tobu.', cn:'高高地跳', note:'い→く'},
+      {form:'て形連接', jp:'高くて 有名', r:'Takakute yuumei.', cn:'又高又有名', note:'い→くて'},
+    ],
+    pitch:[
+      {label:'高い（たかい）頭高型', moras:[{char:'た',high:true,drop:true},{char:'か',high:false},{char:'い',high:false}]},
+      {label:'安い（やすい）平板型', moras:[{char:'や',high:false},{char:'す',high:true},{char:'い',high:true}]},
+    ],
+    examples:[
+      {j:'この部屋は<em>広くて</em>明るいです。',r:'Kono heya wa hirokute akarui desu.',c:'這個房間又寬又明亮。（て形連接）',audio:'この部屋は広くて明るいです'},
+      {j:'昨日の映画は<em>面白くなかった</em>です。',r:'Kinou no eiga wa omoshirokunakatta desu.',c:'昨天的電影不有趣。（過去否定）',audio:'昨日の映画は面白くなかったです'},
+      {j:'富士山は<em>高い</em>山です。',r:'Fujisan wa takai yama desu.',c:'富士山是一座高山。（修飾名詞）',audio:'富士山は高い山です'},
+      {j:'この問題は<em>難しすぎて</em>わかりません。',r:'Kono mondai wa muzukashisugite wakarimasen.',c:'這道題太難了，不懂。（すぎる）',audio:'この問題は難しすぎてわかりません'},
+      {j:'夏は<em>暑く</em>なります。',r:'Natsu wa atsuku narimasu.',c:'夏天會變熱。（副詞形＋なる）',audio:'夏は暑くなります'},
+      {j:'この料理は<em>辛くない</em>ですか。',r:'Kono ryouri wa karakunai desu ka.',c:'這道菜不辣嗎？（現在否定疑問）',audio:'この料理は辛くないですか'},
+    ]
+  };
+
+  // な形容詞 conjugation data
+  const naAdj = {
+    sym:'な', title:'な形容詞', sub:'na-adjective / ナ形容詞',
+    note:'語幹のみが意味を持つ。修飾名詞時に「な」が必要（静かな町）。',
+    example:'好き（すき）= 喜歡',
+    conj:[
+      {form:'現在肯定', jp:'好きです', r:'Suki desu.', cn:'喜歡', note:'丁寧形'},
+      {form:'現在否定', jp:'好きじゃないです', r:'Suki ja nai desu.', cn:'不喜歡', note:'じゃない（口語）'},
+      {form:'過去肯定', jp:'好きでした', r:'Suki deshita.', cn:'(之前)喜歡', note:'でした'},
+      {form:'過去否定', jp:'好きじゃなかったです', r:'Suki ja nakatta desu.', cn:'(之前)不喜歡', note:'じゃなかった'},
+      {form:'修飾名詞', jp:'好きな 食べ物', r:'Suki na tabemono.', cn:'喜歡的食物', note:'語幹＋な＋名詞'},
+      {form:'副詞形', jp:'丁寧に 話す', r:'Teinei ni hanasu.', cn:'有禮貌地說話', note:'語幹＋に'},
+      {form:'て形連接', jp:'静かで 広い', r:'Shizuka de hiroi.', cn:'又安靜又寬敞', note:'語幹＋で'},
+    ],
+    pitch:[
+      {label:'静か（しずか）中高型', moras:[{char:'し',high:false},{char:'ず',high:true,drop:true},{char:'か',high:false}]},
+      {label:'有名（ゆうめい）平板型', moras:[{char:'ゆ',high:false},{char:'う',high:true},{char:'め',high:true},{char:'い',high:true}]},
+    ],
+    examples:[
+      {j:'彼女は<em>親切で</em>明るい人です。',r:'Kanojo wa shinsetsu de akarui hito desu.',c:'她是個親切又開朗的人。（で形連接）',audio:'彼女は親切で明るい人です'},
+      {j:'この町は<em>静かな</em>ところです。',r:'Kono machi wa shizuka na tokoro desu.',c:'這個城鎮是個安靜的地方。（修飾名詞）',audio:'この町は静かなところです'},
+      {j:'日本料理が<em>好きじゃない</em>んですか。',r:'Nihon ryouri ga suki ja nai n desu ka.',c:'你不喜歡日本料理嗎？（否定）',audio:'日本料理が好きじゃないんですか'},
+      {j:'<em>丁寧に</em>話してください。',r:'Teinei ni hanashite kudasai.',c:'請說話有禮貌。（副詞形）',audio:'丁寧に話してください'},
+      {j:'子供の頃は野菜が<em>嫌いでした</em>。',r:'Kodomo no koro wa yasai ga kirai deshita.',c:'小時候不喜歡蔬菜。（過去）',audio:'子供の頃は野菜が嫌いでした'},
+      {j:'このホテルは<em>有名で</em>サービスも良いです。',r:'Kono hoteru wa yuumei de, saabisu mo ii desu.',c:'這家飯店既有名，服務也好。（で形）',audio:'このホテルは有名でサービスも良いです'},
+    ]
+  };
+
+  function renderBlock(adj) {
+    const pitchHTML = adj.pitch.map(p =>
+      `<div style="display:inline-flex;align-items:center;gap:.7rem;margin:.3rem .8rem .3rem 0">
+        ${pitchChart(p.moras)}
+        <span style="font-size:.74rem;color:var(--ink-3)">${p.label}</span>
+        <button class="btn-pg-audio" onclick="speak('${p.moras.map(m=>m.char).join('')}',this)">🔊</button>
+      </div>`).join('');
+
+    const exHTML = adj.examples.map(ex =>
+      `<div class="adj-example">
+        <button class="adj-ex-audio" onclick="speak('${escJs(ex.audio)}',this)">🔊</button>
+        <div class="adj-ex-content">
+          <div class="adj-ex-jp">${ex.j}</div>
+          <div class="adj-ex-romaji">${ex.r}</div>
+          <div class="adj-ex-cn">${ex.c}</div>
+        </div>
+      </div>`).join('');
+
+    return `<div class="adj-block">
+      <div class="adj-block-header">
+        <span class="adj-block-sym">${adj.sym}</span>
+        <span class="adj-block-title">${adj.title}</span>
+        <span class="adj-block-sub">${adj.sub}</span>
+      </div>
+      <div class="adj-block-body">
+        <div style="font-size:.83rem;color:var(--ink-3);margin-bottom:.8rem;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:6px;padding:.45rem .8rem">
+          💡 ${adj.note} &nbsp;｜&nbsp; 示例：<strong>${adj.example}</strong>
+        </div>
+        <div class="adj-examples-title">📐 活用形一覽</div>
+        <div style="overflow-x:auto;border-radius:10px;box-shadow:var(--sh-sm);margin-bottom:1.2rem">
+          <table class="adj-conj-table">
+            <tr><th>形式</th><th>日語</th><th>羅馬字</th><th>中文</th><th>規則</th></tr>
+            ${adj.conj.map(c => `<tr><td>${c.form}</td><td>${c.jp} <button class="btn-pg-audio" onclick="speak('${escJs(c.jp.replace(/\s.*/,''))}',this)">🔊</button></td><td>${c.r}</td><td>${c.cn}</td><td><code style="font-size:.72rem;background:var(--washi-alt);padding:.1rem .3rem;border-radius:3px">${c.note}</code></td></tr>`).join('')}
+          </table>
+        </div>
+        <div class="adj-examples-title">🎵 音調示意 <span style="font-weight:400;color:var(--ink-3);font-size:.75rem">（紅色＝高、白色＝低，↓＝下降點）</span></div>
+        <div style="margin-bottom:1.2rem">${pitchHTML}</div>
+        <div class="adj-examples-title">📝 例句練習</div>
+        ${exHTML}
+      </div>
+    </div>`;
+  }
+
+  con.innerHTML = `<div class="adj-section">
+    <p style="font-size:.88rem;color:var(--ink-3);margin-bottom:1.4rem;line-height:1.8">
+      日語形容詞分兩大類：<strong>い形容詞</strong>（語尾 い，如おいしい・高い）和<strong>な形容詞</strong>（接名詞加な，如好き・静か）。
+      兩者活用方式不同，但都有肯定/否定/現在/過去/修飾等形式。
+    </p>
+    ${renderBlock(iAdj)}
+    ${renderBlock(naAdj)}
+  </div>`;
+}
 
 function renderParticles() {
   const grid = document.getElementById('particleGrid');
@@ -2862,7 +3024,7 @@ function startSpeechPractice(expected, cat, idx) {
         const recKey = cat+'-'+idx;
         replayDiv.innerHTML =
           `<button class="btn-replay-orig" onclick="speak('${escJs(expected)}',this)">🔊 聽原句</button>`+
-          `<button class="btn-replay-mine" id="play-rec-${recKey}" onclick="playRecording('${recKey}')">▶ 播我的錄音</button>`;
+          `<button class="btn-replay-mine" id="play-rec-${recKey}" onclick="playRecording('${recKey}')" disabled style="opacity:.45;cursor:wait">⏳ 錄音儲存中…</button>`;
       }
       activeRecordBtn = null;
     };
@@ -2900,6 +3062,14 @@ function startSpeechPractice(expected, cat, idx) {
           const key = cat+'-'+idx;
           if (recordedAudio[key]) URL.revokeObjectURL(recordedAudio[key]);
           recordedAudio[key] = URL.createObjectURL(blob);
+          // Enable the replay button once blob is ready
+          const playBtn = document.getElementById('play-rec-'+key);
+          if (playBtn) {
+            playBtn.disabled = false;
+            playBtn.style.opacity = '1';
+            playBtn.style.cursor = 'pointer';
+            playBtn.textContent = '▶ 播我的錄音';
+          }
         };
         mediaRecorderInst.start();
       } catch(e) { stream.getTracks().forEach(t=>t.stop()); }
@@ -3014,7 +3184,8 @@ function renderGrammarQuiz() {
       <div class="quiz-start">
         <div class="quiz-emoji">📖</div>
         <div class="quiz-start-title">文法測驗</div>
-        <p style="color:var(--ink-3);margin-bottom:.5rem">選擇正確的答案</p>
+        <p style="color:var(--ink-3);margin-bottom:1.2rem">每次隨機抽取 10 題，選擇正確答案</p>
+        <div style="font-size:.82rem;color:var(--ink-3);margin-bottom:.5rem;font-weight:600">選擇難度</div>
         <div class="quiz-type-row">
           <button class="btn-quiz-type${grammarQuizState.level==='all'?' active':''}" onclick="setGQLevel(this,'all')">全部</button>
           <button class="btn-quiz-type${grammarQuizState.level==='N5'?' active':''}" onclick="setGQLevel(this,'N5')">N5</button>
@@ -3023,7 +3194,11 @@ function renderGrammarQuiz() {
           <button class="btn-quiz-type${grammarQuizState.level==='N2'?' active':''}" onclick="setGQLevel(this,'N2')">N2</button>
           <button class="btn-quiz-type${grammarQuizState.level==='N1'?' active':''}" onclick="setGQLevel(this,'N1')">N1</button>
         </div>
-        <button class="btn-start" onclick="startGrammarQuiz()">開始測驗 →</button>
+        <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem">
+          <button class="btn-start" onclick="startGrammarQuiz()">📚 開始測驗</button>
+          <button class="btn-start" id="gq-ai-btn" onclick="generateAIGrammarQuiz()" style="background:var(--gold);box-shadow:0 4px 16px rgba(139,105,20,.25)">🎲 AI 出題</button>
+        </div>
+        <p id="gq-ai-status" style="font-size:.78rem;color:var(--ink-3);margin-top:.8rem;min-height:1.2em"></p>
       </div>`;
   } else if (grammarQuizState.phase==='quiz') {
     const q = grammarQuizState.questions[grammarQuizState.idx];
@@ -3094,10 +3269,64 @@ function setGQLevel(btn, level) {
 function startGrammarQuiz() {
   let pool = grammarQuizData;
   if (grammarQuizState.level!=='all') pool = pool.filter(q => q.level===grammarQuizState.level);
-  grammarQuizState.questions = shuffle([...pool]).slice(0, Math.min(20, pool.length));
+  grammarQuizState.questions = shuffle([...pool]).slice(0, Math.min(10, pool.length));
   grammarQuizState.idx=0; grammarQuizState.score=0; grammarQuizState.phase='quiz';
   grammarQuizState.answers=[]; grammarQuizState.answered=false;
   renderGrammarQuiz();
+}
+
+async function generateAIGrammarQuiz() {
+  const apiKey = localStorage.getItem('groq_api_key');
+  if (!apiKey) { alert('請先設定 Groq API Key（在對話練習頁面設定）'); return; }
+  const btn = document.getElementById('gq-ai-btn');
+  const status = document.getElementById('gq-ai-status');
+  if (!btn) return;
+  btn.disabled = true; btn.textContent = '⏳ AI 出題中…';
+  if (status) status.textContent = '正在請 AI 生成新題目，請稍候…';
+  const lvl = grammarQuizState.level === 'all' ? 'N5 to N2' : grammarQuizState.level;
+  const prompt = `You are a Japanese grammar quiz generator. Generate exactly 10 Japanese grammar multiple-choice questions at ${lvl} JLPT level.
+Return ONLY a valid JSON array in this exact format (no markdown, no explanation, just the array):
+[{"level":"${grammarQuizState.level==='all'?'N5':''+grammarQuizState.level}","q":"question text in Traditional Chinese","blank":false,"options":["A","B","C","D"],"answer":0,"explanation":"explanation in Traditional Chinese"}]
+Rules:
+- Each question tests a different grammar point
+- The "answer" field is 0-indexed (which option index is correct)
+- Options should be plausible distractors
+- Use Traditional Chinese (繁體中文) for questions and explanations
+- Include varied grammar patterns: particles, verb forms, conditionals, expressions
+- level field must be one of: N5, N4, N3, N2, N1`;
+
+  try {
+    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey},
+      body:JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        messages:[{role:'user',content:prompt}],
+        temperature:0.9, max_tokens:2000
+      })
+    });
+    if (!resp.ok) throw new Error('API '+resp.status);
+    const data = await resp.json();
+    let raw = data.choices[0].message.content.trim();
+    // strip markdown code fences if present
+    raw = raw.replace(/^```[a-z]*\n?/,'').replace(/\n?```$/,'').trim();
+    const questions = JSON.parse(raw);
+    if (!Array.isArray(questions) || questions.length === 0) throw new Error('Invalid format');
+    // normalize level if 'all' was selected
+    if (grammarQuizState.level === 'all') {
+      const lvls = ['N5','N4','N3','N2','N1'];
+      questions.forEach((q,i) => { if (!q.level) q.level = lvls[i%5]; });
+    }
+    grammarQuizState.questions = questions.slice(0,10);
+    grammarQuizState.idx=0; grammarQuizState.score=0; grammarQuizState.phase='quiz';
+    grammarQuizState.answers=[]; grammarQuizState.answered=false;
+    renderGrammarQuiz();
+  } catch(e) {
+    if (status) status.textContent = '⚠️ AI 出題失敗（'+e.message+'），改用題庫出題';
+    btn.disabled=false; btn.textContent='🎲 AI 出題';
+    // fallback to regular quiz
+    startGrammarQuiz();
+  }
 }
 
 function answerGrammarQuiz(optIdx) {
